@@ -15,6 +15,10 @@ class CreateRegistrationsTable extends Migration
     {
         Schema::create('registrations', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->boolean('payment')->default(false);
+            $table->string('status');
+            $table->longtext('query')->nullable();
             $table->timestamps();
         });
     }

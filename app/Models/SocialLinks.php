@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class SocialLinks extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'registration_id',
+        'twitter',
+        'facebook',
+        'google',
+        'linkedin',
+    ];
 }

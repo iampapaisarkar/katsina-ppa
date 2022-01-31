@@ -15,6 +15,11 @@ class CreateCompanyDirectorsTable extends Migration
     {
         Schema::create('company_directors', function (Blueprint $table) {
             $table->id();
+            $table->integer('registration_id');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->integer('country');
+            $table->string('language');
             $table->timestamps();
         });
     }
