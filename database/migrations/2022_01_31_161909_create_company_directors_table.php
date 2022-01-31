@@ -16,14 +16,14 @@ class CreateCompanyDirectorsTable extends Migration
         Schema::create('company_directors', function (Blueprint $table) {
             $table->id();
             $table->integer('registration_id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email');
-            $table->string('phone_number');
-            $table->string('address');
-            $table->string('passport');
-            $table->string('identification');
-            $table->string('certificates');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('address')->nullable();
+            $table->string('passport')->nullable();
+            $table->string('identification')->nullable();
+            $table->string('certificates')->nullable();
             $table->timestamps();
         });
     }
