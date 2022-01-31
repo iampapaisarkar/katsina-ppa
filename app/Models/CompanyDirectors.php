@@ -13,7 +13,11 @@ class CompanyDirectors extends Model
         'registration_id',
         'first_name',
         'last_name',
-        'country',
-        'language',
+        'email',
+        'phone_number',
+        'address',
+        'passport',
+        'identification',
+        'certificates',
     ];
 }

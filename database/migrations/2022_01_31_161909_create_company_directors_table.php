@@ -18,8 +18,12 @@ class CreateCompanyDirectorsTable extends Migration
             $table->integer('registration_id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->integer('country');
-            $table->string('language');
+            $table->string('email');
+            $table->string('phone_number');
+            $table->string('address');
+            $table->string('passport');
+            $table->string('identification');
+            $table->string('certificates');
             $table->timestamps();
         });
     }

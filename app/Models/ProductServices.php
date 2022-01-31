@@ -5,15 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SocialLinks extends Model
+class ProductServices extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'registration_id',
-        'twitter',
-        'facebook',
-        'google',
-        'linkedin',
+        'service_id',
     ];
 }
