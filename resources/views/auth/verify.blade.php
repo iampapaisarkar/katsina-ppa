@@ -33,7 +33,7 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
-                            <p class="card-text mb-2">Account activation link sent to your email address:<span class="fw-bolder"> nasiru@example.com</span> Please follow the link inside to continue.</p><a onclick="event.preventDefault();
+                            <p class="card-text mb-2">Account activation link sent to your email address:<span class="fw-bolder"> {{Auth::user()->email}}</span> Please follow the link inside to continue.</p><a onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();" class="btn btn-primary w-100" href="#"><i class="i-Mail-with-At-Sign"></i>Skip for now</a>
                             <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                                 @csrf

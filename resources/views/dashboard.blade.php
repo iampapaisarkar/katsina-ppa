@@ -25,7 +25,7 @@
                                     </div>-->
                                     <div class="text-center">
                                         <h1 class="mb-1 text-white">Welcome <br/>
-                                        Nasiru Abubakar,</h1>
+                                        {{Auth::user()->first_name}} {{Auth::user()->sur_name}},</h1>
                                         <p class="card-text m-auto w-75">
                                             You are now open to Business Opportunities from Sokoto State PPA Portal
                                         </p>
