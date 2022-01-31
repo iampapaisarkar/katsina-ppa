@@ -13,4 +13,9 @@ class Service extends Model
         'title',
         'parent',
     ];
+
+    public function childs()
+    {
+        return $this->hasMany(Service::class,'parent','id');
+    }
 }

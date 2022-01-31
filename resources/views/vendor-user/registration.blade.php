@@ -18,7 +18,8 @@
                 
             </div>
             <div class="content-body">
-                <form action="#" class="invoice-repeater">
+                <form method="POST" action="{{route('registration-submit')}}" enctype="multipart/form-data" novalidate>
+                @csrf
                     <!-- Modern Vertical Wizard -->
                     <section class="modern-vertical-wizard">
                         <div class="bs-stepper vertical wizard-modern modern-vertical-wizard-example">
