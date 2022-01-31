@@ -23,8 +23,8 @@
             @enderror
         </div>
         <div class="mb-1 col-md-6">
-            <label class="form-label @error('type_of_organization') is-invalid @enderror" name="type_of_organization" for="basicSelect">Type of Organization </label>
-            <select class="form-select" id="basicSelect">
+            <label class="form-label" for="basicSelect">Type of Organization </label>
+            <select class="form-select @error('type_of_organization') is-invalid @enderror" name="type_of_organization" id="basicSelect">
                 <option value="" selected>select one</option>
                 <option value="Incorporated Company">Incorporated Company</option>
                 <option value="Limited Partnerships">Limited Partnerships</option>
