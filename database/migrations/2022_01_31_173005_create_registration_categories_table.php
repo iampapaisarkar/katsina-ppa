@@ -17,8 +17,8 @@ class CreateRegistrationCategoriesTable extends Migration
             $table->id();
             $table->string('class');
             $table->string('contract_value');
-            $table->float('registration_fee');
-            $table->float('renewal_fee');
+            $table->double('registration_fee', 10, 2);
+            $table->double('renewal_fee', 10, 2);
             $table->timestamps();
         });
     }

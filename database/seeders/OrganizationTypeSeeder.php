@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\OrganizationType;
 
 class OrganizationTypeSeeder extends Seeder
 {
@@ -13,6 +14,17 @@ class OrganizationTypeSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $OrganizationType = [
+            [
+            'title' => 'Incorporated Company',
+            ],
+            [
+            'title' => 'Limited Partnerships',
+            ],
+            [
+            'title' => 'Business Name',
+            ],
+        ];
+        OrganizationType::insert($OrganizationType);
     }
 }
