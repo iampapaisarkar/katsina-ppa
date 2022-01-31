@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 if(Auth::check()){
-	Route::get('/', 'App\Http\Controllers\HomeController@index')->name('dashboard');
+	Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 }else{
 	Route::get('/', function () { return view('auth.login'); });
 }
@@ -22,5 +22,5 @@ if(Auth::check()){
 Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth','verified']], function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 });

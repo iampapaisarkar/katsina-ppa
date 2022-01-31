@@ -34,7 +34,7 @@
                 
                 
                 <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="user-nav d-sm-flex d-none"><span class="user-name fw-bolder">Nasiru Abubakar</span><span class="user-status">Admin</span></div><span class="avatar"><img class="round" src="{{ asset('libs/app-assets/images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
+                        <div class="user-nav d-sm-flex d-none"><span class="user-name fw-bolder">{{Auth::user()->first_name}} {{Auth::user()->sur_name}}</span><span class="user-status">{{Auth::user()->role->role}}</span></div><span class="avatar"><img class="round" src="{{ asset('libs/app-assets/images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
                     
@@ -42,7 +42,7 @@
                    <a class="dropdown-item" href="page-account-settings-account.html"><i class="me-50" data-feather="settings"></i> Settings</a>
                         
                    
-                   <a class="dropdown-item" href="index.php"><i class="me-50" data-feather="power"></i> Logout</a>
+                   <a class="dropdown-item" onclick="logout(event)"><i class="me-50" data-feather="power"></i> Logout</a>
                     </div>
                 </li>
             </ul>
@@ -125,3 +125,31 @@
                 <div class="d-flex justify-content-start"><span class="me-75" data-feather="alert-circle"></span><span>No results found.</span></div>
             </a></li>
     </ul>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
+    <script>
+	function logout(event){
+		event.preventDefault();
+
+		$.confirm({
+			title: 'Logout',
+			content: 'Are you sure want to logout?',
+			buttons: {   
+				ok: {
+					text: "YES",
+					btnClass: 'btn-primary',
+					keys: ['enter'],
+					action: function(){
+						document.getElementById('logout-form').submit();
+					}
+				},
+				cancel: function(){
+						console.log('the user clicked cancel');
+				}
+			}
+		});
+
+	}
+</script>
