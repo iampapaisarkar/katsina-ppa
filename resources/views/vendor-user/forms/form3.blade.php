@@ -36,36 +36,14 @@
             </tr>
             @endforeach
         @endforeach
-
-
-
     </table>
-    <!--<div class="row">
-                                    <div class="mb-1 col-md-6">
-                                        <label class="form-label" for="vertical-modern-address">Address</label>
-                                        <input type="text" id="vertical-modern-address" class="form-control" placeholder="98  Borough bridge Road, Birmingham" />
-                                    </div>
-                                    <div class="mb-1 col-md-6">
-                                        <label class="form-label" for="vertical-modern-landmark">Landmark</label>
-                                        <input type="text" id="vertical-modern-landmark" class="form-control" placeholder="Borough bridge" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="mb-1 col-md-6">
-                                        <label class="form-label" for="pincode4">Pincode</label>
-                                        <input type="text" id="pincode4" class="form-control" placeholder="658921" />
-                                    </div>
-                                    <div class="mb-1 col-md-6">
-                                        <label class="form-label" for="city4">City</label>
-                                        <input type="text" id="city4" class="form-control" placeholder="Birmingham" />
-                                    </div>
-                                </div>-->
+
     <div class="d-flex justify-content-between">
-        <button class="btn btn-primary btn-prev">
+        <button class="btn btn-primary btn-prev" type="button">
             <i data-feather="arrow-left" class="align-middle me-sm-25 me-0"></i>
             <span class="align-middle d-sm-inline-block d-none">Previous</span>
         </button>
-        <button class="btn btn-primary btn-next">
+        <button class="btn btn-primary btn-next" type="button">
             <span class="align-middle d-sm-inline-block d-none">Next</span>
             <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
         </button>
