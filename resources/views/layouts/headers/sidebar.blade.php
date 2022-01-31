@@ -22,12 +22,12 @@
                         </li>
                     </ul>
                 </li>-->
-                <li class=" <?php if ($page=="dashboard") { echo "active";} ?> nav-item"><a class="d-flex align-items-center" href="dashboard.php"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Dashboard</span></a>
+                <li class=" <?php if ($page=="dashboard") { echo "active";} ?> nav-item"><a class="d-flex align-items-center" href="{{route('dashboard')}}"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Dashboard</span></a>
                 </li>
                 
                 <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i data-feather="more-horizontal"></i>
                 </li>
-                <li class="<?php if ($page=="vendor-registration") { echo "active";} ?> nav-item"><a class="d-flex align-items-center" href="vendor-register.php"><i data-feather="check-circle"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Vendor Registration</span></a>
+                <li class="<?php if ($page=="vendor-registration") { echo "active";} ?> nav-item"><a class="d-flex align-items-center" href="{{route('registration')}}"><i data-feather="check-circle"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Vendor Registration</span></a>
                 </li>
                 <!-- <li class="<?php if ($page=="vregr") { echo "active";} ?> nav-item"><a class="d-flex align-items-center" href="vendor-register.php"><i data-feather="check-circle"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Renewal</span></a>
                 </li>
