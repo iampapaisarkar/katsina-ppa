@@ -12,6 +12,7 @@ use App\Models\ProductServices;
 use App\Models\CategoryDocuments;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use App\Http\Services\FileUpload;
 
 class RegistrationController extends Controller
 {
@@ -36,8 +37,6 @@ class RegistrationController extends Controller
 
     public function registrationSubmit(RegistrationStoreRequest $request)
     {
-        dd($request->all());
-
         try {
             DB::beginTransaction();
 
@@ -68,6 +67,10 @@ class RegistrationController extends Controller
 
             if($request->director){
                 foreach($request->director as $key => $director) {
+                    $passport = FileUpload::upload($request->file('passport'), $private = false, 'vendor', 'passport');
+                    $identification = FileUpload::upload($request->file('identification'), $private = false, 'vendor', 'identification');
+                    $certificates = FileUpload::upload($request->file('certificates'), $private = false, 'vendor', 'certificates');
+
                     CompanyDirectors::create([
                         'registration_id' => $registration->id,
                         'first_name' => $request->first_name,
@@ -75,9 +78,9 @@ class RegistrationController extends Controller
                         'email' => $request->email,
                         'phone_number' => $request->phone_number,
                         'address' => $request->address,
-                        'passport' => $request->passport,
-                        'identification' => $request->identification,
-                        'certificates' => $request->certificates,
+                        'passport' => $passport,
+                        'identification' => $identification,
+                        'certificates' => $certificates,
                     ]);
                 }
             }
@@ -100,18 +103,28 @@ class RegistrationController extends Controller
                 }
             }
 
+            $attachment_1 = FileUpload::upload($request->file('attachment_1'), $private = false, 'vendor', 'attachment_1');
+            $attachment_2 = FileUpload::upload($request->file('attachment_2'), $private = false, 'vendor', 'attachment_2');
+            $attachment_3 = FileUpload::upload($request->file('attachment_3'), $private = false, 'vendor', 'attachment_3');
+            $attachment_4 = FileUpload::upload($request->file('attachment_4'), $private = false, 'vendor', 'attachment_4');
+            $attachment_5 = FileUpload::upload($request->file('attachment_5'), $private = false, 'vendor', 'attachment_5');
+            $attachment_6 = FileUpload::upload($request->file('attachment_6'), $private = false, 'vendor', 'attachment_6');
+            $attachment_7 = FileUpload::upload($request->file('attachment_7'), $private = false, 'vendor', 'attachment_7');
+            $attachment_8 = FileUpload::upload($request->file('attachment_8'), $private = false, 'vendor', 'attachment_8');
+            $attachment_9 = FileUpload::upload($request->file('attachment_9'), $private = false, 'vendor', 'attachment_9');
+
             CategoryDocuments::create([
                 'registration_id' => $registration->id,
                 'registration_category_id' => $request->registration_category_id,
-                'attachment_1' => $request->attachment_1,
-                'attachment_2' => $request->attachment_2,
-                'attachment_3' => $request->attachment_3,
-                'attachment_4' => $request->attachment_4,
-                'attachment_5' => $request->attachment_5,
-                'attachment_6' => $request->attachment_6,
-                'attachment_7' => $request->attachment_7,
-                'attachment_8' => $request->attachment_8,
-                'attachment_9' => $request->attachment_9,
+                'attachment_1' => $attachment_1,
+                'attachment_2' => $attachment_2,
+                'attachment_3' => $attachment_3,
+                'attachment_4' => $attachment_4,
+                'attachment_5' => $attachment_5,
+                'attachment_6' => $attachment_6,
+                'attachment_7' => $attachment_7,
+                'attachment_8' => $attachment_8,
+                'attachment_9' => $attachment_9,
             ]);
            
             DB::commit();
