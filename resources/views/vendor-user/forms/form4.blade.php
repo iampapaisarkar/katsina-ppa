@@ -11,7 +11,10 @@
         <div class="mb-1 col-md-12">
             <label class="form-label" for="basicSelect">Registration Categories</label>
             <select name="registration_category_id" class="form-select @error('registration_category_id') is-invalid @enderror" id="basicSelect">
-                <option value="" selected>select one</option>
+                @if(old('registration_category_id'))    
+                <option value="old('registration_category_id')" selected>{{old('registration_category_id')}}</option>
+                @endif
+                <option value="">select one</option>
                 <option value="Contract Value N500,000 and below">Contract Value N500,000 and below</option>
                 <option value="Contract Value N500,001 - N5M">Contract Value N500,001 - N5M</option>
                 <option value="Contract Value Above N5M - N10M">Contract Value Above N5M - N10M</option>

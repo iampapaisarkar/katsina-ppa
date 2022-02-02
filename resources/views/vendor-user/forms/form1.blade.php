@@ -11,7 +11,10 @@
         <div class="mb-1 col-md-6">
             <label class="form-label" for="basicSelect">Area of Core Competence</label>
             <select class="form-select @error('area_of_core_competence') is-invalid @enderror" name="area_of_core_competence" id="basicSelect">
-                <option value="" selected>select one</option>
+                @if(old('area_of_core_competence'))    
+                <option value="old('area_of_core_competence')" selected>{{old('area_of_core_competence')}}</option>
+                @endif
+                <option value="">select one</option>
                 <option value="GOODS (Suppliers)">GOODS (Suppliers)</option>
                 <option value="WORKS (Contractors)">WORKS (Contractors)</option>
                 <option value="SERVICES (Consulting & Non-Consulting)">SERVICES (Consulting & Non-Consulting)</option>
@@ -25,7 +28,10 @@
         <div class="mb-1 col-md-6">
             <label class="form-label" for="basicSelect">Type of Organization </label>
             <select class="form-select @error('type_of_organization') is-invalid @enderror" name="type_of_organization" id="basicSelect">
-                <option value="" selected>select one</option>
+                @if(old('type_of_organization'))    
+                <option value="old('type_of_organization')" selected>{{old('type_of_organization')}}</option>
+                @endif    
+                <option value="">select one</option>
                 <option value="Incorporated Company">Incorporated Company</option>
                 <option value="Limited Partnerships">Limited Partnerships</option>
                 <option value="Business Name">Business Name</option>
@@ -44,7 +50,7 @@
         <div class="col-md-6 col-12">
             <div class="mb-1">
                 <label class="form-label" for="basicInput">Company Name</label>
-                <input type="text" class="form-control @error('company_name') is-invalid @enderror" name="company_name" id="basicInput" placeholder="XYZ Limited" />
+                <input value="{{old('company_name')}}" type="text" class="form-control @error('company_name') is-invalid @enderror" name="company_name" id="basicInput" placeholder="XYZ Limited" />
                 @error('company_name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -55,7 +61,7 @@
         <div class="col-md-6 col-12">
             <div class="mb-1">
                 <label class="form-label" for="basicInput">CAC Number</label>
-                <input type="text" class="form-control @error('cac_number') is-invalid @enderror" name="cac_number" id="basicInput" placeholder="RC/BN" />
+                <input value="{{old('cac_number')}}" type="text" class="form-control @error('cac_number') is-invalid @enderror" name="cac_number" id="basicInput" placeholder="RC/BN" />
                 @error('cac_number')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -66,7 +72,7 @@
         <div class="col-md-6 col-12">
             <div class="mb-1">
                 <label class="form-label" for="fp-default">Default</label>
-                <input type="text" id="fp-default" name="default" class="form-control flatpickr-basic @error('default') is-invalid @enderror" placeholder="DD-MM-YYYY" />
+                <input value="{{old('default')}}" type="text" id="fp-default" name="default" class="form-control flatpickr-basic @error('default') is-invalid @enderror" placeholder="DD-MM-YYYY" />
                 @error('default')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -77,7 +83,7 @@
 
         <div class="col-md-6 col-sm-12 mb-2">
             <label class="form-label" for="numeral-formatting">Share Capital (N)</label>
-            <input type="text" name="share_capital" class="form-control numeral-mask @error('share_capital') is-invalid @enderror" placeholder="10,000" id="numeral-formatting" />
+            <input value="{{old('share_capital')}}" type="text" name="share_capital" class="form-control numeral-mask @error('share_capital') is-invalid @enderror" placeholder="10,000" id="numeral-formatting" />
             @error('share_capital')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -93,7 +99,7 @@
         </div>
         <div class="mb-1 col-md-6">
             <label class="form-label" for="vertical-modern-address">Address</label>
-            <input type="text" name="address" id="vertical-modern-address" class="form-control @error('address') is-invalid @enderror"
+            <input value="{{old('address')}}" type="text" name="address" id="vertical-modern-address" class="form-control @error('address') is-invalid @enderror"
                 placeholder="98 Ibrahim Ado bridge Road, " />
             @error('address')
             <span class="invalid-feedback" role="alert">
@@ -103,7 +109,7 @@
         </div>
         <div class="mb-1 col-md-6">
             <label class="form-label" for="vertical-modern-landmark">Landmark</label>
-            <input type="text" name="landmark" id="vertical-modern-landmark" class="form-control @error('landmark') is-invalid @enderror" placeholder="Kusada bridge" />
+            <input value="{{old('landmark')}}" type="text" name="landmark" id="vertical-modern-landmark" class="form-control @error('landmark') is-invalid @enderror" placeholder="Kusada bridge" />
             @error('landmark')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -114,7 +120,7 @@
     <div class="row">
         <div class="mb-1 col-md-6">
             <label class="form-label" for="city4">City</label>
-            <input type="text" name="city" id="city4" class="form-control @error('city') is-invalid @enderror" placeholder="Kankara" />
+            <input value="{{old('city')}}" type="text" name="city" id="city4" class="form-control @error('city') is-invalid @enderror" placeholder="Kankara" />
             @error('city')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -125,7 +131,10 @@
 
             <label class="form-label" for="select2-basic">State</label>
             <select name="state" class="select2 form-select @error('state') is-invalid @enderror" id="select2-basic">
-                <option selected>Select State</option>
+                @if(old('state'))    
+                <option value="old('state')" selected>{{old('state')}}</option>
+                @endif 
+                <option value="">Select State</option>
                 <option value="Abia">Abia</option>
                 <option value="Adamawa">Adamawa</option>
                 <option value="Anambra">Anambra</option>
@@ -182,7 +191,7 @@
         <div class="col-md-6 col-12">
             <div class="mb-1">
                 <label class="form-label" for="first-name-column">First Name</label>
-                <input name="first_name" type="text" id="first-name-column" class="form-control @error('first_name') is-invalid @enderror" placeholder="First Name"
+                <input value="{{old('first_name')}}" name="first_name" type="text" id="first-name-column" class="form-control @error('first_name') is-invalid @enderror" placeholder="First Name"
                     name="fname-column" />
                 @error('first_name')
                 <span class="invalid-feedback" role="alert">
@@ -194,7 +203,7 @@
         <div class="col-md-6 col-12">
             <div class="mb-1">
                 <label class="form-label" for="last-name-column">Last Name</label>
-                <input name="last_name" type="text" id="last-name-column" class="form-control @error('last_name') is-invalid @enderror" placeholder="Last Name"
+                <input value="{{old('last_name')}}" name="last_name" type="text" id="last-name-column" class="form-control @error('last_name') is-invalid @enderror" placeholder="Last Name"
                     name="lname-column" />
                 @error('last_name')
                 <span class="invalid-feedback" role="alert">
@@ -206,7 +215,7 @@
         <div class="col-md-6 col-12">
             <div class="mb-1">
                 <label class="form-label" for="email-id-column">Email</label>
-                <input name="email" type="email" id="email-id-column" class="form-control @error('email') is-invalid @enderror" name="email-id-column"
+                <input value="{{old('email')}}" name="email" type="email" id="email-id-column" class="form-control @error('email') is-invalid @enderror" name="email-id-column"
                     placeholder="Email" />
                 @error('email')
                 <span class="invalid-feedback" role="alert">
@@ -218,7 +227,7 @@
         <div class="col-md-6 col-12">
             <div class="mb-1">
                 <label class="form-label" for="phone-number">Phone Number</label>
-                <input name="phone_number" type="text" class="form-control phone-number-mask @error('phone_number') is-invalid @enderror" placeholder="08021234567" id="phone-number" />
+                <input value="{{old('phone_number')}}" name="phone_number" type="text" class="form-control phone-number-mask @error('phone_number') is-invalid @enderror" placeholder="08021234567" id="phone-number" />
                 @error('phone_number')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -230,7 +239,7 @@
         <div class="col-md-6 col-12">
             <div class="mb-1">
                 <label class="form-label" for="company-column">Position</label>
-                <input name="position" type="text" id="company-column" class="form-control @error('position') is-invalid @enderror" name="company-column"
+                <input value="{{old('position')}}" name="position" type="text" id="company-column" class="form-control @error('position') is-invalid @enderror" name="company-column"
                     placeholder="Position" />
                 @error('position')
                 <span class="invalid-feedback" role="alert">
