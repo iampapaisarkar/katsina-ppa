@@ -12,16 +12,16 @@
             <label class="form-label" for="basicSelect">Registration Categories</label>
             <select name="registration_category_id" class="form-select @error('registration_category_id') is-invalid @enderror" id="basicSelect">
                 <option value="" selected>select one</option>
-                <option value="A">Contract Value N500,000 and below</option>
-                <option value="B">Contract Value N500,001 - N5M</option>
-                <option value="C">Contract Value Above N5M - N10M</option>
-                <option value="D">Contract Value Above N10M - N100M</option>
-                <option value="E">Contract Value Above N100M - N250M</option>
-                <option value="F">Contract Value Above N250M - N1B</option>
-                <option value="G">Contract Value Above N1B to N5B</option>
-                <option value="H">Contract Value Above N5B - N10B</option>
-                <option value="I">Contract Value Above N10B - N20B</option>
-                <option value="J">Contract Value Above N20B</option>
+                <option value="Contract Value N500,000 and below">Contract Value N500,000 and below</option>
+                <option value="Contract Value N500,001 - N5M">Contract Value N500,001 - N5M</option>
+                <option value="Contract Value Above N5M - N10M">Contract Value Above N5M - N10M</option>
+                <option value="Contract Value Above N10M - N100M">Contract Value Above N10M - N100M</option>
+                <option value="Contract Value Above N100M - N250M">Contract Value Above N100M - N250M</option>
+                <option value="Contract Value Above N250M - N1B">Contract Value Above N250M - N1B</option>
+                <option value="Contract Value Above N1B to N5B">Contract Value Above N1B to N5B</option>
+                <option value="Contract Value Above N5B - N10B">Contract Value Above N5B - N10B</option>
+                <option value="Contract Value Above N10B - N20B">Contract Value Above N10B - N20B</option>
+                <option value="Contract Value Above N20B">Contract Value Above N20B</option>
             </select>
             @error('registration_category_id')
                 <span class="invalid-feedback" role="alert">
