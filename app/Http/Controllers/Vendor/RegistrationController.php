@@ -37,8 +37,6 @@ class RegistrationController extends Controller
 
     public function registrationSubmit(RegistrationStoreRequest $request)
     {
-        // dd($request->all());
-
         try {
             DB::beginTransaction();
 
@@ -71,9 +69,9 @@ class RegistrationController extends Controller
                 foreach($request->director as $key => $director) {
 
 
-                    $passport = FileUpload::upload($director['passport'], $private = true, 'vendor', 'passport');
-                    $identification = FileUpload::upload($director['identification'], $private = true, 'vendor', 'identification');
-                    $certificates = FileUpload::upload($director['certificates'], $private = true, 'vendor', 'certificates');
+                    $passport = FileUpload::upload($director['passport'], $private = true, 'vendor', 'passport'.$key);
+                    $identification = FileUpload::upload($director['identification'], $private = true, 'vendor', 'identification'.$key);
+                    $certificates = FileUpload::upload($director['certificates'], $private = true, 'vendor', 'certificates'.$key);
 
                     CompanyDirectors::create([
                         'registration_id' => $registration->id,
@@ -96,15 +94,6 @@ class RegistrationController extends Controller
                         'registration_id' => $registration->id,
                         'service_id' => $service,
                     ]);
-
-                    // if($service['childs']){
-                    //     foreach($service['childs'] as $child) {
-                    //         ProductServices::create([
-                    //             'registration_id' => $registration->id,
-                    //             'service_id' => $child,
-                    //         ]);
-                    //     }
-                    // }
                 }
             }
 
@@ -134,7 +123,7 @@ class RegistrationController extends Controller
            
             DB::commit();
 
-            return back()->withSuccess('Registration submit successfully done');
+            return back()->with('Registration submit successfully done');
 
         }catch(Exception $e) {
             DB::rollback();

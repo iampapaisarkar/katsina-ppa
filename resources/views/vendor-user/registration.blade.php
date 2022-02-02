@@ -18,6 +18,12 @@
                 
             </div>
             <div class="content-body">
+            @if(app('App\Http\Services\CheckVendorRegistration')->canRegistration()['success'] == true)
+                @if (session('status'))
+                    <div class="alert alert-success p-2" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 <form method="POST" action="{{route('registration-submit')}}" enctype="multipart/form-data" novalidate>
                 @csrf
                     <!-- Modern Vertical Wizard -->
@@ -79,6 +85,10 @@
                         </div>
                     </section>
                 </form>
+
+                @else
+                    <h5>{{app('App\Http\Services\CheckVendorRegistration')->canRegistration()['message']}}</h5>
+                @endif
             </div>
         </div>
     </div>
