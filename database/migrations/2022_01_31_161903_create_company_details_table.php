@@ -16,8 +16,8 @@ class CreateCompanyDetailsTable extends Migration
         Schema::create('company_details', function (Blueprint $table) {
             $table->id();
             $table->integer('registration_id');
-            $table->integer('area_of_core_competence');
-            $table->integer('type_of_organization');
+            $table->string('area_of_core_competence'); //integer
+            $table->string('type_of_organization'); //integer
             $table->string('company_name');
             $table->string('cac_number');
             $table->date('default');
@@ -25,7 +25,7 @@ class CreateCompanyDetailsTable extends Migration
             $table->string('address');
             $table->string('landmark');
             $table->string('city');
-            $table->integer('state');
+            $table->string('state'); //integer
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
