@@ -18,7 +18,7 @@
                 
             </div>
             <div class="content-body">
-                <form method="GET" action="{{route('registration-preview')}}" enctype="multipart/form-data" novalidate>
+                <form method="POST" action="{{route('registration-submit')}}" enctype="multipart/form-data" novalidate>
                 @csrf
                     <!-- Modern Vertical Wizard -->
                     <section class="modern-vertical-wizard">

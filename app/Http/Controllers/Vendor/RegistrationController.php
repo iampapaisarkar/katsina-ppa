@@ -37,6 +37,8 @@ class RegistrationController extends Controller
 
     public function registrationSubmit(RegistrationStoreRequest $request)
     {
+        // dd($request->all());
+
         try {
             DB::beginTransaction();
 
@@ -67,9 +69,11 @@ class RegistrationController extends Controller
 
             if($request->director){
                 foreach($request->director as $key => $director) {
-                    $passport = FileUpload::upload($request->file('passport'), $private = false, 'vendor', 'passport');
-                    $identification = FileUpload::upload($request->file('identification'), $private = false, 'vendor', 'identification');
-                    $certificates = FileUpload::upload($request->file('certificates'), $private = false, 'vendor', 'certificates');
+
+
+                    $passport = FileUpload::upload($director['passport'], $private = true, 'vendor', 'passport');
+                    $identification = FileUpload::upload($director['identification'], $private = true, 'vendor', 'identification');
+                    $certificates = FileUpload::upload($director['certificates'], $private = true, 'vendor', 'certificates');
 
                     CompanyDirectors::create([
                         'registration_id' => $registration->id,
@@ -85,6 +89,7 @@ class RegistrationController extends Controller
                 }
             }
 
+
             if($request->services){
                 foreach($request->services as $key => $service) {
                     ProductServices::create([
@@ -92,26 +97,26 @@ class RegistrationController extends Controller
                         'service_id' => $service,
                     ]);
 
-                    if($service['childs']){
-                        foreach($service['childs'] as $key => $child) {
-                            ProductServices::create([
-                                'registration_id' => $registration->id,
-                                'service_id' => $child,
-                            ]);
-                        }
-                    }
+                    // if($service['childs']){
+                    //     foreach($service['childs'] as $child) {
+                    //         ProductServices::create([
+                    //             'registration_id' => $registration->id,
+                    //             'service_id' => $child,
+                    //         ]);
+                    //     }
+                    // }
                 }
             }
 
-            $attachment_1 = FileUpload::upload($request->file('attachment_1'), $private = false, 'vendor', 'attachment_1');
-            $attachment_2 = FileUpload::upload($request->file('attachment_2'), $private = false, 'vendor', 'attachment_2');
-            $attachment_3 = FileUpload::upload($request->file('attachment_3'), $private = false, 'vendor', 'attachment_3');
-            $attachment_4 = FileUpload::upload($request->file('attachment_4'), $private = false, 'vendor', 'attachment_4');
-            $attachment_5 = FileUpload::upload($request->file('attachment_5'), $private = false, 'vendor', 'attachment_5');
-            $attachment_6 = FileUpload::upload($request->file('attachment_6'), $private = false, 'vendor', 'attachment_6');
-            $attachment_7 = FileUpload::upload($request->file('attachment_7'), $private = false, 'vendor', 'attachment_7');
-            $attachment_8 = FileUpload::upload($request->file('attachment_8'), $private = false, 'vendor', 'attachment_8');
-            $attachment_9 = FileUpload::upload($request->file('attachment_9'), $private = false, 'vendor', 'attachment_9');
+            $attachment_1 = FileUpload::upload($request->file('attachment_1'), $private = true, 'vendor', 'attachment_1');
+            $attachment_2 = FileUpload::upload($request->file('attachment_2'), $private = true, 'vendor', 'attachment_2');
+            $attachment_3 = FileUpload::upload($request->file('attachment_3'), $private = true, 'vendor', 'attachment_3');
+            $attachment_4 = FileUpload::upload($request->file('attachment_4'), $private = true, 'vendor', 'attachment_4');
+            $attachment_5 = FileUpload::upload($request->file('attachment_5'), $private = true, 'vendor', 'attachment_5');
+            $attachment_6 = FileUpload::upload($request->file('attachment_6'), $private = true, 'vendor', 'attachment_6');
+            $attachment_7 = FileUpload::upload($request->file('attachment_7'), $private = true, 'vendor', 'attachment_7');
+            $attachment_8 = FileUpload::upload($request->file('attachment_8'), $private = true, 'vendor', 'attachment_8');
+            $attachment_9 = FileUpload::upload($request->file('attachment_9'), $private = true, 'vendor', 'attachment_9');
 
             CategoryDocuments::create([
                 'registration_id' => $registration->id,

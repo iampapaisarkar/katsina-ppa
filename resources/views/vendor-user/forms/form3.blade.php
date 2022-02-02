@@ -28,7 +28,7 @@
 
             @foreach($Service->childs as $child)
             <tr>
-                <td width="5%"><input type="checkbox" name="services['childs'][]" id="childCategories_0_0" value="{{$child->title}}"
+                <td width="5%"><input type="checkbox" name="services[]" id="childCategories_0_0" value="{{$child->title}}"
                         unchecked onClick="onCheckBoxClick('0')" /></td>
                 <td colspan="2" width="95%">
                     {{$child->title}}
