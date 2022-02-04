@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call([RegistrationCategorySeeder::class]);
         $this->call([ServiceSeeder::class]);
         $this->call([ServiceTypeSeeder::class]);
+        $this->call([StateSeeder::class]);
     }
 }
