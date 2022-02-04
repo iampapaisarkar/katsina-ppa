@@ -11,20 +11,13 @@
         <div class="mb-1 col-md-12">
             <label class="form-label" for="basicSelect">Registration Categories</label>
             <select name="registration_category_id" class="form-select @error('registration_category_id') is-invalid @enderror" id="basicSelect">
-                @if(old('registration_category_id'))    
-                <option value="old('registration_category_id')" selected>{{old('registration_category_id')}}</option>
-                @endif
                 <option value="">select one</option>
-                <option value="Contract Value N500,000 and below">Contract Value N500,000 and below</option>
-                <option value="Contract Value N500,001 - N5M">Contract Value N500,001 - N5M</option>
-                <option value="Contract Value Above N5M - N10M">Contract Value Above N5M - N10M</option>
-                <option value="Contract Value Above N10M - N100M">Contract Value Above N10M - N100M</option>
-                <option value="Contract Value Above N100M - N250M">Contract Value Above N100M - N250M</option>
-                <option value="Contract Value Above N250M - N1B">Contract Value Above N250M - N1B</option>
-                <option value="Contract Value Above N1B to N5B">Contract Value Above N1B to N5B</option>
-                <option value="Contract Value Above N5B - N10B">Contract Value Above N5B - N10B</option>
-                <option value="Contract Value Above N10B - N20B">Contract Value Above N10B - N20B</option>
-                <option value="Contract Value Above N20B">Contract Value Above N20B</option>
+                @foreach(app('App\Http\Services\BackendData')->RegistrationCategories() as $RegistrationCategory)
+                @if(old('registration_category_id') && (old('registration_category_id') == $RegistrationCategory->class))
+                <option value="{{$RegistrationCategory->class}}">{{$RegistrationCategory->contract_value}}</option>
+                @endif
+                <option value="{{$RegistrationCategory->class}}">{{$RegistrationCategory->contract_value}}</option>
+                @endforeach
             </select>
             @error('registration_category_id')
                 <span class="invalid-feedback" role="alert">

@@ -7,6 +7,7 @@ use App\Models\OrganizationType;
 use App\Models\RegistrationCategory;
 use App\Models\Service;
 use App\Models\ServiceType;
+use App\Models\State;
 use DB;
 
 class BackendData
@@ -29,5 +30,9 @@ class BackendData
 
     public static function ServiceTypes(){
         return ServiceType::get();
+    }
+
+    public static function States(){
+        return State::get();
     }
 }
