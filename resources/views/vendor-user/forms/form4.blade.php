@@ -14,7 +14,7 @@
                 <option value="">select one</option>
                 @foreach(app('App\Http\Services\BackendData')->RegistrationCategories() as $RegistrationCategory)
                 @if(old('registration_category_id') && (old('registration_category_id') == $RegistrationCategory->class))
-                <option value="{{$RegistrationCategory->class}}">{{$RegistrationCategory->contract_value}}</option>
+                <option value="{{$RegistrationCategory->class}}" selected>{{$RegistrationCategory->contract_value}}</option>
                 @endif
                 <option value="{{$RegistrationCategory->class}}">{{$RegistrationCategory->contract_value}}</option>
                 @endforeach

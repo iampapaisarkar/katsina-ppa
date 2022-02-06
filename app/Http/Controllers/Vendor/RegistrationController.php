@@ -13,6 +13,7 @@ use App\Models\CategoryDocuments;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use App\Http\Services\FileUpload;
+use App\Http\Services\Checkout;
 
 class RegistrationController extends Controller
 {
@@ -121,9 +122,12 @@ class RegistrationController extends Controller
                 'attachment_9' => $attachment_9,
             ]);
            
+            $response = Checkout::checkout($registration = ['id' => $registration->id], 'registration');
+
             DB::commit();
 
-            return back()->with('Registration submit successfully done');
+                return redirect()->route('invoices.show', ['id' => $response['id']])
+                ->with('success', 'Application successfully submitted. Please pay amount for further action');
 
         }catch(Exception $e) {
             DB::rollback();

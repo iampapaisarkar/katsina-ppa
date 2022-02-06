@@ -26,4 +26,7 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/registration', [App\Http\Controllers\Vendor\RegistrationController::class, 'registration'])->name('registration');
     Route::get('/registration-preview', [App\Http\Controllers\Vendor\RegistrationController::class, 'registrationPreview'])->name('registration-preview');
     Route::post('/registration-submit', [App\Http\Controllers\Vendor\RegistrationController::class, 'registrationSubmit'])->name('registration-submit');
+    
+    Route::post('/invoices', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoices.index');
+    Route::post('/invoices/{id}', [App\Http\Controllers\InvoiceController::class, 'show'])->name('invoices.show');
 });
