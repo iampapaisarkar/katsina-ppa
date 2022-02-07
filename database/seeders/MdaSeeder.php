@@ -17,15 +17,15 @@ class MdaSeeder extends Seeder
         $Mda = [
             [
             'title' => 'Ministry of Health',
-            'type' => 'Ministry',
+            'type' => 1,
             ],
             [
             'title' => 'Ministry of Education',
-            'type' => 'Ministry',
+            'type' => 1,
             ],
             [
             'title' => 'Ministry of Works & Housing',
-            'type' => 'Ministry',
+            'type' => 1,
             ]
         ];
         Mda::insert($Mda);

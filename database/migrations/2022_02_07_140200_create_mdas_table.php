@@ -16,7 +16,7 @@ class CreateMdasTable extends Migration
         Schema::create('mdas', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('type');
+            $table->integer('type');
             $table->timestamps();
         });
     }
