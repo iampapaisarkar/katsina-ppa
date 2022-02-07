@@ -27,7 +27,7 @@ class MdaController extends Controller
         if(!empty($request->search)){
             $search = $request->search;
             $Mdas = $Mdas->where(function($q) use ($search){
-                $q->where('users.title', 'like', '%' .$search. '%');
+                $q->where('mdas.title', 'like', '%' .$search. '%');
             });
         }
 

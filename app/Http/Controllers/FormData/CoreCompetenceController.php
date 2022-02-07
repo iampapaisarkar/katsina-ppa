@@ -4,6 +4,8 @@ namespace App\Http\Controllers\FormData;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\FormData\CoreCompetenceRequest;
+use App\Models\CoreCompetence;
 
 class CoreCompetenceController extends Controller
 {
@@ -12,9 +14,27 @@ class CoreCompetenceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $competences = CoreCompetence::latest();
+
+        if($request->per_page){
+            $perPage = (integer) $request->per_page;
+        }else{
+            $perPage = 10;
+        }
+
+        if(!empty($request->search)){
+            $search = $request->search;
+            $competences = $competences->where(function($q) use ($search){
+                $q->where('core_competences.title', 'like', '%' .$search. '%');
+                $q->orWhere('core_competences.code', 'like', '%' .$search. '%');
+            });
+        }
+
+        $competences = $competences->paginate($perPage);
+
+        return view('ppa.form-data.core-competence.index', compact('competences'));
     }
 
     /**
@@ -33,9 +53,14 @@ class CoreCompetenceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CoreCompetenceRequest $request)
     {
-        //
+        CoreCompetence::create([
+            'title' => $request->title,
+            'code' => $request->code
+        ]);
+
+        return back()->withSuccess('Data insert successfully.');
     }
 
     /**
@@ -67,9 +92,14 @@ class CoreCompetenceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CoreCompetenceRequest $request, $id)
     {
-        //
+        CoreCompetence::where('id', $id)->update([
+            'title' => $request->title,
+            'code' => $request->code
+        ]);
+
+        return back()->withSuccess('Data updated successfully.');
     }
 
     /**
@@ -80,6 +110,8 @@ class CoreCompetenceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        CoreCompetence::where('id', $id)->delete();
+
+        return back()->withSuccess('Data deleted successfully.');
     }
 }

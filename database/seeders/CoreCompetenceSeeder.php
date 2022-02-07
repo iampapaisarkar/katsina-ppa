@@ -17,12 +17,15 @@ class CoreCompetenceSeeder extends Seeder
         $CoreCompetence = [
             [
             'title' => 'GOODS (Suppliers)',
+            'code' => 'A',
             ],
             [
             'title' => 'WORKS (Contractors)',
+            'code' => 'B',
             ],
             [
             'title' => 'SERVICES (Consulting & Non-Consulting)',
+            'code' => 'C',
             ],
         ];
         CoreCompetence::insert($CoreCompetence);

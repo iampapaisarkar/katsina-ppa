@@ -16,6 +16,7 @@ class CreateCoreCompetencesTable extends Migration
         Schema::create('core_competences', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('code')->unique();
             $table->timestamps();
         });
     }

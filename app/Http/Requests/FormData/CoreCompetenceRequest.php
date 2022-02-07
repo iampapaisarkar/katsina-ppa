@@ -3,6 +3,8 @@
 namespace App\Http\Requests\FormData;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use App\Models\CoreCompetence;
 
 class CoreCompetenceRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class CoreCompetenceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +26,12 @@ class CoreCompetenceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => [
+                'required'
+            ],
+            'code' => [
+                'required', Rule::unique((new CoreCompetence)->getTable())->ignore($this->id ?? null)
+            ]
         ];
     }
 }

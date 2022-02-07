@@ -10,6 +10,6 @@ class CoreCompetence extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        'title', 'code'
     ];
 }
