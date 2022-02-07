@@ -25,6 +25,15 @@ class UserSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
             ],
+            [
+            'first_name' => 'PPA',
+            'sur_name' => 'User',
+            'email' => 'ppa@test.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456'),
+            'created_at' => now(),
+            'updated_at' => now()
+            ],
         ];
         User::insert($users);
     }

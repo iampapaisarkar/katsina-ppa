@@ -25,6 +25,20 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('isPpa', function($user){
+            if($user->role->code == 'ppa'){
+                return true;
+            }else{
+                return false;
+            }
+        });
+        
+        Gate::define('isVendor', function($user){
+            if($user->role->code == 'vendor'){
+                return true;
+            }else{
+                return false;
+            }
+        });
     }
 }

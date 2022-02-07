@@ -24,11 +24,39 @@
                 </li>-->
                 <li class=" <?php if ($page=="dashboard") { echo "active";} ?> nav-item"><a class="d-flex align-items-center" href="{{route('dashboard')}}"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Dashboard</span></a>
                 </li>
+
+                @can('isPpa')
+                <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="layout"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Form Data</span></a>
+                    <ul class="menu-content">
+                    
+                    
+                    <li class=" <?php if ($page=="mdatype") { echo "active";} ?>" ><a class="d-flex align-items-center" href="formdata-mdatypes.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">MDA Type</span></a>
+                        </li>
+                    
+                    <li class=" <?php if ($page=="mda") { echo "active";} ?>" ><a class="d-flex align-items-center" href="formdata-mda.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">MDAs</span></a>
+                        </li>
+                        <li class=" <?php if ($page=="ccomp") { echo "active";} ?>" ><a class="d-flex align-items-center" href="formdata-competencies.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Core Competencies</span></a>
+                        </li>
+                        <li class=" <?php if ($page=="orgtype") { echo "active";} ?>"><a class="d-flex align-items-center" href="formdata-orgtypes.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Organization Types</span></a>
+                        </li>
+                        <li class=" <?php if ($page=="vcat") { echo "active";} ?>" ><a class="d-flex align-items-center" href="formdata-vendorcategory.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Vendor Categories</span></a>
+                        </li>
+                        <li class=" <?php if ($page=="addfees") { echo "active";} ?>" ><a class="d-flex align-items-center" href="formdata-additional-fees.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Additional Fees</span></a>
+                        </li>
+                        <li class=" <?php if ($page=="servt") { echo "active";} ?>"><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Service Types</span></a>
+                        </li>
+                        <li class=" <?php if ($page=="servs") { echo "active";} ?>"><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Services</span></a>
+                        </li>
+                    </ul>
+                </li>
+                @endcan
                 
                 <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i data-feather="more-horizontal"></i>
                 </li>
+                @can('isVendor')
                 <li class="<?php if ($page=="vendor-registration") { echo "active";} ?> nav-item"><a class="d-flex align-items-center" href="{{route('registration')}}"><i data-feather="check-circle"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Vendor Registration</span></a>
                 </li>
+                @endcan
                 <!-- <li class="<?php if ($page=="vregr") { echo "active";} ?> nav-item"><a class="d-flex align-items-center" href="vendor-register.php"><i data-feather="check-circle"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Renewal</span></a>
                 </li>
                 <li class="<?php if ($page=="vregr") { echo "active";} ?> nav-item"><a class="d-flex align-items-center" href="vendor-register.php"><i data-feather="check-circle"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Invoices</span></a>

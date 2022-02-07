@@ -21,8 +21,11 @@ if(Auth::check()){
 
 Auth::routes(['verify' => true]);
 
-Route::group(['middleware' => ['auth','verified']], function () {
+Route::group(['middleware' => ['auth','verified'], ['can:isVendor,isPpa']], function () {
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+});
+
+Route::group(['middleware' => ['auth','verified', 'can:isVendor']], function () {
     Route::get('/registration', [App\Http\Controllers\Vendor\RegistrationController::class, 'registration'])->name('registration');
     Route::get('/registration-preview', [App\Http\Controllers\Vendor\RegistrationController::class, 'registrationPreview'])->name('registration-preview');
     Route::post('/registration-submit', [App\Http\Controllers\Vendor\RegistrationController::class, 'registrationSubmit'])->name('registration-submit');
