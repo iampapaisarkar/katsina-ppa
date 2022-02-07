@@ -78,9 +78,9 @@
                                             <span class="fw-bold">{{$category->title}}</span>
                                         </td>
                                         <td>{{$category->code}}</td>
+                                        <td>{{number_format($category->contract_value)}}</td>
                                         <td>{{number_format($category->registration_fee)}}</td>
                                         <td>{{number_format($category->renewal_fee)}}</td>
-                                        <td>{{number_format($category->contract_value)}}</td>
                                         <td>
                                             <div class="dropdown">
                                                 <button type="button" class="btn btn-sm dropdown-toggle hide-arrow py-0"

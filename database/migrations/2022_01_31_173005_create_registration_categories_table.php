@@ -17,7 +17,7 @@ class CreateRegistrationCategoriesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('code')->unique();
-            $table->float('contract_value', 10, 2);
+            $table->bigInteger('contract_value');
             $table->float('registration_fee', 10, 2);
             $table->float('renewal_fee', 10, 2);
             $table->timestamps();

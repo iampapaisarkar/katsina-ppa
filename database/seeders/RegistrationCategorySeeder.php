@@ -38,7 +38,7 @@ class RegistrationCategorySeeder extends Seeder
             ],
             [
             'code' => 'D',
-            'title' => 'Contract Value N2.5 and N50m	',
+            'title' => 'Contract Value N2.5 and N50m',
             'contract_value' => 50000000,
             'registration_fee' => 15000,
             'renewal_fee' => 10000,
