@@ -85,12 +85,12 @@
                                                         <span>Edit</span>
                                                     </a>
 
-                                                    <form id="delete-form"
+                                                    <form id="delete-form_{{$fee->id}}"
                                                         action="{{ route('additional-fee.destroy', $fee->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <a onclick="deleteData(event)" class="dropdown-item" href="#">
+                                                        <a onclick="deleteData({{$fee->id}})" class="dropdown-item" href="#">
                                                             <i data-feather="trash" class="me-50"></i>
                                                             <span>Delete</span>
                                                         </a>
@@ -249,7 +249,7 @@
 </div>
 
 <script>
-function deleteData(event) {
+function deleteData(id) {
     event.preventDefault();
 
     $.confirm({
@@ -261,7 +261,7 @@ function deleteData(event) {
                 btnClass: 'btn-primary',
                 keys: ['enter'],
                 action: function() {
-                    document.getElementById('delete-form').submit();
+                    document.getElementById('delete-form_'+id).submit();
                 }
             },
             cancel: function() {
