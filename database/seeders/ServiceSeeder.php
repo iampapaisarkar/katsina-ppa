@@ -17,483 +17,447 @@ class ServiceSeeder extends Seeder
         $Service = [
             [
             'title' => 'Communication Services',
-            'parent' => null,
-            ],
-            [
-            'title' => 'Communication Services',
-            'parent' => 1,
+            'type' => 1,
             ],
             [
             'title' => 'Express Courier Services',
-            'parent' => 1,
+            'type' => 1,
             ],
             [
             'title' => 'Internet/Data Services',
-            'parent' => 1,
+            'type' => 1,
             ],
             [
             'title' => 'Postal Services',
-            'parent' => 1,
-            ],
-            [
-            'title' => 'Consultancy and Professional Services',
-            'parent' => null,
+            'type' => 1,
             ],
             [
             'title' => 'Accountancy',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Administrative Management',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Aerospace',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Architecture',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Audit',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Biomedical',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Building Electrical Services',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Building Inspection',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Building Mechanical Services',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Business Consultancy/Strategy/Operations',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Chemical',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Civil',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Computer Engineering',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Culture and Entertainment',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Dentists',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Design Architect',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Electrical',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Electronics & Electronic Systems',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Engineering',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Environmental',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Environmental',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Equipment',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Estate/Facilities',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Foreign Training Providers',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Geophysical/Hydrographic',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Geotechnical',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Graphic Design and Publishing',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'IT Audit and Security',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'IT Infrastructure Services',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'IT Strategy Development',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Information Technology',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Land',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Lawyers',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Legal Services',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Local Training Providers',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Management Services',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Manufacturing Systems',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Marketing',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Mechanical',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Medical Doctors',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Medical and Health Services',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Mineral/Soil',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Notaries',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Nurses',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Other Specialized Medical Service Providers',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Personnel Management/Staffing/Human Capital Development',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Petroleum',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Power Systems',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Project Consultant',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Project Manager',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Public Relations Media',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Purchasing and Supply Management',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Quantity',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Research and Development',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Sciences and Investigations',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Social and Community Services',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Software Hosting Services',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Software Development',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Solicitors',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Structural',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Surveying',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Taxation',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Town and Regional Planning',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Training and Education',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Transportation',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Transportation Systems',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Valuation',
-            'parent' => 6,
+            'type' => 2,
             ],
             [
             'title' => 'Water',
-            'parent' => 6,
-            ],
-            [
-            'title' => 'Facilities Rental',
-            'parent' => null,
+            'type' => 2,
             ],
             [
             'title' => 'Building Lease and Rent',
-            'parent' => 75,
+            'type' => 3,
             ],
             [
             'title' => 'Estate Management',
-            'parent' => 75,
-            ],
-            [
-            'title' => 'Financial Services',
-            'parent' => null,
+            'type' => 3,
             ],
             [
             'title' => 'Banking Services',
-            'parent' => 78,
+            'type' => 4,
             ],
             [
             'title' => 'Insurance Brokers',
-            'parent' => 78,
+            'type' => 4,
             ],
             [
             'title' => 'Insurance Loss Adjusters',
-            'parent' => 78,
+            'type' => 4,
             ],
             [
             'title' => 'Insurance Providers',
-            'parent' => 78,
+            'type' => 4,
             ],
             [
             'title' => 'Insurance Services',
-            'parent' => 78,
+            'type' => 4,
             ],
             [
             'title' => 'Investment Managers',
-            'parent' => 78,
+            'type' => 4,
             ],
             [
             'title' => 'Investment Services',
-            'parent' => 78,
+            'type' => 4,
             ],
             [
             'title' => 'Pensions Administrators',
-            'parent' => 78,
+            'type' => 4,
             ],
             [
             'title' => 'Trust and Custodial Services',
-            'parent' => 78,
-            ],
-            [
-            'title' => 'Maintenance Services',
-            'parent' => null,
+            'type' => 4,
             ],
             [
             'title' => 'Building Maintenance',
-            'parent' => 88,
+            'type' => 5,
             ],
             [
             'title' => 'Building Repairs',
-            'parent' => 88,
+            'type' => 5,
             ],
             [
             'title' => 'Dredging of Drainage Channels',
-            'parent' => 88,
+            'type' => 5,
             ],
             [
             'title' => 'Equipment Maintenance',
-            'parent' => 88,
+            'type' => 5,
             ],
             [
             'title' => 'Furniture Maintenance',
-            'parent' => 88,
+            'type' => 5,
             ],
             [
             'title' => 'Janitorial/Cleaning Services',
-            'parent' => 88,
+            'type' => 5,
             ],
             [
             'title' => 'Landscaping Services',
-            'parent' => 88,
+            'type' => 5,
             ],
             [
             'title' => 'Maintenance cleaning of Drainage Channels',
-            'parent' => 88,
+            'type' => 5,
             ],
             [
             'title' => 'Waste Disposal',
-            'parent' => 88,
-            ],
-            [
-            'title' => 'Media and Communication Services',
-            'parent' => null,
+            'type' => 5,
             ],
             [
             'title' => 'Direct Mail',
-            'parent' => 98,
+            'type' => 6,
             ],
             [
             'title' => 'Door-to-Door Campaigns',
-            'parent' => 98,
+            'type' => 6,
             ],
             [
             'title' => 'Online/Internet',
-            'parent' => 98,
+            'type' => 6,
             ],
             [
             'title' => 'Outdoor/Billboards',
-            'parent' => 98,
+            'type' => 6,
             ],
             [
             'title' => 'Print',
-            'parent' => 98,
+            'type' => 6,
             ],
             [
             'title' => 'Radio/TV',
-            'parent' => 98,
-            ],
-            [
-            'title' => 'Security Services',
-            'parent' => null,
+            'type' => 6,
             ],
             [
             'title' => 'Building and Facilities',
-            'parent' => 106,
+            'type' => 7,
             ],
             [
             'title' => 'Private Investigative Services',
-            'parent' => 106,
+            'type' => 7,
             ],
             [
             'title' => 'VIP Protection',
-            'parent' => 106,
-            ],
-            [
-            'title' => 'Travel and Hospitality Services',
-            'parent' => null,
+            'type' => 7,
             ],
             [
             'title' => 'Air Travel',
-            'parent' => 110,
+            'type' => 8,
             ],
             [
             'title' => 'Car/Bus Hire',
-            'parent' => 110,
+            'type' => 8,
             ],
             [
             'title' => 'Food and Catering Services',
-            'parent' => 110,
+            'type' => 8,
             ],
             [
             'title' => 'Hotels and Accommodation',
-            'parent' => 110,
+            'type' => 8,
             ],
             [
             'title' => 'Planning and Management',
-            'parent' => 110,
+            'type' => 8,
             ],
             [
             'title' => 'Rail Travel',
-            'parent' => 110,
+            'type' => 8,
             ],
             [
             'title' => 'Ship/Water Transport',
-            'parent' => 110,
+            'type' => 8,
             ],
             [
             'title' => 'Travel Reservations & Booking',
-            'parent' => 110,
-            ],
-            [
-            'title' => 'Utilities',
-            'parent' => null,
+            'type' => 8,
             ],
             [
             'title' => 'Electricity',
-            'parent' => 119,
+            'type' => 9,
             ],
             [
             'title' => 'Water',
-            'parent' => 119,
+            'type' => 9,
             ]
         ];
         Service::insert($Service);

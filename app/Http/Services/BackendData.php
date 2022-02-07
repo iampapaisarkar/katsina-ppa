@@ -35,7 +35,7 @@ class BackendData
     }
 
     public static function Services(){
-        return Service::where('parent', NULL)->with('childs')->get();
+        return Service::get();
     }
 
     public static function ServiceTypes(){

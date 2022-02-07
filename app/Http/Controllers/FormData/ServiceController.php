@@ -4,6 +4,8 @@ namespace App\Http\Controllers\FormData;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\FormData\ServiceRequest;
+use App\Models\Service;
 
 class ServiceController extends Controller
 {
@@ -12,9 +14,27 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $services = Service::with('service_type')->latest();
+
+
+        if($request->per_page){
+            $perPage = (integer) $request->per_page;
+        }else{
+            $perPage = 10;
+        }
+
+        if(!empty($request->search)){
+            $search = $request->search;
+            $services = $services->where(function($q) use ($search){
+                $q->where('services.title', 'like', '%' .$search. '%');
+            });
+        }
+
+        $services = $services->paginate($perPage);
+
+        return view('ppa.form-data.service.index', compact('services'));
     }
 
     /**
@@ -33,9 +53,14 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ServiceRequest $request)
     {
-        //
+        Service::create([
+            'title' => $request->title,
+            'type' => $request->type
+        ]);
+
+        return back()->withSuccess('Data insert successfully.');
     }
 
     /**
@@ -67,9 +92,14 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ServiceRequest $request, $id)
     {
-        //
+        Service::where('id', $id)->update([
+            'title' => $request->title,
+            'type' => $request->type
+        ]);
+
+        return back()->withSuccess('Data updated successfully.');
     }
 
     /**
@@ -80,6 +110,8 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Service::where('id', $id)->delete();
+
+        return back()->withSuccess('Data deleted successfully.');
     }
 }

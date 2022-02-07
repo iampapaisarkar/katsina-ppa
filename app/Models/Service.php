@@ -11,11 +11,10 @@ class Service extends Model
 
     protected $fillable = [
         'title',
-        'parent',
+        'type',
     ];
-
-    public function childs()
-    {
-        return $this->hasMany(Service::class,'parent','id');
+   
+    public function service_type() {
+        return $this->hasOne(ServiceType::class, 'id','type');
     }
 }
