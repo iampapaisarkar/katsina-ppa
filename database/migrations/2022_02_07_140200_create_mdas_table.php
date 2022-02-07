@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegistrationCategoriesTable extends Migration
+class CreateMdasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateRegistrationCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('registration_categories', function (Blueprint $table) {
+        Schema::create('mdas', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('class');
-            $table->float('contract_value', 10, 2);
-            $table->float('registration_fee', 10, 2);
-            $table->float('renewal_fee', 10, 2);
+            $table->string('type');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateRegistrationCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('registration_categories');
+        Schema::dropIfExists('mdas');
     }
 }

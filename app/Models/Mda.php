@@ -5,15 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RegistrationCategory extends Model
+class Mda extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'class',
-        'contract_value',
-        'registration_fee',
-        'renewal_fee',
+        'title', 'type'
     ];
 }
