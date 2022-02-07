@@ -17,11 +17,19 @@
             </div>
 
         </div>
+
         @if (session('errors'))
-        <div class="alert alert-error p-2" role="alert">
-            {{ session('errors') }}
+        <div class="alert alert-danger p-2" role="alert">
+            <p>*{{session('errors')->first('description')}}</p>
+        </div>
+        <div class="alert alert-danger p-2" role="alert">
+            <p>*{{session('errors')->first('registration_fee')}}</p>
+        </div>
+        <div class="alert alert-danger p-2" role="alert">
+            <p>*{{session('errors')->first('renewal_fee')}}</p>
         </div>
         @endif
+       
 
         @if (session('success'))
         <div class="alert alert-success p-2" role="alert">

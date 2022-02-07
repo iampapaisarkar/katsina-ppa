@@ -18,8 +18,20 @@
 
         </div>
         @if (session('errors'))
-        <div class="alert alert-error p-2" role="alert">
-            {{ session('errors') }}
+        <div class="alert alert-danger p-2" role="alert">
+            <p>*{{session('errors')->first('title')}}</p>
+        </div>
+        <div class="alert alert-danger p-2" role="alert">
+            <p>*{{session('errors')->first('code')}}</p>
+        </div>
+        <div class="alert alert-danger p-2" role="alert">
+            <p>*{{session('errors')->first('registration_fee')}}</p>
+        </div>
+        <div class="alert alert-danger p-2" role="alert">
+            <p>*{{session('errors')->first('renewal_fee')}}</p>
+        </div>
+        <div class="alert alert-danger p-2" role="alert">
+            <p>*{{session('errors')->first('threshold')}}</p>
         </div>
         @endif
 
