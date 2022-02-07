@@ -4,6 +4,8 @@ namespace App\Http\Controllers\FormData;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\FormData\MdaTypeRequest;
+use App\Models\MdaType;
 
 class MdaTypeController extends Controller
 {
@@ -12,9 +14,27 @@ class MdaTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('ppa.form-data.mda-type.index');
+        $MdaTypes = MdaType::latest();
+
+        if($request->per_page){
+            $perPage = (integer) $request->per_page;
+        }else{
+            $perPage = 10;
+        }
+
+        if(!empty($request->search)){
+            $search = $request->search;
+            $MdaTypes = $MdaTypes->where(function($q) use ($search){
+                $q->where('users.title', 'like', '%' .$search. '%');
+                // $q->orWhere('users.lastname', 'like', '%' .$search. '%');
+            });
+        }
+
+        $MdaTypes = $MdaTypes->latest()->paginate($perPage);
+
+        return view('ppa.form-data.mda-type.index', compact('MdaTypes'));
     }
 
     /**
@@ -33,9 +53,14 @@ class MdaTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MdaTypeRequest $request)
     {
-        //
+        MdaType::create([
+            'title' => $request->title,
+            'amount' => $request->amount
+        ]);
+
+        return back()->withSuccess('Data insert successfully.');
     }
 
     /**
@@ -67,9 +92,14 @@ class MdaTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MdaTypeRequest $request, $id)
     {
-        //
+        MdaType::where('id', $id)->update([
+            'title' => $request->title,
+            'amount' => $request->amount
+        ]);
+
+        return back()->withSuccess('Data updated successfully.');
     }
 
     /**
@@ -80,6 +110,9 @@ class MdaTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        MdaType::where('id', $id)->delete();
+
+        return back()->withSuccess('Data deleted successfully.');
+
     }
 }
