@@ -33,3 +33,8 @@ Route::group(['middleware' => ['auth','verified', 'can:isVendor']], function () 
     Route::post('/invoices', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoices.index');
     Route::post('/invoices/{id}', [App\Http\Controllers\InvoiceController::class, 'show'])->name('invoices.show');
 });
+
+Route::group(['middleware' => ['auth','verified', 'can:isPpa']], function () {
+    Route::resource('/mda-type', 'App\Http\Controllers\FormData\MdaTypeController');
+	// Route::get('/', function () { return view('auth.login'); });
+});

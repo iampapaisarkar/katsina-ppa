@@ -14,7 +14,7 @@ class MdaTypeController extends Controller
      */
     public function index()
     {
-        //
+        return view('ppa.form-data.mda-type.index');
     }
 
     /**

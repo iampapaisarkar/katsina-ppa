@@ -29,10 +29,10 @@
                 <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="layout"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Form Data</span></a>
                     <ul class="menu-content">
                     
-                    <li class=" <?php if ($page=="mdatype") { echo "active";} ?>" ><a class="d-flex align-items-center" href="formdata-mdatypes.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">MDA Type</span></a>
+                    <li class=" <?php if ($page=="mda-type") { echo "active";} ?>" ><a class="d-flex align-items-center" href="{{route('mda-type.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">MDA Type</span></a>
                     </li>
                     
-                    <li class=" <?php if ($page=="mda") { echo "active";} ?>" ><a class="d-flex align-items-center" href="formdata-mda.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">MDAs</span></a>
+                    <li class=" <?php if ($page=="mda") { echo "active";} ?>" ><a class="d-flex align-items-center" href=""><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">MDAs</span></a>
                         </li>
                         <li class=" <?php if ($page=="ccomp") { echo "active";} ?>" ><a class="d-flex align-items-center" href="formdata-competencies.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Core Competencies</span></a>
                         </li>
