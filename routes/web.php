@@ -36,5 +36,11 @@ Route::group(['middleware' => ['auth','verified', 'can:isVendor']], function () 
 
 Route::group(['middleware' => ['auth','verified', 'can:isPpa']], function () {
     Route::resource('/mda-type', 'App\Http\Controllers\FormData\MdaTypeController');
-	// Route::get('/', function () { return view('auth.login'); });
+    Route::resource('/mda', 'App\Http\Controllers\FormData\MdaController');
+    Route::resource('/core-competence', 'App\Http\Controllers\FormData\CoreCompetenceController');
+    Route::resource('/organization-type', 'App\Http\Controllers\FormData\OrganizationTypeController');
+    Route::resource('/registration-category', 'App\Http\Controllers\FormData\RegistrationCategoryController');
+    Route::resource('/additional-fee', 'App\Http\Controllers\FormData\AdditionalFeeController');
+    Route::resource('/service', 'App\Http\Controllers\FormData\ServiceController');
+    Route::resource('/service-type', 'App\Http\Controllers\FormData\ServiceTypeController');
 });

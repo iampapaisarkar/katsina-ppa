@@ -32,19 +32,19 @@
                     <li class=" <?php if ($page=="mda-type") { echo "active";} ?>" ><a class="d-flex align-items-center" href="{{route('mda-type.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">MDA Type</span></a>
                     </li>
                     
-                    <li class=" <?php if ($page=="mda") { echo "active";} ?>" ><a class="d-flex align-items-center" href=""><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">MDAs</span></a>
+                    <li class=" <?php if ($page=="mda") { echo "active";} ?>" ><a class="d-flex align-items-center" href="{{route('mda.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">MDAs</span></a>
                         </li>
-                        <li class=" <?php if ($page=="ccomp") { echo "active";} ?>" ><a class="d-flex align-items-center" href="formdata-competencies.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Core Competencies</span></a>
+                        <li class=" <?php if ($page=="core-competence") { echo "active";} ?>" ><a class="d-flex align-items-center" href="{{route('core-competence.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Core Competencies</span></a>
                         </li>
-                        <li class=" <?php if ($page=="orgtype") { echo "active";} ?>"><a class="d-flex align-items-center" href="formdata-orgtypes.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Organization Types</span></a>
+                        <li class=" <?php if ($page=="organization-type") { echo "active";} ?>"><a class="d-flex align-items-center" href="{{route('organization-type.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Organization Types</span></a>
                         </li>
-                        <li class=" <?php if ($page=="vcat") { echo "active";} ?>" ><a class="d-flex align-items-center" href="formdata-vendorcategory.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Vendor Categories</span></a>
+                        <li class=" <?php if ($page=="registration-category") { echo "active";} ?>" ><a class="d-flex align-items-center" href="{{route('registration-category.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Vendor Categories</span></a>
                         </li>
-                        <li class=" <?php if ($page=="addfees") { echo "active";} ?>" ><a class="d-flex align-items-center" href="formdata-additional-fees.php"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Additional Fees</span></a>
+                        <li class=" <?php if ($page=="additional-fee") { echo "active";} ?>" ><a class="d-flex align-items-center" href="{{route('additional-fee.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Additional Fees</span></a>
                         </li>
-                        <li class=" <?php if ($page=="servt") { echo "active";} ?>"><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Service Types</span></a>
+                        <li class=" <?php if ($page=="service") { echo "active";} ?>"><a class="d-flex align-items-center" href="{{route('service.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Service Types</span></a>
                         </li>
-                        <li class=" <?php if ($page=="servs") { echo "active";} ?>"><a class="d-flex align-items-center" href="#"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Services</span></a>
+                        <li class=" <?php if ($page=="service-type") { echo "active";} ?>"><a class="d-flex align-items-center" href="{{route('service-type.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Services</span></a>
                         </li>
                     </ul>
                 </li>
