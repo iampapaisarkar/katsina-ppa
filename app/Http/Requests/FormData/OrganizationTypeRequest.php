@@ -3,6 +3,8 @@
 namespace App\Http\Requests\FormData;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use App\Models\OrganizationType;
 
 class OrganizationTypeRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class OrganizationTypeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +26,13 @@ class OrganizationTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => [
+                'required'
+            ],
+            'code' => [
+                'required'
+                // , Rule::unique((new OrganizationType)->getTable())->ignore($this->id ?? null)
+            ]
         ];
     }
 }

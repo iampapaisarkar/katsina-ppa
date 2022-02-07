@@ -30,7 +30,8 @@ class CoreCompetenceRequest extends FormRequest
                 'required'
             ],
             'code' => [
-                'required', Rule::unique((new CoreCompetence)->getTable())->ignore($this->id ?? null)
+                'required'
+                // , Rule::unique((new CoreCompetence)->getTable())->ignore($this->id ?? null)
             ]
         ];
     }

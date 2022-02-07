@@ -17,12 +17,15 @@ class OrganizationTypeSeeder extends Seeder
         $OrganizationType = [
             [
             'title' => 'Incorporated Company',
+            'code' => 'A',
             ],
             [
             'title' => 'Limited Partnerships',
+            'code' => 'B',
             ],
             [
             'title' => 'Business Name',
+            'code' => 'C',
             ],
         ];
         OrganizationType::insert($OrganizationType);

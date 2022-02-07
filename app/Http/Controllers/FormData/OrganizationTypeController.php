@@ -4,6 +4,8 @@ namespace App\Http\Controllers\FormData;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\FormData\OrganizationTypeRequest;
+use App\Models\OrganizationType;
 
 class OrganizationTypeController extends Controller
 {
@@ -12,9 +14,27 @@ class OrganizationTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $types = OrganizationType::latest();
+
+        if($request->per_page){
+            $perPage = (integer) $request->per_page;
+        }else{
+            $perPage = 10;
+        }
+
+        if(!empty($request->search)){
+            $search = $request->search;
+            $types = $types->where(function($q) use ($search){
+                $q->where('organization_types.title', 'like', '%' .$search. '%');
+                $q->orWhere('organization_types.code', 'like', '%' .$search. '%');
+            });
+        }
+
+        $types = $types->paginate($perPage);
+
+        return view('ppa.form-data.organization-type.index', compact('types'));
     }
 
     /**
@@ -33,9 +53,14 @@ class OrganizationTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrganizationTypeRequest $request)
     {
-        //
+        OrganizationType::create([
+            'title' => $request->title,
+            'code' => $request->code
+        ]);
+
+        return back()->withSuccess('Data insert successfully.');
     }
 
     /**
@@ -67,9 +92,14 @@ class OrganizationTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OrganizationTypeRequest $request, $id)
     {
-        //
+        OrganizationType::where('id', $id)->update([
+            'title' => $request->title,
+            'code' => $request->code
+        ]);
+
+        return back()->withSuccess('Data updated successfully.');
     }
 
     /**
@@ -80,6 +110,8 @@ class OrganizationTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        OrganizationType::where('id', $id)->delete();
+
+        return back()->withSuccess('Data deleted successfully.');
     }
 }
