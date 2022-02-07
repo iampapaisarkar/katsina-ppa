@@ -104,19 +104,6 @@
     <script src="{{ asset('libs/app-assets/vendors/js/forms/repeater/jquery.repeater.min.js')}}"></script>
     <!-- END: Page Vendor JS-->
 
-    <!-- BEGIN: Theme JS-->
-    <script src="{{ asset('libs/app-assets/js/core/app-menu.js')}}"></script>
-    <script src="{{ asset('libs/app-assets/js/core/app.js')}}"></script>
-    <!-- END: Theme JS-->
-
-    <!-- BEGIN: Page JS-->
-    <script src="{{ asset('libs/app-assets/js/scripts/forms/form-wizard.js')}}"></script>
-    <script src="{{ asset('libs/app-assets/js/scripts/forms/form-input-mask.js')}}"></script>
-    <script src="{{ asset('libs/app-assets/js/scripts/forms/pickers/form-pickers.js')}}"></script>
-    <script src="{{ asset('libs/app-assets/js/scripts/forms/form-repeater.js')}}"></script>
-    <!-- END: Page JS-->
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
