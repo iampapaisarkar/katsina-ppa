@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'organization-type'])
+@extends('layouts.app', ['page' => 'registration-category'])
 
 @section('content')
 <!-- BEGIN: Content-->
@@ -10,7 +10,7 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-start mb-0">Organization Types</h2>
+                        <h2 class="content-header-title float-start mb-0">Vendor Categories</h2>
 
                     </div>
                 </div>
@@ -51,19 +51,24 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>ORGANIZATION TYPES</th>
+                                        <th>VENDOR CATEGORIES</th>
                                         <th>CODE</th>
-
+                                        <th>THRESHOLD</th>
+                                        <th>REGISTRATION FEE</th>
+                                        <th>RENEWAL FEE</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($types as $type)
+                                    @foreach($categories as $category)
                                     <tr>
                                         <td>
-                                            <span class="fw-bold">{{$type->title}}</span>
+                                            <span class="fw-bold">{{$category->title}}</span>
                                         </td>
-                                        <td>{{$type->code}}</td>
+                                        <td>{{$category->code}}</td>
+                                        <td>{{number_format($category->registration_fee)}}</td>
+                                        <td>{{number_format($category->renewal_fee)}}</td>
+                                        <td>{{number_format($category->contract_value)}}</td>
                                         <td>
                                             <div class="dropdown">
                                                 <button type="button" class="btn btn-sm dropdown-toggle hide-arrow py-0"
@@ -71,13 +76,13 @@
                                                     <i data-feather="more-vertical"></i>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="#"  onclick="editData({{$type}})">
+                                                    <a class="dropdown-item" href="#"  onclick="editData({{$category}})">
                                                         <i data-feather="edit-2" class="me-50"></i>
                                                         <span>Edit</span>
                                                     </a>
 
                                                     <form id="delete-form"
-                                                        action="{{ route('organization-type.destroy', $type->id) }}"
+                                                        action="{{ route('registration-category.destroy', $category->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
@@ -98,7 +103,7 @@
                 </div>
             </div>
             <!-- Basic Tables end -->
-            {{$types->links()}}
+            {{$categories->links()}}
 
 
             <!-- Create Modal -->
@@ -114,7 +119,7 @@
 
                             </div>
                             <form id="createDataForm" class="row gy-1 pt-75" method="POST"
-                                action="{{route('organization-type.store')}}">
+                                action="{{route('registration-category.store')}}">
                                 @csrf
                                 @method('POST')
                                 <div class="col-12 col-md-6">
@@ -134,6 +139,42 @@
                                         class="form-control @error('code') is-invalid @enderror" placeholder="Doe"
                                         value=" " data-msg="Please enter Code" />
                                     @error('code')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <label class="form-label" for="createRegistrationFee">Registration Fee (N)</label>
+                                    <input name="registration_fee" type="number" id="createRegistrationFee"
+                                        class="form-control @error('registration_fee') is-invalid @enderror" placeholder="Doe"
+                                        value=" " data-msg="Please enter registration_fee" />
+                                    @error('registration_fee')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <label class="form-label" for="createRenewalFee">Renewal Fee (N)</label>
+                                    <input name="renewal_fee" type="number" id="createRenewalFee"
+                                        class="form-control @error('renewal_fee') is-invalid @enderror" placeholder="Doe"
+                                        value=" " data-msg="Please enter renewal_fee" />
+                                    @error('renewal_fee')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-12 col-md-12">
+                                    <label class="form-label" for="createThresholdFee">Threshold Value (N)</label>
+                                    <input name="threshold" type="number" id="createThresholdFee"
+                                        class="form-control @error('threshold') is-invalid @enderror" placeholder="Doe"
+                                        value=" " data-msg="Please enter threshold" />
+                                    @error('threshold')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -193,6 +234,42 @@
                                     @enderror
                                 </div>
 
+                                <div class="col-12 col-md-6">
+                                    <label class="form-label" for="editRegistrationFee">Registration Fee (N)</label>
+                                    <input name="registration_fee" type="number" id="editRegistrationFee"
+                                        class="form-control @error('registration_fee') is-invalid @enderror" placeholder="Doe"
+                                        value=" " data-msg="Please enter registration_fee" />
+                                    @error('registration_fee')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <label class="form-label" for="editRenewalFee">Renewal Fee (N)</label>
+                                    <input name="renewal_fee" type="number" id="editRenewalFee"
+                                        class="form-control @error('renewal_fee') is-invalid @enderror" placeholder="Doe"
+                                        value=" " data-msg="Please enter renewal_fee" />
+                                    @error('renewal_fee')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-12 col-md-12">
+                                    <label class="form-label" for="editThresholdFee">Threshold Value (N)</label>
+                                    <input name="threshold" type="number" id="editThresholdFee"
+                                        class="form-control @error('threshold') is-invalid @enderror" placeholder="Doe"
+                                        value=" " data-msg="Please enter threshold" />
+                                    @error('threshold')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
                                 <div class="col-12 text-center mt-2 pt-50">
                                     <button type="submit" class="btn btn-primary me-1">Submit</button>
                                     <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
@@ -236,10 +313,13 @@ function deleteData(event) {
 }
 
 function editData(data){
-    var _edit_route = '{{env('APP_URL')}}' + '/organization-type/' + data.id;
+    var _edit_route = '{{env('APP_URL')}}' + '/registration-category/' + data.id;
     $("#editFormForm").attr("action", _edit_route);
     $("#editTitle").val(data.title);
     $("#editCode").val(data.code);
+    $("#editRegistrationFee").val(data.registration_fee);
+    $("#editRenewalFee").val(data.renewal_fee);
+    $("#editThresholdFee").val(data.contract_value);
     $("#editData").modal("show")
 }
 </script>

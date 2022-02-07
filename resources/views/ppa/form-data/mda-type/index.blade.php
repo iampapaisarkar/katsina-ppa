@@ -98,6 +98,7 @@
                 </div>
             </div>
             <!-- Basic Tables end -->
+            {{$MdaTypes->links()}}
 
 
 

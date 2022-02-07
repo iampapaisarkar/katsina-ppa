@@ -13,7 +13,7 @@ class RegistrationCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,22 @@ class RegistrationCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => [
+                'required'
+            ],
+            'code' => [
+                'required'
+                // , Rule::unique((new OrganizationType)->getTable())->ignore($this->id ?? null)
+            ],
+            'registration_fee' => [
+                'required'
+            ],
+            'renewal_fee' => [
+                'required'
+            ],
+            'threshold' => [
+                'required'
+            ]
         ];
     }
 }

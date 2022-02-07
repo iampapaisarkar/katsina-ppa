@@ -11,7 +11,7 @@ class RegistrationCategory extends Model
 
     protected $fillable = [
         'title',
-        'class',
+        'code',
         'contract_value',
         'registration_fee',
         'renewal_fee',

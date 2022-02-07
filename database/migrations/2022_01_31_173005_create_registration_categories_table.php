@@ -16,7 +16,7 @@ class CreateRegistrationCategoriesTable extends Migration
         Schema::create('registration_categories', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('class');
+            $table->string('code')->unique();
             $table->float('contract_value', 10, 2);
             $table->float('registration_fee', 10, 2);
             $table->float('renewal_fee', 10, 2);

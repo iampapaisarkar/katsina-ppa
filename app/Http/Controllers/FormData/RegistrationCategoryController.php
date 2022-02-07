@@ -4,6 +4,8 @@ namespace App\Http\Controllers\FormData;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\FormData\RegistrationCategoryRequest;
+use App\Models\RegistrationCategory;
 
 class RegistrationCategoryController extends Controller
 {
@@ -12,9 +14,27 @@ class RegistrationCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $categories = RegistrationCategory::latest();
+
+        if($request->per_page){
+            $perPage = (integer) $request->per_page;
+        }else{
+            $perPage = 10;
+        }
+
+        if(!empty($request->search)){
+            $search = $request->search;
+            $categories = $categories->where(function($q) use ($search){
+                $q->where('registration_categories.title', 'like', '%' .$search. '%');
+                $q->orWhere('registration_categories.code', 'like', '%' .$search. '%');
+            });
+        }
+
+        $categories = $categories->paginate($perPage);
+
+        return view('ppa.form-data.registration-category.index', compact('categories'));
     }
 
     /**
@@ -33,9 +53,17 @@ class RegistrationCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RegistrationCategoryRequest $request)
     {
-        //
+        RegistrationCategory::create([
+            'title' => $request->title,
+            'code' => $request->code,
+            'registration_fee' => $request->registration_fee,
+            'renewal_fee' => $request->renewal_fee,
+            'contract_value' => $request->threshold,
+        ]);
+
+        return back()->withSuccess('Data insert successfully.');
     }
 
     /**
@@ -67,9 +95,17 @@ class RegistrationCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RegistrationCategoryRequest $request, $id)
     {
-        //
+        RegistrationCategory::where('id', $id)->update([
+            'title' => $request->title,
+            'code' => $request->code,
+            'registration_fee' => $request->registration_fee,
+            'renewal_fee' => $request->renewal_fee,
+            'contract_value' => $request->threshold,
+        ]);
+
+        return back()->withSuccess('Data updated successfully.');
     }
 
     /**
@@ -80,6 +116,8 @@ class RegistrationCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        RegistrationCategory::where('id', $id)->delete();
+
+        return back()->withSuccess('Data deleted successfully.');
     }
 }

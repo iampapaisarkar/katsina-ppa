@@ -98,7 +98,7 @@
                 </div>
             </div>
             <!-- Basic Tables end -->
-
+            {{$competences->links()}}
 
 
             <!-- Create Modal -->
