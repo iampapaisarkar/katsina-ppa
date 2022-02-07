@@ -12,4 +12,8 @@ class Mda extends Model
     protected $fillable = [
         'title', 'type'
     ];
+
+    public function mda_type() {
+        return $this->hasOne(MdaType::class, 'id','type');
+    }
 }

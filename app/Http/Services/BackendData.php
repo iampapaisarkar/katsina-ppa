@@ -2,6 +2,8 @@
 
 namespace App\Http\Services;
 use Illuminate\Support\Facades\Auth;
+use App\Models\MdaType;
+use App\Models\Mda;
 use App\Models\CoreCompetence;
 use App\Models\OrganizationType;
 use App\Models\RegistrationCategory;
@@ -12,6 +14,14 @@ use DB;
 
 class BackendData
 {
+    public static function MdaTypes(){
+        return MdaType::get();
+    }
+
+    public static function Mdas(){
+        return Mda::get();
+    }
+
     public static function CoreCompetences(){
         return CoreCompetence::get();
     }

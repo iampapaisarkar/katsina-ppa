@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'mda-type'])
+@extends('layouts.app', ['page' => 'mda'])
 
 @section('content')
 <!-- BEGIN: Content-->
@@ -10,7 +10,7 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-start mb-0">MDA Types</h2>
+                        <h2 class="content-header-title float-start mb-0">MDAs</h2>
 
                     </div>
                 </div>
@@ -51,19 +51,19 @@
                             <table class="table">
                                 <thead>
                                     <tr>
+                                        <th>MDA Name</th>
                                         <th>MDA Types</th>
-                                        <th>Contract Threshold</th>
 
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($MdaTypes as $MdaType)
+                                    @foreach($Mdas as $Mda)
                                     <tr>
                                         <td>
-                                            <span class="fw-bold">{{$MdaType->title}}</span>
+                                            <span class="fw-bold">{{$Mda->title}}</span>
                                         </td>
-                                        <td>{{number_format($MdaType->amount)}}</td>
+                                        <td>{{$Mda->mda_type->title}}</td>
                                         <td>
                                             <div class="dropdown">
                                                 <button type="button" class="btn btn-sm dropdown-toggle hide-arrow py-0"
@@ -71,13 +71,13 @@
                                                     <i data-feather="more-vertical"></i>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="#"  onclick="editData({{$MdaType}})">
+                                                    <a class="dropdown-item" href="#"  onclick="editData({{$Mda}})">
                                                         <i data-feather="edit-2" class="me-50"></i>
                                                         <span>Edit</span>
                                                     </a>
 
                                                     <form id="delete-form"
-                                                        action="{{ route('mda-type.destroy', $MdaType->id) }}"
+                                                        action="{{ route('mda.destroy', $Mda->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
@@ -98,7 +98,7 @@
                 </div>
             </div>
             <!-- Basic Tables end -->
-
+            {{$Mdas->links()}}
 
 
             <!-- Create Modal -->
@@ -114,11 +114,11 @@
 
                             </div>
                             <form id="createDataForm" class="row gy-1 pt-75" method="POST"
-                                action="{{route('mda-type.store')}}">
+                                action="{{route('mda.store')}}">
                                 @csrf
                                 @method('POST')
                                 <div class="col-12 col-md-6">
-                                    <label class="form-label" for="createTitle">Title</label>
+                                    <label class="form-label" for="createTitle">MDA Title</label>
                                     <input name="title" type="text" id="createTitle"
                                         class="form-control @error('title') is-invalid @enderror" placeholder="John"
                                         value=" " data-msg="Please enter Title" />
@@ -129,11 +129,15 @@
                                     @enderror
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <label class="form-label" for="createAmount">Contract Threshold (N)</label>
-                                    <input name="amount" type="number" id="createAmount"
-                                        class="form-control @error('amount') is-invalid @enderror" placeholder="Doe"
-                                        value=" " data-msg="Please enter Code" />
-                                    @error('amount')
+                                    <label class="form-label" for="createType">MDA Type</label>
+                                    <select id="createType" name="type" class="select2 form-select
+                                    @error('type') is-invalid @enderror">
+                                        <option value="">Select Type</option>
+                                        @foreach(app('App\Http\Services\BackendData')->MdaTypes() as $MdaType)
+                                        <option value="{{$MdaType->id}}">{{$MdaType->title}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('type')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -182,11 +186,15 @@
                                     @enderror
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <label class="form-label" for="editAmount">Contract Threshold (N)</label>
-                                    <input name="amount" type="number" id="editAmount"
-                                        class="form-control @error('amount') is-invalid @enderror" placeholder="Doe"
-                                        value=" " data-msg="Please enter Code" />
-                                    @error('amount')
+                                    <label class="form-label" for="editType">MDA Type</label>
+                                    <select id="editType" name="type" class="select2 form-select
+                                    @error('type') is-invalid @enderror">
+                                        <option value="">Select Type</option>
+                                        @foreach(app('App\Http\Services\BackendData')->MdaTypes() as $MdaType)
+                                        <option value="{{$MdaType->id}}">{{$MdaType->title}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('type')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -236,10 +244,21 @@ function deleteData(event) {
 }
 
 function editData(data){
-    var _edit_route = '{{env('APP_URL')}}' + '/mda-type/' + data.id;
+    var _edit_route = '{{env('APP_URL')}}' + '/mda/' + data.id;
     $("#editFormForm").attr("action", _edit_route);
     $("#editTitle").val(data.title);
-    $("#editAmount").val(data.amount);
+    
+    var MDATypes = <?php echo json_encode(app('App\Http\Services\BackendData')->MdaTypes()); ?>;
+    var _options_html = '';
+
+    $.each( MDATypes, function( key, value ) {
+        if(data.type == value.id){
+            _options_html += '<option selected hidden value="'+value.id+'">'+value.title+'</option>';
+        }
+        _options_html += '<option value="'+value.id+'">'+value.title+'</option>';
+    });
+    
+    $("#editType").html(_options_html);
     $("#editData").modal("show")
 }
 </script>

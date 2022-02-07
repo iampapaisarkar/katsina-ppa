@@ -4,6 +4,8 @@ namespace App\Http\Controllers\FormData;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\FormData\MdaRequest;
+use App\Models\Mda;
 
 class MdaController extends Controller
 {
@@ -12,9 +14,26 @@ class MdaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $Mdas = Mda::with('mda_type')->latest();
+
+        if($request->per_page){
+            $perPage = (integer) $request->per_page;
+        }else{
+            $perPage = 10;
+        }
+
+        if(!empty($request->search)){
+            $search = $request->search;
+            $Mdas = $Mdas->where(function($q) use ($search){
+                $q->where('users.title', 'like', '%' .$search. '%');
+            });
+        }
+
+        $Mdas = $Mdas->paginate($perPage);
+
+        return view('ppa.form-data.mda.index', compact('Mdas'));
     }
 
     /**
@@ -33,9 +52,14 @@ class MdaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MdaRequest $request)
     {
-        //
+        Mda::create([
+            'title' => $request->title,
+            'type' => $request->type
+        ]);
+
+        return back()->withSuccess('Data insert successfully.');
     }
 
     /**
@@ -69,7 +93,12 @@ class MdaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Mda::where('id', $id)->update([
+            'title' => $request->title,
+            'type' => $request->type
+        ]);
+
+        return back()->withSuccess('Data updated successfully.');
     }
 
     /**
@@ -80,6 +109,8 @@ class MdaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Mda::where('id', $id)->delete();
+
+        return back()->withSuccess('Data deleted successfully.');
     }
 }

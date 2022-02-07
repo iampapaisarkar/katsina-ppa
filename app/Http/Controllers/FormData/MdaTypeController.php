@@ -27,12 +27,12 @@ class MdaTypeController extends Controller
         if(!empty($request->search)){
             $search = $request->search;
             $MdaTypes = $MdaTypes->where(function($q) use ($search){
-                $q->where('users.title', 'like', '%' .$search. '%');
-                // $q->orWhere('users.lastname', 'like', '%' .$search. '%');
+                $q->where('mda_types.title', 'like', '%' .$search. '%');
+                // $q->orWhere('mda_types.lastname', 'like', '%' .$search. '%');
             });
         }
 
-        $MdaTypes = $MdaTypes->latest()->paginate($perPage);
+        $MdaTypes = $MdaTypes->paginate($perPage);
 
         return view('ppa.form-data.mda-type.index', compact('MdaTypes'));
     }

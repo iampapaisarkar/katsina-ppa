@@ -13,7 +13,7 @@ class MdaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class MdaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => [
+                'required'
+            ],
+            'type' => [
+                'required'
+            ]
         ];
     }
 }
