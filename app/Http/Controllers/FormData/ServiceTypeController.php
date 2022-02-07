@@ -4,6 +4,8 @@ namespace App\Http\Controllers\FormData;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\FormData\ServiceTypeRequest;
+use App\Models\ServiceType;
 
 class ServiceTypeController extends Controller
 {
@@ -12,9 +14,26 @@ class ServiceTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $types = ServiceType::latest();
+
+        if($request->per_page){
+            $perPage = (integer) $request->per_page;
+        }else{
+            $perPage = 10;
+        }
+
+        if(!empty($request->search)){
+            $search = $request->search;
+            $types = $types->where(function($q) use ($search){
+                $q->where('service_types.title', 'like', '%' .$search. '%');
+            });
+        }
+
+        $types = $types->paginate($perPage);
+
+        return view('ppa.form-data.service-type.index', compact('types'));
     }
 
     /**
@@ -33,9 +52,13 @@ class ServiceTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ServiceTypeRequest $request)
     {
-        //
+        ServiceType::create([
+            'title' => $request->title
+        ]);
+
+        return back()->withSuccess('Data insert successfully.');
     }
 
     /**
@@ -67,9 +90,13 @@ class ServiceTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ServiceTypeRequest $request, $id)
     {
-        //
+        ServiceType::where('id', $id)->update([
+            'title' => $request->title
+        ]);
+
+        return back()->withSuccess('Data updated successfully.');
     }
 
     /**
@@ -80,6 +107,8 @@ class ServiceTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        ServiceType::where('id', $id)->delete();
+
+        return back()->withSuccess('Data deleted successfully.');
     }
 }

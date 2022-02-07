@@ -42,9 +42,9 @@
                         </li>
                         <li class=" <?php if ($page=="additional-fee") { echo "active";} ?>" ><a class="d-flex align-items-center" href="{{route('additional-fee.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Additional Fees</span></a>
                         </li>
-                        <li class=" <?php if ($page=="service") { echo "active";} ?>"><a class="d-flex align-items-center" href="{{route('service.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Service Types</span></a>
+                        <li class=" <?php if ($page=="service-type") { echo "active";} ?>"><a class="d-flex align-items-center" href="{{route('service-type.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Service Types</span></a>
                         </li>
-                        <li class=" <?php if ($page=="service-type") { echo "active";} ?>"><a class="d-flex align-items-center" href="{{route('service-type.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Services</span></a>
+                        <li class=" <?php if ($page=="service") { echo "active";} ?>"><a class="d-flex align-items-center" href="{{route('service.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="eCommerce">Services</span></a>
                         </li>
                     </ul>
                 </li>

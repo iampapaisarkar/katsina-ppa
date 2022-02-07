@@ -41,6 +41,6 @@ Route::group(['middleware' => ['auth','verified', 'can:isPpa']], function () {
     Route::resource('/organization-type', 'App\Http\Controllers\FormData\OrganizationTypeController');
     Route::resource('/registration-category', 'App\Http\Controllers\FormData\RegistrationCategoryController');
     Route::resource('/additional-fee', 'App\Http\Controllers\FormData\AdditionalFeeController');
-    Route::resource('/service', 'App\Http\Controllers\FormData\ServiceController');
     Route::resource('/service-type', 'App\Http\Controllers\FormData\ServiceTypeController');
+    Route::resource('/service', 'App\Http\Controllers\FormData\ServiceController');
 });
