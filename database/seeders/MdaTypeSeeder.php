@@ -17,15 +17,15 @@ class MdaTypeSeeder extends Seeder
         $MdaType = [
             [
             'title' => 'Ministry',
-            'amount' => 2000000,
+            'amount' => 20000000,
             ],
             [
             'title' => 'Department',
-            'amount' => 1000000,
+            'amount' => 10000000,
             ],
             [
             'title' => 'Agency',
-            'amount' => 1000000,
+            'amount' => 10000000,
             ],
         ];
         MdaType::insert($MdaType);
