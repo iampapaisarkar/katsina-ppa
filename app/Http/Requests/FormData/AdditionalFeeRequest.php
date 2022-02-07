@@ -13,7 +13,7 @@ class AdditionalFeeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,15 @@ class AdditionalFeeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'description' => [
+                'required'
+            ],
+            'registration_fee' => [
+                'required'
+            ],
+            'renewal_fee' => [
+                'required'
+            ]
         ];
     }
 }

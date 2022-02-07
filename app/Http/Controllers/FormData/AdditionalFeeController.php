@@ -4,6 +4,8 @@ namespace App\Http\Controllers\FormData;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\FormData\AdditionalFeeRequest;
+use App\Models\AdditionalFee;
 
 class AdditionalFeeController extends Controller
 {
@@ -12,9 +14,26 @@ class AdditionalFeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $fees = AdditionalFee::latest();
+
+        if($request->per_page){
+            $perPage = (integer) $request->per_page;
+        }else{
+            $perPage = 10;
+        }
+
+        if(!empty($request->search)){
+            $search = $request->search;
+            $fees = $fees->where(function($q) use ($search){
+                $q->where('additional_fees.description', 'like', '%' .$search. '%');
+            });
+        }
+
+        $fees = $fees->paginate($perPage);
+
+        return view('ppa.form-data.additional-fee.index', compact('fees'));
     }
 
     /**
@@ -33,9 +52,15 @@ class AdditionalFeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdditionalFeeRequest $request)
     {
-        //
+        AdditionalFee::create([
+            'description' => $request->description,
+            'registration_fee' => $request->registration_fee,
+            'renewal_fee' => $request->renewal_fee,
+        ]);
+
+        return back()->withSuccess('Data insert successfully.');
     }
 
     /**
@@ -67,9 +92,15 @@ class AdditionalFeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AdditionalFeeRequest $request, $id)
     {
-        //
+        AdditionalFee::where('id', $id)->update([
+            'description' => $request->description,
+            'registration_fee' => $request->registration_fee,
+            'renewal_fee' => $request->renewal_fee,
+        ]);
+
+        return back()->withSuccess('Data updated successfully.');
     }
 
     /**
@@ -80,6 +111,8 @@ class AdditionalFeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        AdditionalFee::where('id', $id)->delete();
+
+        return back()->withSuccess('Data deleted successfully.');
     }
 }
