@@ -18,14 +18,18 @@ class CreatePaymentsTable extends Migration
             $table->integer('user_id');
             $table->string('order_id');
             $table->string('reference_id')->nullable();
-            $table->integer('application_id');
+            $table->integer('registration_id');
             $table->integer('service_id');
+            $table->integer('extra_service_id')->nullable();
             $table->string('service_type');
             $table->float('amount', 10, 2);
             $table->float('service_charge', 10, 2)->nullable();
             $table->float('total_amount', 10, 2)->nullable();
             $table->boolean('status')->default(false);
             $table->longtext('token')->nullable();
+            $table->boolean('is_online')->default(false);
+            $table->string('evidence_of_payment')->nullable();
+            $table->string('payment_method')->nullable();
             $table->timestamps();
         });
     }
