@@ -12,24 +12,36 @@
     <table id="itemList" border="0" cellpadding="0" cellspacing="0" width="100%" class="cate">
 
 
-        @foreach(app('App\Http\Services\BackendData')->ServiceTypes() as $ServiceType)
+        @foreach(app('App\Http\Services\BackendData')->ServiceTypes() as $key => $ServiceType)
         <tr>
 
-            <th width="5%"><input type="checkbox" name="services[]" id="parentCategories_0" value="{{$ServiceType->title}}"
-                    data-index="0" onClick="checkAll('0')" /></th>
-
-
+            <th width="5%">
+                <input 
+                type="checkbox" 
+                name="services[{{$key}}][service_type]" 
+                id="service_types_{{$ServiceType->id}}" 
+                value="{{$ServiceType->id}}"
+                data-index="{{$ServiceType->id}}" 
+                onClick="checkAll({{$ServiceType}})" 
+                />
+            </th>
             <th width="95%">
                 {{$ServiceType->title}}
             </th>
         </tr>
 
-
-
             @foreach($ServiceType->services as $service)
             <tr>
-                <td width="5%"><input type="checkbox" name="services[]" id="childCategories_0_0" value="{{$service->title}}"
-                        unchecked onClick="onCheckBoxClick('0')" /></td>
+                <td width="5%">
+                    <input 
+                    type="checkbox" 
+                    name="services[{{$key}}][service][]" 
+                    id="services_{{$ServiceType->id}}_{{$service->id}}" 
+                    value="{{$service->id}}"
+                    unchecked 
+                    onClick="onCheckBoxClick({{$service->id}})" 
+                    />
+                </td>
                 <td colspan="2" width="95%">
                     {{$service->title}}
                 </td>
@@ -49,3 +61,17 @@
         </button>
     </div>
 </div>
+
+<!-- <script>
+    function checkAll(ServiceType){
+        var ServiceType = <?php // echo json_encode($ServiceType); ?>
+
+        console.log("ServiceType :", ServiceType);
+
+        $("#service_types_"+ServiceType.id).prop('checked', $(this).prop('checked'));
+
+        $.each(ServiceType.services, function( index, service ) {
+            $("#services_"+ServiceType.id+"_"+service.id).prop('checked', $(this).prop('checked'));
+        });
+    }
+</script> -->

@@ -16,16 +16,16 @@ class CreateCompanyDetailsTable extends Migration
         Schema::create('company_details', function (Blueprint $table) {
             $table->id();
             $table->integer('registration_id');
-            $table->string('area_of_core_competence'); //integer
-            $table->string('type_of_organization'); //integer
+            $table->integer('area_of_core_competence'); //integer
+            $table->integer('type_of_organization'); //integer
             $table->string('company_name');
             $table->string('cac_number');
             $table->date('default');
-            $table->string('share_capital'); // float
+            $table->float('share_capital', 10, 2); // float
             $table->string('address');
             $table->string('landmark');
             $table->string('city');
-            $table->string('state'); //integer
+            $table->integer('state'); //integer
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');

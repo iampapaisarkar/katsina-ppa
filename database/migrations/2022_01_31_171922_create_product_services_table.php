@@ -16,7 +16,8 @@ class CreateProductServicesTable extends Migration
         Schema::create('product_services', function (Blueprint $table) {
             $table->id();
             $table->integer('registration_id');
-            $table->string('service_id'); //integer
+            $table->integer('service_type_id')->nullable(); //integer
+            $table->integer('service_id'); //integer
             $table->timestamps();
         });
     }

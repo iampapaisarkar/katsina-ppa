@@ -83,7 +83,7 @@
 
         <div class="col-md-6 col-sm-12 mb-2">
             <label class="form-label" for="numeral-formatting">Share Capital (N)</label>
-            <input value="{{old('share_capital')}}" type="text" name="share_capital" class="form-control numeral-mask @error('share_capital') is-invalid @enderror" placeholder="10,000" id="numeral-formatting" />
+            <input value="{{old('share_capital')}}" type="number" name="share_capital" class="form-control numeral-mask @error('share_capital') is-invalid @enderror" placeholder="10,000" id="numeral-formatting" />
             @error('share_capital')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -131,12 +131,12 @@
 
             <label class="form-label" for="select2-basic">State</label>
             <select name="state" class="select2 form-select @error('state') is-invalid @enderror" id="select2-basic">
-                @if(old('state'))    
-                <option value="old('state')" selected>{{old('state')}}</option>
-                @endif 
                 <option value="">Select State</option>
                 @foreach(app('App\Http\Services\BackendData')->States() as $State)
-                <option value="{{$State->title}}">{{$State->title}}</option>
+                @if(old('state') && (old('state') == $State->id))
+                <option value="{{$State->id}}" selected>{{$State->title}}</option>
+                @endif
+                <option value="{{$State->id}}">{{$State->title}}</option>
                 @endforeach
             </select>
             @error('state')

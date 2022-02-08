@@ -27,4 +27,16 @@ class CompanyDetails extends Model
         'phone_number',
         'position',
     ];
+
+    public function core_competence() {
+        return $this->hasOne(CoreCompetence::class, 'id','area_of_core_competence');
+    }
+
+    public function organization_type() {
+        return $this->hasOne(OrganizationType::class, 'id','type_of_organization');
+    }
+
+    public function company_state() {
+        return $this->hasOne(State::class, 'id','state');
+    }
 }

@@ -22,4 +22,8 @@ class CategoryDocuments extends Model
         'attachment_8',
         'attachment_9',
     ];
+
+    public function registration_category() {
+        return $this->hasOne(RegistrationCategory::class, 'id','registration_category_id');
+    }
 }

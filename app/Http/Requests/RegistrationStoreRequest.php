@@ -69,7 +69,9 @@ class RegistrationStoreRequest extends FormRequest
             'position' => [
                 'required'
             ],
-
+            'services' => [
+                'required'
+            ],
 
 
             'registration_category_id' => [

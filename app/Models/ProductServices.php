@@ -11,6 +11,7 @@ class ProductServices extends Model
 
     protected $fillable = [
         'registration_id',
+        'service_type_id',
         'service_id',
     ];
 }

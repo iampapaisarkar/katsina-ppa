@@ -38,8 +38,6 @@ class RegistrationController extends Controller
 
     public function registrationSubmit(RegistrationStoreRequest $request)
     {
-        dd($request->all());
-
         try {
             DB::beginTransaction();
 
@@ -71,7 +69,6 @@ class RegistrationController extends Controller
             if($request->director){
                 foreach($request->director as $key => $director) {
 
-
                     $passport = FileUpload::upload($director['passport'], $private = true, 'vendor', 'passport'.$key);
                     $identification = FileUpload::upload($director['identification'], $private = true, 'vendor', 'identification'.$key);
                     $certificates = FileUpload::upload($director['certificates'], $private = true, 'vendor', 'certificates'.$key);
@@ -90,13 +87,20 @@ class RegistrationController extends Controller
                 }
             }
 
+            // dd($request->all());
 
             if($request->services){
                 foreach($request->services as $key => $service) {
-                    ProductServices::create([
-                        'registration_id' => $registration->id,
-                        'service_id' => $service,
-                    ]);
+                    if($service['service_type']){
+                        $service_type_id = $service['service_type'];
+                    }
+                    foreach($service['service'] as $serv) {
+                        ProductServices::create([
+                            'registration_id' => $registration->id,
+                            'service_type_id' => $service_type_id,
+                            'service_id' => $serv
+                        ]);
+                    }
                 }
             }
 
@@ -124,6 +128,20 @@ class RegistrationController extends Controller
                 'attachment_9' => $attachment_9,
             ]);
            
+            $_C_REGISTRATION = Registration::with(
+                'company_details.core_competence', 
+                'company_details.organization_type', 
+                'company_details.company_state', 
+                'company_directors', 
+                'product_service_types', 
+                'product_services', 
+                'category_documents.registration_category'
+            )
+            ->where('id', $registration->id)
+            ->first();
+
+            dd($_C_REGISTRATION);
+
             $response = Checkout::checkout($registration = ['id' => $registration->id], 'registration');
 
             DB::commit();
