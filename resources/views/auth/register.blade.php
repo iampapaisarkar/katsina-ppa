@@ -50,13 +50,24 @@
                                     
                                     <div class="mb-1">
                                         <label class="form-label" for="register-email">Email</label>
-                                        <input class="form-control @error('email') is-invalid @enderror" id="register-email" type="text" name="email" placeholder="john@example.com" aria-describedby="register-email" tabindex="2" />
+                                        <input class="form-control @error('email') is-invalid @enderror" id="register-email" type="email" name="email" placeholder="john@example.com" aria-describedby="register-email" tabindex="2" />
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
+
+                                    <div class="mb-1">
+                                        <label class="form-label" for="register-phone_number">Phone Number</label>
+                                        <input class="form-control @error('phone_number') is-invalid @enderror" id="register-phone_number" type="text" name="phone_number" placeholder="john@example.com" aria-describedby="register-phone_number" tabindex="2" />
+                                        @error('phone_number')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
                                     <div class="mb-1">
                                         <label class="form-label" for="register-password">Password</label>
                                         <div class="input-group input-group-merge form-password-toggle">

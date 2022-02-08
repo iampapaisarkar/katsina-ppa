@@ -39,7 +39,7 @@
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
                     
                     
-                   <a class="dropdown-item" href="page-account-settings-account.html"><i class="me-50" data-feather="settings"></i> Settings</a>
+                   <a class="dropdown-item" href="{{route('profile')}}"><i class="me-50" data-feather="settings"></i> Settings</a>
                         
                    
                    <a class="dropdown-item" onclick="logout(event)"><i class="me-50" data-feather="power"></i> Logout</a>

@@ -26,6 +26,11 @@ Route::group(['middleware' => ['auth','verified'], ['can:isVendor,isPpa']], func
 
     Route::get('/invoice', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoice.index');
     Route::get('/invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'show'])->name('invoice.show');
+
+    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
+    Route::post('/profile-update', [App\Http\Controllers\ProfileController::class, 'profileUpdate'])->name('profile-update');
+    Route::get('/profile-password', [App\Http\Controllers\ProfileController::class, 'profilePassword'])->name('profile-password');
+    Route::post('/profile-password-update', [App\Http\Controllers\ProfileController::class, 'profilePasswordUpdate'])->name('profile-password-update');
 });
 
 Route::group(['middleware' => ['auth','verified', 'can:isVendor']], function () {
