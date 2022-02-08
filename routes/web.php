@@ -32,6 +32,8 @@ Route::group(['middleware' => ['auth','verified', 'can:isVendor']], function () 
     Route::get('/registration', [App\Http\Controllers\Vendor\RegistrationController::class, 'registration'])->name('registration');
     Route::get('/registration-preview', [App\Http\Controllers\Vendor\RegistrationController::class, 'registrationPreview'])->name('registration-preview');
     Route::post('/registration-submit', [App\Http\Controllers\Vendor\RegistrationController::class, 'registrationSubmit'])->name('registration-submit');
+
+    Route::get('/registration-status', [App\Http\Controllers\Vendor\RegistrationController::class, 'status'])->name('registration-status');
 });
 
 Route::group(['middleware' => ['auth','verified', 'can:isPpa']], function () {

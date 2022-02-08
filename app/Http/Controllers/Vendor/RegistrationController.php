@@ -43,6 +43,7 @@ class RegistrationController extends Controller
                 'user_id' => Auth::user()->id,
                 'payment' => false,
                 'status' => 'pending',
+                'type' => 'vendor_registration'
             ]);
 
             CompanyDetails::create([
@@ -138,5 +139,9 @@ class RegistrationController extends Controller
             DB::rollback();
             return back()->with('error','There something internal server errore');
         }
+    }
+
+    public function status(){
+        return view('vendor-user.registration-status');
     }
 }

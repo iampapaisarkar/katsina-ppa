@@ -18,6 +18,7 @@ class CreateRegistrationsTable extends Migration
             $table->integer('user_id');
             $table->boolean('payment')->default(false);
             $table->string('status');
+            $table->string('type');
             $table->longtext('query')->nullable();
             $table->timestamps();
         });

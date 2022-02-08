@@ -59,6 +59,9 @@
                 <li class="<?php if ($page=="vendor-registration") { echo "active";} ?> nav-item"><a class="d-flex align-items-center" href="{{route('registration')}}"><i data-feather="check-circle"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Vendor Registration</span></a>
                 </li>
 
+                <li class="<?php if ($page=="vendor-registration-status") { echo "active";} ?> nav-item"><a class="d-flex align-items-center" href="{{route('registration-status')}}"><i data-feather="check-circle"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Registration Status</span></a>
+                </li>
+
                 <li class="<?php if ($page=="invoice") { echo "active";} ?> nav-item"><a class="d-flex align-items-center" href="{{route('invoice.index')}}"><i data-feather="credit-card"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Invoices</span></a>
                 </li>
                 @endcan

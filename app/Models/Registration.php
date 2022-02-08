@@ -13,6 +13,7 @@ class Registration extends Model
         'user_id',
         'payment',
         'status',
+        'type',
         'query'
     ];
 
