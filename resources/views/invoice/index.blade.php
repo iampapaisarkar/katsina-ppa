@@ -54,7 +54,7 @@
                             @foreach($invoices as $invoice)
                             <tr>
                                 <td>
-                                    <a href="{{route('invoice.show', 1)}}">{{$invoice->order_id}}</a>
+                                    <a href="{{route('invoice.show', $invoice->id)}}">{{$invoice->order_id}}</a>
                                 </td>
                                 <td><span class="invoice-amount">₦ {{number_format($invoice->amount)}}</span></td>
                                 <td><small class="text-muted">{{$invoice->created_at->format('d M Y')}}</small></td>
@@ -80,7 +80,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('invoice.show', 1)}}" class="btn btn-success ">
+                                    <a href="{{route('invoice.show', $invoice->id)}}" class="btn btn-success ">
                                         <i data-feather="eye"></i>
                                         <span>VIEW</span>
                                     </a>

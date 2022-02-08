@@ -181,13 +181,14 @@
                     <!-- /Invoice -->
 
                     <!-- Invoice Actions -->
-                    @can('isVendor')
                     <div class="col-xl-3 col-md-4 col-12 invoice-actions mt-md-0 mt-2">
                         <div class="card">
                             <div class="card-body">
 
                                 <a class="btn btn-outline-secondary w-100 mb-75"
-                                    href="./vendor-register-invoice-print.php" target="_blank"> Print </a>
+                                    href="#" target="_blank"> Print </a>
+
+                                @can('isVendor')
                                 <button class="btn btn-success w-100 mb-75" data-bs-toggle="modal"
                                     data-bs-target="#add-payment-sidebar">
                                     Upload Payment
@@ -195,10 +196,10 @@
                                 <button disabled class="btn btn-success w-100 mb-75" data-bs-toggle="modal" data-bs-target="">
                                     Payment Online
                                 </button>
+                                @endcan
                             </div>
                         </div>
                     </div>
-                    @endcan
                     <!-- /Invoice Actions -->
                 </div>
             </section>
