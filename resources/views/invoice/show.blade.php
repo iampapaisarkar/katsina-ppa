@@ -167,7 +167,7 @@
                                     data-bs-target="#add-payment-sidebar">
                                     Upload Payment
                                 </button>
-                                <button class="btn btn-success w-100 mb-75" data-bs-toggle="modal" data-bs-target="">
+                                <button disabled class="btn btn-success w-100 mb-75" data-bs-toggle="modal" data-bs-target="">
                                     Payment Online
                                 </button>
                             </div>
