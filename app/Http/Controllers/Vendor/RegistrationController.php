@@ -38,6 +38,8 @@ class RegistrationController extends Controller
 
     public function registrationSubmit(RegistrationStoreRequest $request)
     {
+        dd($request->all());
+
         try {
             DB::beginTransaction();
 

@@ -39,7 +39,7 @@ class BackendData
     }
 
     public static function ServiceTypes(){
-        return ServiceType::get();
+        return ServiceType::with('services')->get();
     }
 
     public static function States(){

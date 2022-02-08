@@ -13,10 +13,10 @@
             <select name="registration_category_id" class="form-select @error('registration_category_id') is-invalid @enderror" id="basicSelect">
                 <option value="">select one</option>
                 @foreach(app('App\Http\Services\BackendData')->RegistrationCategories() as $RegistrationCategory)
-                @if(old('registration_category_id') && (old('registration_category_id') == $RegistrationCategory->class))
-                <option value="{{$RegistrationCategory->class}}" selected>{{$RegistrationCategory->contract_value}}</option>
+                @if(old('registration_category_id') && (old('registration_category_id') == $RegistrationCategory->id))
+                <option value="{{$RegistrationCategory->id}}" selected>{{$RegistrationCategory->title}}</option>
                 @endif
-                <option value="{{$RegistrationCategory->class}}">{{$RegistrationCategory->contract_value}}</option>
+                <option value="{{$RegistrationCategory->id}}">{{$RegistrationCategory->title}}</option>
                 @endforeach
             </select>
             @error('registration_category_id')

@@ -12,26 +12,26 @@
     <table id="itemList" border="0" cellpadding="0" cellspacing="0" width="100%" class="cate">
 
 
-        @foreach(app('App\Http\Services\BackendData')->Services() as $Service)
+        @foreach(app('App\Http\Services\BackendData')->ServiceTypes() as $ServiceType)
         <tr>
 
-            <th width="5%"><input type="checkbox" name="services[]" id="parentCategories_0" value="{{$Service->title}}"
+            <th width="5%"><input type="checkbox" name="services[]" id="parentCategories_0" value="{{$ServiceType->title}}"
                     data-index="0" onClick="checkAll('0')" /></th>
 
 
             <th width="95%">
-                {{$Service->title}}
+                {{$ServiceType->title}}
             </th>
         </tr>
 
 
 
-            @foreach($Service->childs as $child)
+            @foreach($ServiceType->services as $service)
             <tr>
-                <td width="5%"><input type="checkbox" name="services[]" id="childCategories_0_0" value="{{$child->title}}"
+                <td width="5%"><input type="checkbox" name="services[]" id="childCategories_0_0" value="{{$service->title}}"
                         unchecked onClick="onCheckBoxClick('0')" /></td>
                 <td colspan="2" width="95%">
-                    {{$child->title}}
+                    {{$service->title}}
                 </td>
             </tr>
             @endforeach

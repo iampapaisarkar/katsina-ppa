@@ -11,12 +11,12 @@
         <div class="mb-1 col-md-6">
             <label class="form-label" for="basicSelect">Area of Core Competence</label>
             <select class="form-select @error('area_of_core_competence') is-invalid @enderror" name="area_of_core_competence" id="basicSelect">
-                @if(old('area_of_core_competence'))    
-                <option value="old('area_of_core_competence')" selected>{{old('area_of_core_competence')}}</option>
-                @endif
                 <option value="">select one</option>
                 @foreach(app('App\Http\Services\BackendData')->CoreCompetences() as $CoreCompetence)
-                <option value="{{$CoreCompetence->title}}">{{$CoreCompetence->title}}</option>
+                @if(old('area_of_core_competence') && (old('area_of_core_competence') == $CoreCompetence->id))
+                <option value="{{$CoreCompetence->id}}" selected>{{$CoreCompetence->title}}</option>
+                @endif
+                <option value="{{$CoreCompetence->id}}">{{$CoreCompetence->title}}</option>
                 @endforeach
             </select>
             @error('area_of_core_competence')
@@ -27,13 +27,13 @@
         </div>
         <div class="mb-1 col-md-6">
             <label class="form-label" for="basicSelect">Type of Organization </label>
-            <select class="form-select @error('type_of_organization') is-invalid @enderror" name="type_of_organization" id="basicSelect">
-                @if(old('type_of_organization'))    
-                <option value="old('type_of_organization')" selected>{{old('type_of_organization')}}</option>
-                @endif    
+            <select class="form-select @error('type_of_organization') is-invalid @enderror" name="type_of_organization" id="basicSelect">  
                 <option value="">select one</option>
                 @foreach(app('App\Http\Services\BackendData')->OrganizationTypes() as $OrganizationType)
-                <option value="{{$OrganizationType->title}}">{{$OrganizationType->title}}</option>
+                @if(old('type_of_organization') && (old('type_of_organization') == $OrganizationType->id))
+                <option value="{{$OrganizationType->id}}" selected>{{$OrganizationType->title}}</option>
+                @endif
+                <option value="{{$OrganizationType->id}}">{{$OrganizationType->title}}</option>
                 @endforeach
             </select>
             @error('type_of_organization')

@@ -96,6 +96,7 @@
     <script src="{{ asset('libs/app-assets/vendors/js/forms/validation/jquery.validate.min.js')}}"></script>
     <script src="{{ asset('libs/app-assets/vendors/js/forms/cleave/cleave.min.js')}}"></script>
     <script src="{{ asset('libs/app-assets/vendors/js/forms/cleave/addons/cleave-phone.ng.js')}}"></script>
+
     <script src="{{ asset('libs/app-assets/vendors/js/pickers/pickadate/picker.js')}}"></script>
     <script src="{{ asset('libs/app-assets/vendors/js/pickers/pickadate/picker.date.js')}}"></script>
     <script src="{{ asset('libs/app-assets/vendors/js/pickers/pickadate/picker.time.js')}}"></script>
@@ -107,6 +108,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- BEGIN: Page JS-->
+    <script src="{{ asset('libs/app-assets/js/scripts/forms/form-wizard.js')}}"></script>
+    <script src="{{ asset('libs/app-assets/js/scripts/forms/form-input-mask.js')}}"></script>
+    <script src="{{ asset('libs/app-assets/js/scripts/forms/pickers/form-pickers.js')}}"></script>
+    <script src="{{ asset('libs/app-assets/js/scripts/forms/form-repeater.js')}}"></script>
+    <!-- END: Page JS-->
 
     <script>
         $(window).on('load', function() {

@@ -12,4 +12,8 @@ class ServiceType extends Model
     protected $fillable = [
         'title',
     ];
+
+    public function services() {
+        return $this->hasMany(Service::class, 'type','id');
+    }
 }
