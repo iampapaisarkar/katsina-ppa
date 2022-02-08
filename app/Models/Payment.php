@@ -24,6 +24,7 @@ class Payment extends Model
         'token',
         'is_online',
         'evidence_of_payment',
+        'payment_date',
         'payment_method'
     ];
 

@@ -21,7 +21,7 @@ class CreateCompanyDetailsTable extends Migration
             $table->string('company_name');
             $table->string('cac_number');
             $table->date('default');
-            $table->float('share_capital', 10, 2); // float
+            $table->string('share_capital'); // float
             $table->string('address');
             $table->string('landmark');
             $table->string('city');

@@ -15,6 +15,19 @@
                     <div class="col-xl-9 col-md-8 col-12">
                         <div class="card invoice-preview-card">
                             <div class="card-body invoice-padding pb-0">
+
+                                @if (session('errors'))
+                                <div class="alert alert-danger p-2" role="alert">
+                                    <p>*{{session('errors')->first('evidence_of_payment')}}</p>
+                                </div>
+                                <div class="alert alert-danger p-2" role="alert">
+                                    <p>*{{session('errors')->first('payment_date')}}</p>
+                                </div>
+                                <div class="alert alert-danger p-2" role="alert">
+                                    <p>*{{session('errors')->first('payment_method')}}</p>
+                                </div>
+                                @endif
+
                                 @if (session('success'))
                                 <div class="alert alert-success p-2" role="alert">
                                     {{ session('success') }}
@@ -39,6 +52,17 @@
                                             Invoice
                                             <span class="invoice-number">#{{$invoice->order_id}}</span>
                                         </h4>
+                                        <h4 class="invoice-title">
+                                            @if($invoice->status == 'paid')
+                                            <span class="badge badge-glow bg-success">PAID</span>
+                                            @endif
+                                            @if($invoice->status == 'unpaid')
+                                            <span class="badge badge-glow bg-danger">UNPAID</span>
+                                            @endif
+                                            @if($invoice->status == 'pending')
+                                            <span class="badge badge-glow bg-warning">APPROVAL PENDING</span>
+                                            @endif
+                                        </h4>
                                         <div class="invoice-date-wrapper">
                                             <p class="invoice-date-title">Date Issued:</p>
                                             <p class="invoice-date">{{$invoice->created_at->format('d/m/Y')}}</p>
@@ -61,7 +85,7 @@
                                         <h6 class="mb-2">Invoice To:</h6>
                                         <h6 class="mb-25">{{$invoice->user->first_name}} {{$invoice->user->sur_name}}</h6>
                                         <p class="card-text mb-25">{{$invoice->vendor_registration->company_details->company_name}}</p>
-                                        <p class="card-text mb-25">+234 802 123 4567</p>
+                                        <p class="card-text mb-25">{{$invoice->user->phone_number}}</p>
                                         <p class="card-text mb-0">{{$invoice->user->email}}</p>
                                     </div>
                                     <div class="col-xl-4 p-0 mt-xl-0 mt-2">
@@ -157,6 +181,7 @@
                     <!-- /Invoice -->
 
                     <!-- Invoice Actions -->
+                    @can('isVendor')
                     <div class="col-xl-3 col-md-4 col-12 invoice-actions mt-md-0 mt-2">
                         <div class="card">
                             <div class="card-body">
@@ -173,6 +198,7 @@
                             </div>
                         </div>
                     </div>
+                    @endcan
                     <!-- /Invoice Actions -->
                 </div>
             </section>
@@ -189,22 +215,38 @@
                             </h5>
                         </div>
                         <div class="modal-body flex-grow-1">
-                            <form>
+                            <form class="auth-register-form mt-2" action="{{ route('payment-update', $invoice->id) }}" method="POST">
+                            @csrf
                                 <div class="mb-1">
                                     <label for="formFile" class="form-label">Evidence of Payment (PDF/2MB max)</label>
-                                    <input class="form-control" type="file" id="formFile" accept="application/pdf" />
+                                    <input name="evidence_of_payment" class="form-control @error('evidence_of_payment') is-invalid @enderror" type="file" id="formFile" accept="application/pdf" />
+                                    @error('evidence_of_payment')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="mb-1">
                                     <label class="form-label" for="amount">Payment Amount</label>
-                                    <input id="amount" class="form-control" type="text" value="120,110.00" readonly />
+                                    <input name="amount" id="amount" class="form-control @error('amount') is-invalid @enderror" type="text" value="{{$invoice->amount}}" readonly />
+                                    @error('amount')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="mb-1">
                                     <label class="form-label" for="payment-date">Payment Date</label>
-                                    <input id="payment-date" class="form-control date-picker" type="text" />
+                                    <input name="payment_date" id="payment-date" class="form-control date-picker @error('payment_date') is-invalid @enderror" type="date" />
+                                    @error('payment_date')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="mb-1">
                                     <label class="form-label" for="payment-method">Payment Method</label>
-                                    <select class="form-select" id="payment-method">
+                                    <select name="payment_method" class="form-select @error('payment_method') is-invalid @enderror" id="payment-method">
                                         <option value="" selected disabled>Select payment method</option>
                                         <option value="Bank Deposit">Bank Deposit</option>
                                         <option value="Bank Transfer">Bank Transfer</option>
@@ -212,13 +254,18 @@
                                             <option value="Credit">Credit</option>
                                             <option value="Paypal">Paypal</option>-->
                                     </select>
+                                    @error('payment_method')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <!--<div class="mb-1">
                                         <label class="form-label" for="payment-note">Internal Payment Note</label>
                                         <textarea class="form-control" id="payment-note" rows="5" placeholder="Internal Payment Note"></textarea>
                                     </div>-->
                                 <div class="d-flex flex-wrap mb-0">
-                                    <button type="button" class="btn btn-primary me-1"
+                                    <button type="submit" class="btn btn-primary me-1"
                                         data-bs-dismiss="modal">Upload</button>
                                     <button type="button" class="btn btn-outline-secondary"
                                         data-bs-dismiss="modal">Cancel</button>

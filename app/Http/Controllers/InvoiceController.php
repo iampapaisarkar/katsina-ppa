@@ -48,8 +48,23 @@ class InvoiceController extends Controller
             $invoice = $invoice->where('user_id', $authUser->id)->first();
         }
 
-        // dd($invoice);
-
         return view('invoice.show', compact('invoice'));
+    }
+
+    public function paymentUpdate(Request $request, $id){
+        
+        $this->validate($request, [
+            'evidence_of_payment' => [
+                'required'
+            ],
+            'payment_date' => [
+                'required'
+            ],
+            'payment_method' => [
+                'required'
+            ],
+        ]);
+
+        return back()->withSuccess('Payment update successfully');
     }
 }

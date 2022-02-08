@@ -83,7 +83,7 @@
 
         <div class="col-md-6 col-sm-12 mb-2">
             <label class="form-label" for="numeral-formatting">Share Capital (N)</label>
-            <input value="{{old('share_capital')}}" type="number" name="share_capital" class="form-control numeral-mask @error('share_capital') is-invalid @enderror" placeholder="10,000" id="numeral-formatting" />
+            <input value="{{old('share_capital')}}" type="text" name="share_capital" class="form-control numeral-mask @error('share_capital') is-invalid @enderror" placeholder="10,000" id="numeral-formatting" />
             @error('share_capital')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

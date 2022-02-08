@@ -29,6 +29,7 @@ class CreatePaymentsTable extends Migration
             $table->longtext('token')->nullable();
             $table->boolean('is_online')->default(false);
             $table->string('evidence_of_payment')->nullable();
+            $table->date('payment_date')->nullable();
             $table->string('payment_method')->nullable();
             $table->timestamps();
         });
