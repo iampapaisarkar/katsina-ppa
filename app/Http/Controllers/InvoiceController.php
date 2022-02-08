@@ -39,7 +39,7 @@ class InvoiceController extends Controller
     public function show($id){
         $authUser = Auth::user();
 
-        $invoice = Payment::with('user', 'service', 'extra_service')->where('id', $id);
+        $invoice = Payment::with('user', 'service', 'extra_service', 'vendor_registration')->where('id', $id);
 
         if($authUser->hasRole(['ppa'])){
             $invoice = $invoice->first();

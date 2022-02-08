@@ -59,10 +59,10 @@
                                 <div class="row invoice-spacing">
                                     <div class="col-xl-8 p-0">
                                         <h6 class="mb-2">Invoice To:</h6>
-                                        <h6 class="mb-25">Ahmed Dogara</h6>
-                                        <p class="card-text mb-25">Shelby Company Limited</p>
+                                        <h6 class="mb-25">{{$invoice->user->first_name}} {{$invoice->user->sur_name}}</h6>
+                                        <p class="card-text mb-25">{{$invoice->vendor_registration->company_details->company_name}}</p>
                                         <p class="card-text mb-25">+234 802 123 4567</p>
-                                        <p class="card-text mb-0">username@domain.com</p>
+                                        <p class="card-text mb-0">{{$invoice->user->email}}</p>
                                     </div>
                                     <div class="col-xl-4 p-0 mt-xl-0 mt-2">
                                         <h6 class="mb-2">Payment Details:</h6>
@@ -72,14 +72,14 @@
                                                     <td class="pe-1">Total Due:</td>
                                                     <td><span class="fw-bold">₦ 120,110.00</span></td>
                                                 </tr>
-                                                <tr>
+                                                <!-- <tr>
                                                     <td class="pe-1">Bank Name:</td>
                                                     <td>Zenith Bank</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="pe-1">Account Number:</td>
                                                     <td>1234567890</td>
-                                                </tr>
+                                                </tr> -->
 
                                             </tbody>
                                         </table>

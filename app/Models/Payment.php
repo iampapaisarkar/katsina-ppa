@@ -38,4 +38,18 @@ class Payment extends Model
     public function extra_service() {
         return $this->hasOne(RegistrationCategory::class, 'id','extra_service_id');
     }
+
+    public function vendor_registration() {
+        return $this->hasOne(Registration::class, 'id','registration_id')
+        ->where('type', 'vendor_registration')
+        ->with(
+            'company_details.core_competence', 
+            'company_details.organization_type', 
+            'company_details.company_state', 
+            'company_directors', 
+            'product_service_types', 
+            'product_services', 
+            'category_documents.registration_category'
+        );
+    }
 }
