@@ -3,37 +3,37 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Payment;
+use Illuminate\Support\Facades\Auth;
 
 class InvoiceController extends Controller
 {
     public function index(Request $request){
-        // $authUser = Auth::user();
 
-        // $invoices = Payment::with('user', 'service');
+        $authUser = Auth::user();
+        $invoices = Payment::with('user');
 
-        // if($authUser->hasRole(['sadmin'])){
-            
-        //     if($request->per_page){
-        //         $perPage = (integer) $request->per_page;
-        //     }else{
-        //         $perPage = 10;
-        //     }
-    
-        //     if(!empty($request->search)){
-        //         $search = $request->search;
-        //         $invoices = $invoices->where(function($q) use ($search){
-        //             $q->where('order_id', 'like', '%' .$search. '%');
-        //         });
-        //     }
-        //     $invoices = $invoices->latest()->paginate($perPage);
+        if($authUser->hasRole(['ppa'])){
 
-        // }else if($authUser->hasRole(['hospital_pharmacy', 'community_pharmacy', 'distribution_premises', 'manufacturing_premises', 'ppmv'])){
+            if($request->per_page){
+                $perPage = (integer) $request->per_page;
+            }else{
+                $perPage = 10;
+            }
+            $invoices = $invoices->latest()->paginate($perPage);
 
-        //     $invoices = $invoices->latest()->where('vendor_id', $authUser->id)->get();
-        // }
+        }else if($authUser->hasRole(['vendor'])){
 
-        // return view('invoice.index', compact('invoices'));
-        return view('invoice.index');
+            if($request->per_page){
+                $perPage = (integer) $request->per_page;
+            }else{
+                $perPage = 10;
+            }
+
+            $invoices = $invoices->latest()->where('user_id', $authUser->id)->paginate($perPage);
+        }
+
+        return view('invoice.index', compact('invoices'));
     }
 
     public function show($id){
@@ -59,7 +59,7 @@ class InvoiceController extends Controller
 
         // }else if($authUser->hasRole(['hospital_pharmacy', 'community_pharmacy', 'distribution_premises', 'manufacturing_premises', 'ppmv'])){
 
-        //     $invoices = $invoices->latest()->where('vendor_id', $authUser->id)->get();
+        //     $invoices = $invoices->latest()->where('user_id', $authUser->id)->get();
         // }
 
         // return view('invoice.index', compact('invoices'));

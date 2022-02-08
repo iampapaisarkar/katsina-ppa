@@ -25,7 +25,7 @@ class CreatePaymentsTable extends Migration
             $table->float('amount', 10, 2);
             $table->float('service_charge', 10, 2)->nullable();
             $table->float('total_amount', 10, 2)->nullable();
-            $table->boolean('status')->default(false);
+            $table->string('status')->default('unpaid'); // paid, unpaid, pending
             $table->longtext('token')->nullable();
             $table->boolean('is_online')->default(false);
             $table->string('evidence_of_payment')->nullable();

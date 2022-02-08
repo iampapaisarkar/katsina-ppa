@@ -26,4 +26,8 @@ class Payment extends Model
         'evidence_of_payment',
         'payment_method'
     ];
+
+    public function user() {
+        return $this->hasOne(User::class, 'id','user_id');
+    }
 }

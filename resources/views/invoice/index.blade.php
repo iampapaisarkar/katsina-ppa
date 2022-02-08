@@ -51,42 +51,34 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($invoices as $invoice)
                             <tr>
-                                <!--<td></td>
-                                    <td></td>-->
                                 <td>
-                                    <a href="{{route('invoice.show', 1)}}">INV-00956</a>
+                                    <a href="{{route('invoice.show', 1)}}">{{$invoice->order_id}}</a>
                                 </td>
-                                <td><span class="invoice-amount">₦ 50,000.00</span></td>
-                                <td><small class="text-muted">5 Jan 2020</small></td>
-                                <!--<td><span class="invoice-customer">Buhari Specialist Hospital</span></td>-->
+                                <td><span class="invoice-amount">₦ {{number_format($invoice->amount)}}</span></td>
+                                <td><small class="text-muted">{{$invoice->created_at->format('d M Y')}}</small></td>
                                 <td>
+                                    @if($invoice->service_type == 'vendor_registration')
                                     <span class="bullet bullet-success bullet-sm"></span>
                                     <small class="text-muted">Vendor Registration</small>
-                                </td>
-                                <td><span class="badge badge-light-success badge-pill">PAID</span></td>
-                                <td>
-
-                                    <a href="{{route('invoice.show', 1)}}" class="btn btn-success ">
-                                        <i data-feather="eye"></i>
-                                        <span>VIEW</span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <!--<td></td>
-                                    <td></td>-->
-                                <td>
-                                    <a href="{{route('invoice.show', 1)}}">INV-00349</a>
-                                </td>
-                                <td><span class="invoice-amount">₦ 150,000.00</span></td>
-                                <td><small class="text-muted">5 Jan 2020</small></td>
-                                <!--<td><span class="invoice-customer">St Nicholas Hospital</span></td>-->
-                                <td>
+                                    @endif
+                                    @if($invoice->service_type == 'vendor_renewal')
                                     <span class="bullet bullet-info bullet-sm"></span>
                                     <small class="text-muted">Vendor Renewal</small>
+                                    @endif
                                 </td>
-                                <td><span class="badge badge-light-success badge-pill">PAID</span></td>
+                                <td>
+                                    @if($invoice->status == 'paid')
+                                    <span class="badge badge-light-success badge-pill">PAID</span>
+                                    @endif
+                                    @if($invoice->status == 'unpaid')
+                                    <span class="badge badge-light-danger badge-pill">UNPAID</span>
+                                    @endif
+                                    @if($invoice->status == 'pending')
+                                    <span class="badge badge-light-warning badge-pill">Pending Approval</span>
+                                    @endif
+                                </td>
                                 <td>
                                     <a href="{{route('invoice.show', 1)}}" class="btn btn-success ">
                                         <i data-feather="eye"></i>
@@ -94,115 +86,10 @@
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-                                <!--<td></td>
-                                    <td></td>-->
-                                <td>
-                                    <a href="{{route('invoice.show', 1)}}">INV-00853</a>
-                                </td>
-                                <td><span class="invoice-amount">₦ 501,000.00</span></td>
-                                <td><small class="text-muted">5 Jan 2020</small></td>
-                                <!--<td><span class="invoice-customer">Chevron Staff Clinic</span></td>-->
-                                <td>
-                                    <span class="bullet bullet-info bullet-sm"></span>
-                                    <small class="text-muted">Vendor Renewal</small>
-                                </td>
-                                <td><span class="badge badge-light-danger badge-pill">UNPAID</span></td>
-                                <td>
-                                    <a href="{{route('invoice.show', 1)}}" class="btn btn-success ">
-                                        <i data-feather="eye"></i>
-                                        <span>VIEW</span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <!--<td></td>
-                                    <td></td>-->
-                                <td>
-                                    <a href="{{route('invoice.show', 1)}}">INV-00452</a>
-                                </td>
-                                <td><span class="invoice-amount">₦ 55,000.00</span></td>
-                                <td><small class="text-muted">5 Jan 2020</small></td>
-                                <!--<td><span class="invoice-customer">Saint Alphabet Eye Hospital</span></td>-->
-                                <td>
-                                    <span class="bullet bullet-info bullet-sm"></span>
-                                    <small class="text-muted">Vendor Renewal</small>
-                                </td>
-                                <td><span class="badge badge-light-warning badge-pill">Pending Approval</span></td>
-                                <td>
-                                    <a href="{{route('invoice.show', 1)}}" class="btn btn-success ">
-                                        <i data-feather="eye"></i>
-                                        <span>VIEW</span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <!--<td></td>
-                                    <td></td>-->
-                                <td>
-                                    <a href="{{route('invoice.show', 1)}}">INV-00123</a>
-                                </td>
-                                <td><span class="invoice-amount">₦ 511,000.00</span></td>
-                                <td><small class="text-muted">5 Jan 2020</small></td>
-                                <!--<td><span class="invoice-customer">Toyota Motors Hospital</span></td>-->
-                                <td>
-                                    <span class="bullet bullet-info bullet-sm"></span>
-                                    <small class="text-muted">Vendor Renewal</small>
-                                </td>
-                                <td><span class="badge badge-light-success badge-pill">PAID</span></td>
-                                <td>
-                                    <a href="{{route('invoice.show', 1)}}" class="btn btn-success ">
-                                        <i data-feather="eye"></i>
-                                        <span>VIEW</span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <!--<td></td>
-                                    <td></td>-->
-                                <td>
-                                    <a href="{{route('invoice.show', 1)}}">INV-00853</a>
-                                </td>
-                                <td><span class="invoice-amount">₦ 100,000.00</span></td>
-                                <td><small class="text-muted">5 Jan 2020</small></td>
-                                <!--<td><span class="invoice-customer">Samsung Staff Clinic</span></td>-->
-                                <td>
-                                    <span class="bullet bullet-info bullet-sm"></span>
-                                    <small class="text-muted">Vendor Renewal</small>
-                                </td>
-                                <td><span class="badge badge-light-success badge-pill">PAID</span></td>
-                                <td>
-                                    <a href="{{route('invoice.show', 1)}}" class="btn btn-success ">
-                                        <i data-feather="eye"></i>
-                                        <span>VIEW</span>
-                                    </a>
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <!--<td></td>
-                                    <td></td>-->
-                                <td>
-                                    <a href="{{route('invoice.show', 1)}}">INV-00223</a>
-                                </td>
-                                <td><span class="invoice-amount">₦ 15,000.00</span></td>
-                                <td><small class="text-muted">5 Jan 2020</small></td>
-                                <!--<td><span class="invoice-customer">Ademola Clinic</span></td>-->
-                                <td>
-                                    <span class="bullet bullet-info bullet-sm"></span>
-                                    <small class="text-muted">Vendor Renewal</small>
-                                </td>
-                                <td><span class="badge badge-light-success badge-pill">PAID</span></td>
-                                <td>
-                                    <a href="{{route('invoice.show', 1)}}" class="btn btn-success ">
-                                        <i data-feather="eye"></i>
-                                        <span>VIEW</span>
-                                    </a>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
+                    {{$invoices->links()}}
                 </div>
             </section>
         </div>
