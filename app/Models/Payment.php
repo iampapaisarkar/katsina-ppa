@@ -30,4 +30,12 @@ class Payment extends Model
     public function user() {
         return $this->hasOne(User::class, 'id','user_id');
     }
+
+    public function service() {
+        return $this->hasOne(AdditionalFee::class, 'id','service_id');
+    }
+
+    public function extra_service() {
+        return $this->hasOne(RegistrationCategory::class, 'id','extra_service_id');
+    }
 }

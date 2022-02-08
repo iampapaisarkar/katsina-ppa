@@ -26,7 +26,7 @@
                                     <div>
                                         <div class="logo-wrapper">
                                             <h4 class="text-center mb-2"><img class="logo"
-                                                    src="../app-assets/images/logo/logo.png" /></h4>
+                                                    src="{{asset('libs/app-assets/images/logo/logo.png')}}" /></h4>
                                         </div>
                                         <p class="card-text mb-25">Katsina State Bureau of Public Procurement</p>
                                         <p class="card-text mb-25">Government Office</p>
@@ -37,15 +37,15 @@
                                     <div class="mt-md-0 mt-2">
                                         <h4 class="invoice-title">
                                             Invoice
-                                            <span class="invoice-number">#3492</span>
+                                            <span class="invoice-number">#{{$invoice->order_id}}</span>
                                         </h4>
                                         <div class="invoice-date-wrapper">
                                             <p class="invoice-date-title">Date Issued:</p>
-                                            <p class="invoice-date">25/08/2020</p>
+                                            <p class="invoice-date">{{$invoice->created_at->format('d/m/Y')}}</p>
                                         </div>
                                         <div class="invoice-date-wrapper">
                                             <p class="invoice-date-title">Due Date:</p>
-                                            <p class="invoice-date">29/08/2020</p>
+                                            <p class="invoice-date">{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $invoice->created_at)->addDays(env('PAYMENT_DUE_DAYS'))->format('d/m/Y')}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -101,14 +101,19 @@
                                     <tbody>
                                         <tr class="border-bottom">
                                             <td class="py-1">
-                                                <p class="card-text fw-bold mb-25">Vendor Registration Fee</p>
-                                                <p class="card-text text-nowrap">
-                                                    Contract Value Above N10B - N20B
-                                                </p>
+                                                @if($invoice->service_type == 'vendor_registration')
+                                                    <p class="card-text fw-bold mb-25">Vendor Registration Fee</p>
+                                                    <p class="card-text text-nowrap">
+                                                        {{number_format($invoice->service->registration_fee)}}
+                                                    </p>
+                                                    <p class="card-text text-nowrap">
+                                                        {{$invoice->extra_service->title}}
+                                                    </p>
+                                                @endif
                                             </td>
 
                                             <td class="py-1">
-                                                <span class="fw-bold">₦120,110.00</span>
+                                                <span class="fw-bold">₦{{number_format($invoice->amount)}}</span>
                                             </td>
                                         </tr>
 
@@ -119,9 +124,6 @@
                             <div class="card-body invoice-padding pb-0">
                                 <div class="row invoice-sales-total-wrapper">
                                     <div class="col-md-4 order-md-1 order-2 mt-md-0 mt-3">
-                                        <!--<p class="card-text mb-0">
-                                                <span class="fw-bold">Salesperson:</span> <span class="ms-75">Alfie Solomons</span>
-                                            </p>-->
                                     </div>
                                     <div class="col-md-8 d-flex justify-content-end order-md-2 order-1">
                                         <div class="invoice-total-wrapper">
@@ -129,7 +131,7 @@
                                             <hr class="my-50" />
                                             <div class="invoice-total-item">
                                                 <p class="invoice-total-title">Total:</p>
-                                                <p class="invoice-total-amount">₦120,110.00</p>
+                                                <p class="invoice-total-amount">₦{{number_format($invoice->amount)}}</p>
                                             </div>
                                         </div>
                                     </div>
