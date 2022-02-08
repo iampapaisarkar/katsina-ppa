@@ -23,15 +23,15 @@ Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth','verified'], ['can:isVendor,isPpa']], function () {
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+
+    Route::get('/invoice', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoice.index');
+    Route::get('/invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'show'])->name('invoice.show');
 });
 
 Route::group(['middleware' => ['auth','verified', 'can:isVendor']], function () {
     Route::get('/registration', [App\Http\Controllers\Vendor\RegistrationController::class, 'registration'])->name('registration');
     Route::get('/registration-preview', [App\Http\Controllers\Vendor\RegistrationController::class, 'registrationPreview'])->name('registration-preview');
     Route::post('/registration-submit', [App\Http\Controllers\Vendor\RegistrationController::class, 'registrationSubmit'])->name('registration-submit');
-    
-    Route::post('/invoices', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoices.index');
-    Route::post('/invoices/{id}', [App\Http\Controllers\InvoiceController::class, 'show'])->name('invoices.show');
 });
 
 Route::group(['middleware' => ['auth','verified', 'can:isPpa']], function () {

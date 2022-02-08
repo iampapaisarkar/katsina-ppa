@@ -1,0 +1,229 @@
+@extends('layouts.app', ['page' => 'invoice'])
+
+@section('content')
+<!-- BEGIN: Content-->
+<div class="app-content content ">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper container-xxl p-0">
+        <div class="content-header row">
+        </div>
+        <div class="content-body">
+            <section class="invoice-preview-wrapper">
+                <div class="row invoice-preview">
+                    <!-- Invoice -->
+                    <div class="col-xl-9 col-md-8 col-12">
+                        <div class="card invoice-preview-card">
+                            <div class="card-body invoice-padding pb-0">
+                                <!-- Header starts -->
+                                <div
+                                    class="d-flex justify-content-between flex-md-row flex-column invoice-spacing mt-0">
+                                    <div>
+                                        <div class="logo-wrapper">
+                                            <h4 class="text-center mb-2"><img class="logo"
+                                                    src="../app-assets/images/logo/logo.png" /></h4>
+                                        </div>
+                                        <p class="card-text mb-25">Katsina State Bureau of Public Procurement</p>
+                                        <p class="card-text mb-25">Government Office</p>
+                                        <p class="card-text mb-25">I.B.B Way, Dandagoro</p>
+                                        <p class="card-text mb-25">Katsina State, Nigeria</p>
+
+                                    </div>
+                                    <div class="mt-md-0 mt-2">
+                                        <h4 class="invoice-title">
+                                            Invoice
+                                            <span class="invoice-number">#3492</span>
+                                        </h4>
+                                        <div class="invoice-date-wrapper">
+                                            <p class="invoice-date-title">Date Issued:</p>
+                                            <p class="invoice-date">25/08/2020</p>
+                                        </div>
+                                        <div class="invoice-date-wrapper">
+                                            <p class="invoice-date-title">Due Date:</p>
+                                            <p class="invoice-date">29/08/2020</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Header ends -->
+                            </div>
+
+                            <hr class="invoice-spacing" />
+
+                            <!-- Address and Contact starts -->
+                            <div class="card-body invoice-padding pt-0">
+                                <div class="row invoice-spacing">
+                                    <div class="col-xl-8 p-0">
+                                        <h6 class="mb-2">Invoice To:</h6>
+                                        <h6 class="mb-25">Ahmed Dogara</h6>
+                                        <p class="card-text mb-25">Shelby Company Limited</p>
+                                        <p class="card-text mb-25">+234 802 123 4567</p>
+                                        <p class="card-text mb-0">username@domain.com</p>
+                                    </div>
+                                    <div class="col-xl-4 p-0 mt-xl-0 mt-2">
+                                        <h6 class="mb-2">Payment Details:</h6>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="pe-1">Total Due:</td>
+                                                    <td><span class="fw-bold">₦ 120,110.00</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="pe-1">Bank Name:</td>
+                                                    <td>Zenith Bank</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="pe-1">Account Number:</td>
+                                                    <td>1234567890</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Address and Contact ends -->
+
+                            <!-- Invoice Description starts -->
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="py-1">Description</th>
+
+                                            <th class="py-1">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-bottom">
+                                            <td class="py-1">
+                                                <p class="card-text fw-bold mb-25">Vendor Registration Fee</p>
+                                                <p class="card-text text-nowrap">
+                                                    Contract Value Above N10B - N20B
+                                                </p>
+                                            </td>
+
+                                            <td class="py-1">
+                                                <span class="fw-bold">₦120,110.00</span>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="card-body invoice-padding pb-0">
+                                <div class="row invoice-sales-total-wrapper">
+                                    <div class="col-md-4 order-md-1 order-2 mt-md-0 mt-3">
+                                        <!--<p class="card-text mb-0">
+                                                <span class="fw-bold">Salesperson:</span> <span class="ms-75">Alfie Solomons</span>
+                                            </p>-->
+                                    </div>
+                                    <div class="col-md-8 d-flex justify-content-end order-md-2 order-1">
+                                        <div class="invoice-total-wrapper">
+
+                                            <hr class="my-50" />
+                                            <div class="invoice-total-item">
+                                                <p class="invoice-total-title">Total:</p>
+                                                <p class="invoice-total-amount">₦120,110.00</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Invoice Description ends -->
+
+                            <hr class="invoice-spacing" />
+
+                            <!-- Invoice Note starts -->
+                            <div class="card-body invoice-padding pt-0">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span class="fw-bold">Note:</span>
+                                        <span>When you make payment at the bank, please indicate the invoice number on
+                                            the teller.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Invoice Note ends -->
+                        </div>
+                    </div>
+                    <!-- /Invoice -->
+
+                    <!-- Invoice Actions -->
+                    <div class="col-xl-3 col-md-4 col-12 invoice-actions mt-md-0 mt-2">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <a class="btn btn-outline-secondary w-100 mb-75"
+                                    href="./vendor-register-invoice-print.php" target="_blank"> Print </a>
+                                <button class="btn btn-success w-100 mb-75" data-bs-toggle="modal"
+                                    data-bs-target="#add-payment-sidebar">
+                                    Upload Payment
+                                </button>
+                                <button class="btn btn-success w-100 mb-75" data-bs-toggle="modal" data-bs-target="">
+                                    Payment Online
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Invoice Actions -->
+                </div>
+            </section>
+
+
+            <!-- Add Payment Sidebar -->
+            <div class="modal modal-slide-in fade" id="add-payment-sidebar" aria-hidden="true">
+                <div class="modal-dialog sidebar-lg">
+                    <div class="modal-content p-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
+                        <div class="modal-header mb-1">
+                            <h5 class="modal-title">
+                                <span class="align-middle">Add Payment</span>
+                            </h5>
+                        </div>
+                        <div class="modal-body flex-grow-1">
+                            <form>
+                                <div class="mb-1">
+                                    <label for="formFile" class="form-label">Evidence of Payment (PDF/2MB max)</label>
+                                    <input class="form-control" type="file" id="formFile" accept="application/pdf" />
+                                </div>
+                                <div class="mb-1">
+                                    <label class="form-label" for="amount">Payment Amount</label>
+                                    <input id="amount" class="form-control" type="text" value="120,110.00" readonly />
+                                </div>
+                                <div class="mb-1">
+                                    <label class="form-label" for="payment-date">Payment Date</label>
+                                    <input id="payment-date" class="form-control date-picker" type="text" />
+                                </div>
+                                <div class="mb-1">
+                                    <label class="form-label" for="payment-method">Payment Method</label>
+                                    <select class="form-select" id="payment-method">
+                                        <option value="" selected disabled>Select payment method</option>
+                                        <option value="Bank Deposit">Bank Deposit</option>
+                                        <option value="Bank Transfer">Bank Transfer</option>
+                                        <!--<option value="Debit">Debit</option>
+                                            <option value="Credit">Credit</option>
+                                            <option value="Paypal">Paypal</option>-->
+                                    </select>
+                                </div>
+                                <!--<div class="mb-1">
+                                        <label class="form-label" for="payment-note">Internal Payment Note</label>
+                                        <textarea class="form-control" id="payment-note" rows="5" placeholder="Internal Payment Note"></textarea>
+                                    </div>-->
+                                <div class="d-flex flex-wrap mb-0">
+                                    <button type="button" class="btn btn-primary me-1"
+                                        data-bs-dismiss="modal">Upload</button>
+                                    <button type="button" class="btn btn-outline-secondary"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Add Payment Sidebar -->
+        </div>
+    </div>
+</div>
+<!-- END: Content-->
+@endsection
