@@ -4,6 +4,7 @@ namespace App\Http\Services;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Payment;
 use App\Models\Registration;
+use App\Models\AdditionalFee;
 use DB;
 
 class Checkout
@@ -13,19 +14,24 @@ class Checkout
         try {
             DB::beginTransaction();
 
-            if($type == 'meptp'){
+            if($type == 'vendor_registration'){
 
-                $application = Registration::where(['id' => $registration['id'], 'payment' => false])->first(); 
+                $_c_registration = Registration::with(
+                    'company_details.core_competence', 
+                    'company_details.organization_type', 
+                    'company_details.company_state', 
+                    'company_directors', 
+                    'product_service_types', 
+                    'product_services', 
+                    'category_documents.registration_category'
+                )
+                ->where(['id' => $registration['id'], 'payment' => false])
+                ->first();; 
 
-                if($application){
-                    $service = Service::where('id', 1)
-                    ->with('netFees')
-                    ->first();
+                if($registration){
+                    $AdditionalFee = AdditionalFee::where('id', 1)->first();
 
-                    $totalAmount = 0;
-                    foreach($service->netFees as $fee){
-                        $totalAmount += $fee->amount;
-                    }
+                    $totalAmount = floatval($AdditionalFee->registration_fee + $_c_registration->category_documents->registration_category->registration_fee);
 
                     $token = md5(uniqid(rand(), true));
                     $order_id = date('m-Y') . '-' .rand(10,1000);
@@ -33,11 +39,13 @@ class Checkout
                     $payment = Payment::create([
                         'user_id' => Auth::user()->id,
                         'order_id' => $order_id,
-                        'application_id' => $application['id'],
-                        'service_id' => $service->id,
-                        'service_type' => 'meptp_training',
+                        'registration_id' => $_c_registration->id,
+                        'service_id' => $AdditionalFee->id,
+                        'extra_service_id' => $_c_registration->category_documents->registration_category->id,
+                        'service_type' => 'vendor_registration',
                         'amount' => $totalAmount,
                         'token' => $token,
+                        'is_online' => false,
                     ]);
 
                     $response = [

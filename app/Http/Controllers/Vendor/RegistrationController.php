@@ -24,8 +24,6 @@ class RegistrationController extends Controller
 
     public function registrationPreview(RegistrationStoreRequest $request)
     {
-        // dd($request->all());
-        // return view('vendor-user.registration-preview');
         if($request->all()){
             $data = $request->all();
             $data['attachment_9'] = base64_encode($request->file('attachment_9'));
@@ -128,26 +126,13 @@ class RegistrationController extends Controller
                 'attachment_9' => $attachment_9,
             ]);
            
-            $_C_REGISTRATION = Registration::with(
-                'company_details.core_competence', 
-                'company_details.organization_type', 
-                'company_details.company_state', 
-                'company_directors', 
-                'product_service_types', 
-                'product_services', 
-                'category_documents.registration_category'
-            )
-            ->where('id', $registration->id)
-            ->first();
 
-            dd($_C_REGISTRATION);
-
-            $response = Checkout::checkout($registration = ['id' => $registration->id], 'registration');
+            $response = Checkout::checkout($registration = ['id' => $registration->id], 'vendor_registration');
 
             DB::commit();
 
-                return redirect()->route('invoices.show', ['id' => $response['id']])
-                ->with('success', 'Application successfully submitted. Please pay amount for further action');
+                return redirect()->route('invoice.show', ['id' => $response['id']])
+                ->withSuccess('Application successfully submitted. Please pay amount for further action');
 
         }catch(Exception $e) {
             DB::rollback();
