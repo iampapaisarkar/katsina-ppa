@@ -10,6 +10,7 @@ class ProductServices extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'registration_id',
         'service_type_id',
         'service_id',

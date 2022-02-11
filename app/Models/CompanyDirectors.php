@@ -10,6 +10,7 @@ class CompanyDirectors extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'registration_id',
         'first_name',
         'last_name',

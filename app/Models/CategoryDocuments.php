@@ -10,6 +10,7 @@ class CategoryDocuments extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'registration_id',
         'registration_category_id',
         'attachment_1',

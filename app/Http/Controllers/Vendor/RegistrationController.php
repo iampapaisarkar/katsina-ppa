@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Vendor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegistrationStoreRequest;
+use App\Http\Requests\CompanyDetailRequest;
+use App\Http\Requests\CompanyDirectorRequest;
+use App\Http\Requests\ProductServiceRequest;
+use App\Http\Requests\CategoryDocumentRequest;
 use App\Models\Registration;
 use App\Models\CompanyDetails;
 use App\Models\CompanyDirectors;
@@ -143,5 +147,21 @@ class RegistrationController extends Controller
 
     public function status(){
         return view('vendor-user.registration-status');
+    }
+
+    public function registrationCompanyDetailSubmit(CompanyDetailRequest $request)
+    {
+    }
+
+    public function registrationCompanyDirectorSubmit(CompanyDirectorRequest $request)
+    {
+    }
+
+    public function registrationProductServiceSubmit(ProductServiceRequest $request)
+    {
+    }
+
+    public function registrationCategoryDocumentSubmit(CategoryDocumentRequest $request)
+    {
     }
 }

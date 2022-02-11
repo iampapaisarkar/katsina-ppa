@@ -38,6 +38,11 @@ Route::group(['middleware' => ['auth','verified', 'can:isVendor']], function () 
     Route::get('/registration-preview', [App\Http\Controllers\Vendor\RegistrationController::class, 'registrationPreview'])->name('registration-preview');
     Route::post('/registration-submit', [App\Http\Controllers\Vendor\RegistrationController::class, 'registrationSubmit'])->name('registration-submit');
 
+    Route::post('/registration-company-details-submit', [App\Http\Controllers\Vendor\RegistrationController::class, 'registrationCompanyDetailSubmit'])->name('registration-company-details-submit');
+    Route::post('/registration-company-director-submit', [App\Http\Controllers\Vendor\RegistrationController::class, 'registrationCompanyDirectorSubmit'])->name('registration-company-director-submit');
+    Route::post('/registration-product-service-submit', [App\Http\Controllers\Vendor\RegistrationController::class, 'registrationProductServiceSubmit'])->name('registration-product-service-submit');
+    Route::post('/registration-category-document-submit', [App\Http\Controllers\Vendor\RegistrationController::class, 'registrationCategoryDocumentSubmit'])->name('registration-category-document-submit');
+
     Route::get('/registration-status', [App\Http\Controllers\Vendor\RegistrationController::class, 'status'])->name('registration-status');
 
     Route::post('/payment-update/{id}', [App\Http\Controllers\InvoiceController::class, 'paymentUpdate'])->name('payment-update');

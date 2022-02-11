@@ -10,6 +10,7 @@ class CompanyDetails extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'registration_id',
         'area_of_core_competence',
         'type_of_organization',

@@ -15,6 +15,7 @@ class CreateCategoryDocumentsTable extends Migration
     {
         Schema::create('category_documents', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->integer('registration_id');
             $table->integer('registration_category_id'); //integer
             $table->string('attachment_1');
