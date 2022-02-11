@@ -1,3 +1,4 @@
+<form id="vendorRegistrationForm1">
 <div id="account-details-vertical-modern" class="content" role="tabpanel"
     aria-labelledby="account-details-vertical-modern-trigger">
     <div class="content-header">
@@ -26,8 +27,8 @@
             @enderror
         </div>
         <div class="mb-1 col-md-6">
-            <label class="form-label" for="basicSelect">Type of Organization </label>
-            <select class="form-select @error('type_of_organization') is-invalid @enderror" name="type_of_organization" id="basicSelect">  
+            <label class="form-label" for="basicSelect2">Type of Organization </label>
+            <select class="form-select @error('type_of_organization') is-invalid @enderror" name="type_of_organization" id="basicSelect2">  
                 <option value="">select one</option>
                 @foreach(app('App\Http\Services\BackendData')->OrganizationTypes() as $OrganizationType)
                 @if(old('type_of_organization') && (old('type_of_organization') == $OrganizationType->id))
@@ -60,8 +61,8 @@
         </div>
         <div class="col-md-6 col-12">
             <div class="mb-1">
-                <label class="form-label" for="basicInput">CAC Number</label>
-                <input value="{{old('cac_number')}}" type="text" class="form-control @error('cac_number') is-invalid @enderror" name="cac_number" id="basicInput" placeholder="RC/BN" />
+                <label class="form-label" for="basicInput2">CAC Number</label>
+                <input value="{{old('cac_number')}}" type="text" class="form-control @error('cac_number') is-invalid @enderror" name="cac_number" id="basicInput2" placeholder="RC/BN" />
                 @error('cac_number')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -225,9 +226,48 @@
             <i data-feather="arrow-left" class="align-middle me-sm-25 me-0"></i>
             <span class="align-middle d-sm-inline-block d-none">Previous</span>
         </button>
-        <button class="btn btn-primary btn-next" type="button">
+        <!-- btn-next -->
+        <input class="submit" type="submit" value="SUBMIT">
+        <!-- <button class="btn btn-primary " type="submit"> 
             <span class="align-middle d-sm-inline-block d-none">Next</span>
             <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
-        </button>
+        </button> -->
     </div>
 </div>
+</form>
+
+<script>
+    $(document).ready(function() {
+        var $form = $("#vendorRegistrationForm1");
+        $form.validate({
+            submitHandler: function(form) {
+                var formData = new FormData(form);
+                // $(".loader").removeClass('d-none');
+                // $(".submitBtn").attr('disabled', true);
+                $.ajax({
+                    url: "<?php echo asset('') ?>"+"registration-company-details-submit",
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    type: 'POST',
+                    data: formData,
+                    dataType: "json",
+                    success: function(data) {
+                        console.log("data", data)
+                    },
+                    error: function(errors){
+                        console.log("errors", errors)
+                        if(errors.status == 422){
+                            var errorMessages = errors.responseJSON.errors
+                            var validator = $( "#vendorRegistrationForm1" ).validate();
+                            validator.showErrors(errorMessages);
+                        }
+
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+                return false;
+            }
+        });
+    });
+</script>

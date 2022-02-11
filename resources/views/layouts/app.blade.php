@@ -50,6 +50,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('libs/app-assets/css/plugins/forms/pickers/form-pickadate.css')}}">
     <!-- END: Page CSS-->
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    
     <!-- Jquery Confirm CDN -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />  
