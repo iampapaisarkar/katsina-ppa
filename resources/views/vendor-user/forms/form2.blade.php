@@ -1,3 +1,5 @@
+<form id="vendorRegistrationForm2">
+@csrf
 <div id="directors-info-vertical-modern" class="content" role="tabpanel"
     aria-labelledby="directors-info-vertical-modern-trigger">
     <div class="content-header">
@@ -24,12 +26,19 @@
             <i data-feather="arrow-left" class="align-middle me-sm-25 me-0"></i>
             <span class="align-middle d-sm-inline-block d-none">Previous</span>
         </button>
-        <button class="btn btn-primary btn-next" type="button">
+        <!-- <button class="btn btn-primary btn-next" type="button">
             <span class="align-middle d-sm-inline-block d-none">Next</span>
             <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
+        </button> -->
+        <button id="formSubmit2" class="btn btn-primary d-flex justify-content-between" type="submit"> 
+            <span class="align-middle d-sm-inline-block d-none">Next</span>
+            <i id="form2Next" data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
+            <div id="form2Loader" style="width: 15px;height: 15px;" class="d-none spinner-border text-light ml-2" role="status"></div>
         </button>
     </div>
 </div>
+</form>
+
 
 <script>
 function addDirectorRow(){
@@ -156,4 +165,73 @@ function addDirectorRow(){
 function deleteDirectorRow(id){
     $("#directorID_"+id).remove();
 }
+
+
+$(document).ready(function() {
+    var $form = $("#vendorRegistrationForm2");
+    $form.validate({
+        submitHandler: function(form) {
+            var formData = new FormData(form);
+            $("#form2Next").addClass('d-none');
+            $("#form2Loader").removeClass('d-none');
+            $("#formSubmit2").attr('disabled', true);
+            $.ajax({
+                url: "<?php echo asset('') ?>"+"registration-company-director-submit",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                type: 'POST',
+                data: formData,
+                dataType: "json",
+                success: function(response) {
+                    $("#form2Next").removeClass('d-none');
+                    $("#form2Loader").addClass('d-none');
+                    $("#formSubmit2").attr('disabled', false);
+
+                    setTimeout(function() {
+                        toastr['success'](
+                            response, {
+                                closeButton: true,
+                                tapToDismiss: false
+                            }
+                        );
+                    }, 1000);
+
+                    $('#services-step-vertical-modern-trigger .step-trigger').click();
+                },
+                error: function(errors){
+
+                    if(errors.status == 422){
+                        var errorMessages = errors.responseJSON.errors
+                        setTimeout(function() {
+                            toastr['error'](
+                                errorMessages.director[0], {
+                                    closeButton: true,
+                                    tapToDismiss: false
+                                }
+                            );
+                        }, 1000);
+                    }else{
+
+                        setTimeout(function() {
+                        toastr['error'](
+                            errors.responseJSON.message, {
+                                closeButton: true,
+                                tapToDismiss: false
+                            }
+                        );
+                    }, 1000);
+                    }
+
+                    $("#form2Next").removeClass('d-none');
+                    $("#form2Loader").addClass('d-none');
+                    $("#formSubmit2").attr('disabled', false);
+
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+            return false;
+        }
+    });
+});
 </script>
