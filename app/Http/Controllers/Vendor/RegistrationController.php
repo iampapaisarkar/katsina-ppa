@@ -26,7 +26,19 @@ class RegistrationController extends Controller
         $authUser = Auth::user();
         $companyDetails = CompanyDetails::where('user_id', $authUser->id)->first();
         $companyDirectors = CompanyDirectors::where('user_id', $authUser->id)->get();
-        return view('vendor-user.registration', compact('companyDetails', 'companyDirectors'));
+        $productServices = ProductServices::where('user_id', $authUser->id)->get();
+
+        $serviceTypes = [];
+        $services = [];
+        foreach ($productServices as $key => $productService) {
+            if(!in_array($productService->service_type_id, $serviceTypes)){
+                array_push($serviceTypes, $productService->service_type_id);
+            }
+            array_push($services, $productService->service_id);
+        }
+
+        // dd(['service types' => $serviceTypes, 'services' => $services]);
+        return view('vendor-user.registration', compact('companyDetails', 'companyDirectors', 'serviceTypes', 'services'));
     }
 
     // public function registrationPreview(RegistrationStoreRequest $request)
@@ -227,8 +239,6 @@ class RegistrationController extends Controller
             $CompanyDirectors = CompanyDirectors::where('user_id', $authUser->id)
             ->where('registration_id', null);
 
-            // return response()->json($request->all(), 200);
-
             if($CompanyDirectors->exists()){
 
                 // Store OR Update directors 
@@ -355,6 +365,68 @@ class RegistrationController extends Controller
 
     public function registrationProductServiceSubmit(ProductServiceRequest $request)
     {
+        try {
+            DB::beginTransaction();
+
+            $authUser = Auth::user();
+            $ProductServices = ProductServices::where('user_id', $authUser->id)
+            ->where('registration_id', null);
+
+            if($ProductServices->exists()){
+
+                if($request->services){
+
+                    ProductServices::where('user_id', $authUser->id)
+                    ->where('registration_id', null)->delete();
+
+                    foreach($request->services as $key => $service) {
+                        if(isset($service['service_type'])){
+                            $service_type_id = $service['service_type'];
+                        }else{
+                            $service_type_id = null;
+                        }
+                        foreach($service['service'] as $serv) {
+                            ProductServices::create([
+                                'user_id' => $authUser->id,
+                                'service_type_id' => $service_type_id,
+                                'service_id' => $serv
+                            ]);
+                        }
+                    }
+                }
+
+                $message = 'Product & Services updated successfully';
+            }else{
+                
+                if($request->services){
+                    foreach($request->services as $key => $service) {
+                        if(isset($service['service_type'])){
+                            $service_type_id = $service['service_type'];
+                        }else{
+                            $service_type_id = null;
+                        }
+                        foreach($service['service'] as $serv) {
+                            ProductServices::create([
+                                'user_id' => $authUser->id,
+                                'service_type_id' => $service_type_id,
+                                'service_id' => $serv
+                            ]);
+                        }
+                    }
+                }
+
+                $message = 'Product & Services stored successfully';
+            }
+
+        DB::commit();
+
+            return response()->json($message, 200);
+
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return response()->json('error','There something internal server errore');
+        }
     }
 
     public function registrationCategoryDocumentSubmit(CategoryDocumentRequest $request)
