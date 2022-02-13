@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'invoice'])
+@extends('layouts.app', ['page' => 'invoice-queried'])
 
 @section('content')
 <!-- BEGIN: Content-->
@@ -15,6 +15,12 @@
                     <div class="col-xl-9 col-md-8 col-12">
                         <div class="card invoice-preview-card">
                             <div class="card-body invoice-padding pb-0">
+
+                                @if (session('errors'))
+                                <div class="alert alert-danger p-2" role="alert">
+                                    <p>*{{session('errors')->first('reason')}}</p>
+                                </div>
+                                @endif
 
                                 @if (session('success'))
                                 <div class="alert alert-success p-2" role="alert">
@@ -178,13 +184,25 @@
 
                                 <a class="btn btn-outline-secondary w-100 mb-75" target="_blank"
                                     href="{{route('invoice.download', $invoice->id)}}" target="_blank"> Print </a>
+
+                                <a class="btn btn-secondary w-100 mb-75"
+                                href="{{route('download-pending-invoice-evidence', $invoice->id)}}" target="_blank">
+                                    Download Evidence
+                                </a>
+                                <hr/>
+                                <div class="card shadow-none bg-transparent border-secondary">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Queried By</h4>
+                                        <p class="card-text">{{$invoice->queried_by->first_name}} {{$invoice->queried_by->sur_name}}</p>
+                                        <p class="card-text"><span class="badge badge-light-secondary">{{$invoice->updated_at->format('d M Y / h:i A')}}</span></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <!-- /Invoice Actions -->
                 </div>
             </section>
-
         </div>
     </div>
 </div>

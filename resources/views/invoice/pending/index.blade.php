@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'invoice'])
+@extends('layouts.app', ['page' => 'invoice-pending'])
 
 @section('content')
 <!-- BEGIN: Content-->
@@ -42,9 +42,8 @@
                                 <th>
                                     <span class="align-middle">Invoice#</span>
                                 </th>
-                                <th>Amount</th>
                                 <th>Date</th>
-                                <!--<th>Facility</th>-->
+                                <th>Company</th>
                                 <th>Type</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -56,8 +55,8 @@
                                 <td>
                                     <a href="{{route('invoice.show', $invoice->id)}}">{{$invoice->order_id}}</a>
                                 </td>
-                                <td><span class="invoice-amount">₦ {{number_format($invoice->amount)}}</span></td>
                                 <td><small class="text-muted">{{$invoice->created_at->format('d M Y')}}</small></td>
+                                <td>{{$invoice->vendor_registration->company_details->company_name}}</td>
                                 <td>
                                     @if($invoice->service_type == 'vendor_registration')
                                     <span class="bullet bullet-success bullet-sm"></span>
@@ -75,15 +74,12 @@
                                     @if($invoice->status == 'unpaid')
                                     <span class="badge badge-light-danger badge-pill">UNPAID</span>
                                     @endif
-                                    @if($invoice->status == 'queried')
-                                    <span class="badge badge-light-danger badge-pill">QUERIED</span>
-                                    @endif
                                     @if($invoice->status == 'pending')
                                     <span class="badge badge-light-warning badge-pill">Pending Approval</span>
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('invoice.show', $invoice->id)}}" class="btn btn-success ">
+                                    <a href="{{route('invoice.pending.show', $invoice->id)}}" class="btn btn-success ">
                                         <i data-feather="eye"></i>
                                         <span>VIEW</span>
                                     </a>

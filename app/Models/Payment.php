@@ -25,11 +25,17 @@ class Payment extends Model
         'is_online',
         'evidence_of_payment',
         'payment_date',
-        'payment_method'
+        'payment_method',
+        'query',
+        'query_by'
     ];
 
     public function user() {
         return $this->hasOne(User::class, 'id','user_id');
+    }
+
+    public function queried_by() {
+        return $this->hasOne(User::class, 'id','query_by');
     }
 
     public function service() {

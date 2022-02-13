@@ -216,7 +216,7 @@
                             </h5>
                         </div>
                         <div class="modal-body flex-grow-1">
-                            <form class="auth-register-form mt-2" action="{{ route('payment-update', $invoice->id) }}" method="POST">
+                            <form class="auth-register-form mt-2" action="{{ route('payment-update', $invoice->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                                 <div class="mb-1">
                                     <label for="formFile" class="form-label">Evidence of Payment (PDF/2MB max)</label>

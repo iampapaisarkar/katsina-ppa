@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'invoice'])
+@extends('layouts.app', ['page' => 'invoice-pending'])
 
 @section('content')
 <!-- BEGIN: Content-->
@@ -15,6 +15,12 @@
                     <div class="col-xl-9 col-md-8 col-12">
                         <div class="card invoice-preview-card">
                             <div class="card-body invoice-padding pb-0">
+
+                                @if (session('errors'))
+                                <div class="alert alert-danger p-2" role="alert">
+                                    <p>*{{session('errors')->first('reason')}}</p>
+                                </div>
+                                @endif
 
                                 @if (session('success'))
                                 <div class="alert alert-success p-2" role="alert">
@@ -46,9 +52,6 @@
                                             @endif
                                             @if($invoice->status == 'unpaid')
                                             <span class="badge badge-glow bg-danger">UNPAID</span>
-                                            @endif
-                                            @if($invoice->status == 'queried')
-                                            <span class="badge badge-glow bg-danger">QUERIED</span>
                                             @endif
                                             @if($invoice->status == 'pending')
                                             <span class="badge badge-glow bg-warning">APPROVAL PENDING</span>
@@ -178,6 +181,17 @@
 
                                 <a class="btn btn-outline-secondary w-100 mb-75" target="_blank"
                                     href="{{route('invoice.download', $invoice->id)}}" target="_blank"> Print </a>
+
+                                <a class="btn btn-secondary w-100 mb-75"
+                                href="{{route('download-pending-invoice-evidence', $invoice->id)}}" target="_blank">
+                                    Download Evidence
+                                </a>
+                                <button class="btn btn-warning w-100 mb-75" data-bs-toggle="modal" data-bs-target="#QueryPayment">
+                                    Query Payment
+                                </button>
+                                <button class="btn btn-success w-100 mb-75" data-bs-toggle="modal" data-bs-target="">
+                                    Approve Payment
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -185,6 +199,51 @@
                 </div>
             </section>
 
+            <!-- Update payment Modal -->
+            <div class="modal fade" id="QueryPayment" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
+                        <div class="modal-content">
+                            <div class="modal-header bg-transparent">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body pb-5 px-sm-5 pt-50">
+                                <div class="text-center mb-2">
+                                    <h1 class="mb-1">Query Payment Evidence</h1>
+                                    
+                                </div>
+                                <form class="auth-register-form mt-2" action="{{ route('pending-invoice-query', $invoice->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                    <div class="col-12 col-md-12">
+                                        <label class="form-label" for="modalEditUserFirstName">Invoice Number</label>
+                                        <input name="invoice_number" value="{{$invoice->order_id}}"  type="text" id="modalEditUserFirstName" name="modalEditUserFirstName" class="form-control @error('invoice_number') is-invalid @enderror" placeholder="" data-msg="Please enter Title" readonly />
+                                        @error('invoice_number')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 col-md-12">
+                                        <label class="form-label" for="modalEditUserLastName">Reason</label>
+                                        <input name="reason" type="text" id="modalEditUserLastName" name="modalEditUserLastName" class="form-control @error('reason') is-invalid @enderror" placeholder="Doe" value=" " data-msg="Please enter Code" />
+                                        @error('reason')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    
+                                    <div class="col-12 text-center mt-2 pt-50">
+                                        <button type="submit" class="btn btn-primary me-1">Submit</button>
+                                        <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
+                                            Discard
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!--/ Update payment Modal -->
         </div>
     </div>
 </div>
