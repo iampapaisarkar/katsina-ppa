@@ -41,7 +41,7 @@ class InvoiceController extends Controller
     public function show($id){
         $authUser = Auth::user();
 
-        $invoice = Payment::with('user', 'service', 'extra_service', 'vendor_registration')->where('id', $id);
+        $invoice = Payment::with('user', 'service', 'extra_service', 'vendor_registration', 'queried_by')->where('id', $id);
 
         if($invoice->exists()){
             if($authUser->hasRole(['ppa'])){
@@ -60,20 +60,36 @@ class InvoiceController extends Controller
 
     public function paymentUpdate(Request $request, $id){
         
-        $this->validate($request, [
-            'evidence_of_payment' => [
-                'required'
-            ],
-            'payment_date' => [
-                'required'
-            ],
-            'payment_method' => [
-                'required'
-            ],
-        ]);
-
         $authUser = Auth::user();
-        $evidence_of_payment = FileUpload::upload($request->file('evidence_of_payment'), $private = true, 'vendor', 'evidence_of_payment');
+
+        if(Payment::where(['id' => $id, 'user_id' => $authUser->id])->exists()){
+            $this->validate($request, [
+                'payment_date' => [
+                    'required'
+                ],
+                'payment_method' => [
+                    'required'
+                ]
+            ]);
+        }else{
+            $this->validate($request, [
+                'evidence_of_payment' => [
+                    'required'
+                ],
+                'payment_date' => [
+                    'required'
+                ],
+                'payment_method' => [
+                    'required'
+                ]
+            ]);
+        }
+
+        if($request->file('evidence_of_payment')){
+            $evidence_of_payment = FileUpload::upload($request->file('evidence_of_payment'), $private = true, 'vendor', 'evidence_of_payment');
+        }else{
+            $evidence_of_payment = Payment::where(['id' => $id, 'user_id' => $authUser->id])->first()->evidence_of_payment;
+        }
 
         Payment::where(['id' => $id, 'user_id' => $authUser->id])->update([
             'status' => 'pending',
@@ -111,7 +127,6 @@ class InvoiceController extends Controller
             return abort(404);
         }
     }
-
 
     public function unpaidIndex(Request $request){
 
@@ -190,7 +205,17 @@ class InvoiceController extends Controller
             'query_by' => Auth::user()->id,
         ]);
 
-        return redirect('invoice.pending.index')->withSuccess('Queried successfully');
+        return redirect('pending-invoice')->withSuccess('Queried successfully');
+    }
+
+    public function pendingApproved($id){
+        
+        Payment::where(['id' => $id])->update([
+            'status' => 'paid',
+            'approve_by' => Auth::user()->id
+        ]);
+
+        return redirect('pending-invoice')->withSuccess('Approved successfully');
     }
 
     public function queriedIndex(Request $request){
@@ -220,44 +245,26 @@ class InvoiceController extends Controller
 
     public function approvedIndex(Request $request){
 
-        $authUser = Auth::user();
-        $invoices = Payment::with('user');
+        $invoices = Payment::with('user', 'vendor_registration')->where('status', 'paid');
 
-        if($authUser->hasRole(['ppa'])){
-
-            if($request->per_page){
-                $perPage = (integer) $request->per_page;
-            }else{
-                $perPage = 10;
-            }
-            $invoices = $invoices->latest()->paginate($perPage);
-
-        }else if($authUser->hasRole(['vendor'])){
-
-            if($request->per_page){
-                $perPage = (integer) $request->per_page;
-            }else{
-                $perPage = 10;
-            }
-
-            $invoices = $invoices->latest()->where('user_id', $authUser->id)->paginate($perPage);
+        if($request->per_page){
+            $perPage = (integer) $request->per_page;
+        }else{
+            $perPage = 10;
         }
+        $invoices = $invoices->latest()->paginate($perPage);
 
-        return view('invoice.index', compact('invoices'));
+        return view('invoice.approved.index', compact('invoices'));
     }
 
     public function approvedShow($id){
-        $authUser = Auth::user();
+        $invoice = Payment::with('user', 'service', 'extra_service', 'vendor_registration', 'approved_by')->where('id', $id)
+        ->where('status', 'paid')->first();
 
-        $invoice = Payment::with('user', 'service', 'extra_service', 'vendor_registration')->where('id', $id);
-
-        if($authUser->hasRole(['ppa'])){
-            $invoice = $invoice->first();
+        if($invoice){
+            return view('invoice.approved.show', compact('invoice'));
+        }else{
+            return abort(404);
         }
-        if($authUser->hasRole(['vendor'])){
-            $invoice = $invoice->where('user_id', $authUser->id)->first();
-        }
-
-        return view('invoice.show', compact('invoice'));
     }
 }

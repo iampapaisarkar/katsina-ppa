@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth','verified', 'can:isPpa']], function () {
     Route::get('/pending-invoice', [App\Http\Controllers\InvoiceController::class, 'pendingIndex'])->name('invoice.pending.index');
     Route::get('/pending-invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'pendingShow'])->name('invoice.pending.show');
     Route::get('/download-pending-invoice-evidence/{id}', [App\Http\Controllers\InvoiceController::class, 'downloadEvidence'])->name('download-pending-invoice-evidence');
+    Route::post('/pending-invoice-approve/{id}', [App\Http\Controllers\InvoiceController::class, 'pendingApproved'])->name('pending-invoice-approve');
     Route::post('/pending-invoice-query/{id}', [App\Http\Controllers\InvoiceController::class, 'pendingQueried'])->name('pending-invoice-query');
 
     Route::get('/queried-invoice', [App\Http\Controllers\InvoiceController::class, 'queriedIndex'])->name('invoice.queried.index');

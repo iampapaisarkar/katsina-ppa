@@ -16,6 +16,18 @@
                         <div class="card invoice-preview-card">
                             <div class="card-body invoice-padding pb-0">
 
+                                @if (session('errors'))
+                                <div class="alert alert-danger p-2" role="alert">
+                                    <p>*{{session('errors')->first('evidence_of_payment')}}</p>
+                                </div>
+                                <div class="alert alert-danger p-2" role="alert">
+                                    <p>*{{session('errors')->first('payment_date')}}</p>
+                                </div>
+                                <div class="alert alert-danger p-2" role="alert">
+                                    <p>*{{session('errors')->first('payment_method')}}</p>
+                                </div>
+                                @endif
+
                                 @if (session('success'))
                                 <div class="alert alert-success p-2" role="alert">
                                     {{ session('success') }}
@@ -178,6 +190,46 @@
 
                                 <a class="btn btn-outline-secondary w-100 mb-75" target="_blank"
                                     href="{{route('invoice.download', $invoice->id)}}" target="_blank"> Print </a>
+
+                                @if($invoice->status == 'unpaid')
+                                <button class="btn btn-success w-100 mb-75" data-bs-toggle="modal"
+                                    data-bs-target="#add-payment-sidebar">
+                                    Upload Payment
+                                </button>
+                                @endif
+                                @if($invoice->status == 'queried')
+                                <button class="btn btn-success w-100 mb-75" data-bs-toggle="modal"
+                                    data-bs-target="#add-payment-sidebar">
+                                    Update Payment
+                                </button>
+                                @endif
+                                <button disabled class="btn btn-success w-100 mb-75" data-bs-toggle="modal" data-bs-target="">
+                                    Payment Online
+                                </button>
+
+                                @if($invoice->status == 'queried')
+                                <hr/>
+                                <div class="card shadow-none bg-transparent border-secondary">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Queried By</h4>
+                                        <p class="card-text">{{$invoice->queried_by->first_name}} {{$invoice->queried_by->sur_name}}</p>
+                                        <p class="card-text"><span class="badge badge-light-secondary">{{$invoice->updated_at->format('d M Y / h:i A')}}</span></p>
+                                        <p class="card-text"><strong>REASON:</strong></p>
+                                        <p class="card-text">{{$invoice->query}}</p>
+                                    </div>
+                                </div>
+                                @endif
+
+                                @if($invoice->status == 'paid')
+                                <hr/>
+                                <div class="card shadow-none bg-transparent border-success">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Approved By</h4>
+                                        <p class="card-text">{{$invoice->approved_by->first_name}} {{$invoice->approved_by->sur_name}}</p>
+                                        <p class="card-text"><span class="badge badge-light-success">{{$invoice->updated_at->format('d M Y / h:i A')}}</span></p>
+                                    </div>
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -185,6 +237,82 @@
                 </div>
             </section>
 
+
+            <!-- Add Payment Sidebar -->
+            <div class="modal modal-slide-in fade" id="add-payment-sidebar" aria-hidden="true">
+                <div class="modal-dialog sidebar-lg">
+                    <div class="modal-content p-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
+                        <div class="modal-header mb-1">
+                            <h5 class="modal-title">
+                                <span class="align-middle">Add Payment</span>
+                            </h5>
+                        </div>
+                        <div class="modal-body flex-grow-1">
+                            <form class="auth-register-form mt-2" action="{{ route('payment-update', $invoice->id) }}" method="POST"  enctype="multipart/form-data">
+                            @csrf
+                                <div class="mb-1">
+                                    <label for="formFile" class="form-label">Evidence of Payment (PDF/2MB max)</label>
+                                    <input name="evidence_of_payment" class="form-control @error('evidence_of_payment') is-invalid @enderror" type="file" id="formFile" accept="application/pdf" />
+                                    @error('evidence_of_payment')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="mb-1">
+                                    <label class="form-label" for="amount">Payment Amount</label>
+                                    <input name="amount" id="amount" class="form-control @error('amount') is-invalid @enderror" type="text" value="{{$invoice->amount}}" readonly />
+                                    @error('amount')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="mb-1">
+                                    <label class="form-label" for="payment-date">Payment Date</label>
+                                    <input value="{{$invoice->payment_date}}" type="text" id="fp-payment_date" name="payment_date" class="form-control flatpickr-basic @error('payment_date') is-invalid @enderror" placeholder="DD-MM-YYYY" />
+                                    @error('payment_date')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="mb-1">
+                                    <label class="form-label" for="payment-method">Payment Method</label>
+                                    <select name="payment_method" class="form-select @error('payment_method') is-invalid @enderror" id="payment-method">
+                                        <option value="" disabled>Select payment method</option>
+                                        @if($invoice->payment_method)
+                                        <option selected hidden value="{{$invoice->payment_method}}">{{$invoice->payment_method}}</option>
+                                        @endif
+                                        <option value="Bank Deposit">Bank Deposit</option>
+                                        <option value="Bank Transfer">Bank Transfer</option>
+                                        <!--<option value="Debit">Debit</option>
+                                            <option value="Credit">Credit</option>
+                                            <option value="Paypal">Paypal</option>-->
+                                    </select>
+                                    @error('payment_method')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <!--<div class="mb-1">
+                                        <label class="form-label" for="payment-note">Internal Payment Note</label>
+                                        <textarea class="form-control" id="payment-note" rows="5" placeholder="Internal Payment Note"></textarea>
+                                    </div>-->
+                                <div class="d-flex flex-wrap mb-0">
+                                    <button type="submit" class="btn btn-primary me-1"
+                                        data-bs-dismiss="modal">Upload</button>
+                                    <button type="button" class="btn btn-outline-secondary"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Add Payment Sidebar -->
         </div>
     </div>
 </div>

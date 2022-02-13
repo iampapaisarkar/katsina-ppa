@@ -33,6 +33,7 @@ class CreatePaymentsTable extends Migration
             $table->string('payment_method')->nullable();
             $table->longtext('query')->nullable();
             $table->integer('query_by')->nullable();
+            $table->integer('approve_by')->nullable();
             $table->timestamps();
         });
     }

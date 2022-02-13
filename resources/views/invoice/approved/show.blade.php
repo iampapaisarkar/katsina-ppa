@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'invoice-unpaid'])
+@extends('layouts.app', ['page' => 'invoice-approved'])
 
 @section('content')
 <!-- BEGIN: Content-->
@@ -175,6 +175,15 @@
 
                                 <a class="btn btn-outline-secondary w-100 mb-75" target="_blank"
                                     href="{{route('invoice.download', $invoice->id)}}" target="_blank"> Print </a>
+
+                                <hr/>
+                                <div class="card shadow-none bg-transparent border-success">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Approved By</h4>
+                                        <p class="card-text">{{$invoice->approved_by->first_name}} {{$invoice->approved_by->sur_name}}</p>
+                                        <p class="card-text"><span class="badge badge-light-success">{{$invoice->updated_at->format('d M Y / h:i A')}}</span></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

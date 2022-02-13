@@ -27,7 +27,8 @@ class Payment extends Model
         'payment_date',
         'payment_method',
         'query',
-        'query_by'
+        'query_by',
+        'approve_by'
     ];
 
     public function user() {
@@ -36,6 +37,10 @@ class Payment extends Model
 
     public function queried_by() {
         return $this->hasOne(User::class, 'id','query_by');
+    }
+
+    public function approved_by() {
+        return $this->hasOne(User::class, 'id','approve_by');
     }
 
     public function service() {

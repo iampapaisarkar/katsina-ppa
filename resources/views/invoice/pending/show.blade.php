@@ -189,7 +189,7 @@
                                 <button class="btn btn-warning w-100 mb-75" data-bs-toggle="modal" data-bs-target="#QueryPayment">
                                     Query Payment
                                 </button>
-                                <button class="btn btn-success w-100 mb-75" data-bs-toggle="modal" data-bs-target="">
+                                <button onclick="approved(event)" type="button" class="btn btn-success w-100 mb-75">
                                     Approve Payment
                                 </button>
                             </div>
@@ -248,4 +248,33 @@
     </div>
 </div>
 <!-- END: Content-->
+
+<form id="approved-form" action="{{ route('pending-invoice-approve', $invoice->id) }}" method="POST" class="d-none">
+@csrf
+</form>
+
+<script>
+	function approved(event){
+		event.preventDefault();
+
+		$.confirm({
+			title: 'Approved',
+			content: 'Are you sure want to approve?',
+			buttons: {   
+				ok: {
+					text: "YES",
+					btnClass: 'btn-primary',
+					keys: ['enter'],
+					action: function(){
+						document.getElementById('approved-form').submit();
+					}
+				},
+				cancel: function(){
+						console.log('the user clicked cancel');
+				}
+			}
+		});
+
+	}
+</script>
 @endsection
