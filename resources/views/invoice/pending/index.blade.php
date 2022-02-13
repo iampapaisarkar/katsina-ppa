@@ -53,7 +53,7 @@
                             @foreach($invoices as $invoice)
                             <tr>
                                 <td>
-                                    <a href="{{route('invoice.show', $invoice->id)}}">{{$invoice->order_id}}</a>
+                                    <a href="{{route('invoice.pending.show', $invoice->id)}}">{{$invoice->order_id}}</a>
                                 </td>
                                 <td><small class="text-muted">{{$invoice->created_at->format('d M Y')}}</small></td>
                                 <td>{{$invoice->vendor_registration->company_details->company_name}}</td>
