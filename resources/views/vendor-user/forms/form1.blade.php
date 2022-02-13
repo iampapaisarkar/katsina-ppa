@@ -266,6 +266,8 @@
                                 }
                             );
                         }, 1000);
+
+                        $('#directors-info-vertical-modern-trigger .step-trigger').click();
                     },
                     error: function(errors){
 
