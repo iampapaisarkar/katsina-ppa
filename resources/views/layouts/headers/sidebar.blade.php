@@ -49,6 +49,9 @@
                     </ul>
                 </li>
 
+                <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Vendor Management</span><i data-feather="more-horizontal"></i>
+                </li>
+
                 <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="credit-card"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Payments</span></a>
                     <ul class="menu-content">
                     <li class=" <?php if ($page=="invoice-unpaid") { echo "active";} ?>" ><a class="d-flex align-items-center" href="{{route('invoice.unpaid.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Unpaid</span></a>
@@ -63,9 +66,12 @@
                 </li>
                 @endcan
                 
+                
+                @can('isVendor')
+
                 <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i data-feather="more-horizontal"></i>
                 </li>
-                @can('isVendor')
+                
                 <li class="<?php if ($page=="vendor-registration") { echo "active";} ?> nav-item"><a class="d-flex align-items-center" href="{{route('registration')}}"><i data-feather="check-circle"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Vendor Registration</span></a>
                 </li>
 
