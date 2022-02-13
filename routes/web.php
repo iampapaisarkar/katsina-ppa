@@ -24,8 +24,6 @@ Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth','verified'], ['can:isVendor,isPpa']], function () {
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
-    Route::get('/invoice', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoice.index');
-    Route::get('/invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'show'])->name('invoice.show');
     Route::get('/invoice-download/{id}', [App\Http\Controllers\InvoiceController::class, 'download'])->name('invoice.download');
 
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
@@ -46,6 +44,8 @@ Route::group(['middleware' => ['auth','verified', 'can:isVendor']], function () 
 
     Route::get('/registration-status', [App\Http\Controllers\Vendor\RegistrationController::class, 'status'])->name('registration-status');
 
+    Route::get('/invoice', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoice.index');
+    Route::get('/invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'show'])->name('invoice.show');
     Route::post('/payment-update/{id}', [App\Http\Controllers\InvoiceController::class, 'paymentUpdate'])->name('payment-update');
 });
 
@@ -58,4 +58,13 @@ Route::group(['middleware' => ['auth','verified', 'can:isPpa']], function () {
     Route::resource('/additional-fee', 'App\Http\Controllers\FormData\AdditionalFeeController');
     Route::resource('/service-type', 'App\Http\Controllers\FormData\ServiceTypeController');
     Route::resource('/service', 'App\Http\Controllers\FormData\ServiceController');
+
+    Route::get('/unpaid-invoice', [App\Http\Controllers\InvoiceController::class, 'unpaidIndex'])->name('invoice.unpaid.index');
+    Route::get('/unpaid-invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'unpaidShow'])->name('invoice.unpaid.show');
+    Route::get('/pending-invoice', [App\Http\Controllers\InvoiceController::class, 'pendingIndex'])->name('invoice.pending.index');
+    Route::get('/pending-invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'pendingShow'])->name('invoice.pending.show');
+    Route::get('/queried-invoice', [App\Http\Controllers\InvoiceController::class, 'queriedIndex'])->name('invoice.queried.index');
+    Route::get('/queried-invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'queriedShow'])->name('invoice.queried.show');
+    Route::get('/approved-invoice', [App\Http\Controllers\InvoiceController::class, 'approvedIndex'])->name('invoice.approved.index');
+    Route::get('/approved-invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'approvedShow'])->name('invoice.approved.show');
 });

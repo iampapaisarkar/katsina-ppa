@@ -49,7 +49,17 @@
                     </ul>
                 </li>
 
-                <li class="<?php if ($page=="invoice") { echo "active";} ?> nav-item"><a class="d-flex align-items-center" href="{{route('invoice.index')}}"><i data-feather="credit-card"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Invoices</span></a>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="credit-card"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Payments</span></a>
+                    <ul class="menu-content">
+                    <li class=" <?php if ($page=="invoice-unpaid") { echo "active";} ?>" ><a class="d-flex align-items-center" href="{{route('invoice.unpaid.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Unpaid</span></a>
+                        </li>
+                    <li class=" <?php if ($page=="invoice-pending") { echo "active";} ?>" ><a class="d-flex align-items-center" href="{{route('invoice.pending.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Pending Approval</span></a>
+                        </li>
+                    <li class=" <?php if ($page=="invoice-queried") { echo "active";} ?>" ><a class="d-flex align-items-center" href="{{route('invoice.queried.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Queried</span></a>
+                        </li>
+                    <li class=" <?php if ($page=="invoice-approved") { echo "active";} ?>" ><a class="d-flex align-items-center" href="{{route('invoice.approved.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Approved</span></a>
+                        </li>
+                    </ul>
                 </li>
                 @endcan
                 
