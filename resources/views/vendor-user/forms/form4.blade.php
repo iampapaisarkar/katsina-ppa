@@ -180,18 +180,25 @@
                     data: formData,
                     dataType: "json",
                     success: function(response) {
+
+                        console.log(response)
+
                         $("#form4Next").removeClass('d-none');
                         $("#form4Loader").addClass('d-none');
                         $("#formSubmit4").attr('disabled', false);
 
                         setTimeout(function() {
                             toastr['success'](
-                                response, {
+                                response.message, {
                                     closeButton: true,
                                     tapToDismiss: false
                                 }
                             );
                         }, 1000);
+
+                        if(response.data){
+                            window.location.href = '<?php echo asset('') ?>' + 'invoice/' + response.data.id ;
+                        }
                     },
                     error: function(errors){
 

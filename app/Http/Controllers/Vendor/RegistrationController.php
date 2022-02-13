@@ -410,10 +410,16 @@ class RegistrationController extends Controller
                 $message = 'Category & Documents stored successfully';
             }
 
+
+            $response = $this->registrationSubmit();
+
         DB::commit();
 
-            return response()->json($message, 200);
-
+            if($response){
+                return response()->json(['message' => 'Application successfully submitted. Please pay amount for further action', 'data' => $response], 200);
+            }else{
+                return response()->json(['message' => $message], 200);
+            }
 
         }catch(Exception $e) {
             DB::rollback();
@@ -421,28 +427,48 @@ class RegistrationController extends Controller
         }
     }
 
-    public function registrationSubmit(RegistrationStoreRequest $request)
+    public function registrationSubmit()
     {
-        try {
-            DB::beginTransaction();
 
+        $authUser = Auth::user();
+        $companyDetails = CompanyDetails::where('user_id', $authUser->id);
+        $companyDirectors = CompanyDirectors::where('user_id', $authUser->id);
+        $productServices = ProductServices::where('user_id', $authUser->id);
+        $categoryDocuments = CategoryDocuments::where('user_id', $authUser->id);
+
+        if($companyDetails->exists() &&
+        $companyDirectors->exists() &&
+        $productServices->exists() &&
+        $categoryDocuments->exists()){
             $registration = Registration::create([
-                'user_id' => Auth::user()->id,
+                'user_id' => $authUser->id,
                 'payment' => false,
                 'status' => 'pending',
                 'type' => 'vendor_registration'
             ]);
+            $companyDetails->update([
+                'registration_id' => $registration->id
+            ]);
+            $companyDirectors->update([
+                'registration_id' => $registration->id
+            ]);
+            $productServices->update([
+                'registration_id' => $registration->id
+            ]);
+            $categoryDocuments->update([
+                'registration_id' => $registration->id
+            ]);
 
             $response = Checkout::checkout($registration = ['id' => $registration->id], 'vendor_registration');
 
-            DB::commit();
+            return $response;
 
-                return redirect()->route('invoice.show', ['id' => $response['id']])
-                ->withSuccess('Application successfully submitted. Please pay amount for further action');
-
-        }catch(Exception $e) {
-            DB::rollback();
-            return back()->with('error','There something internal server errore');
+        }else{
+            return false;
         }
+        
+        // return redirect()->route('invoice.show', ['id' => $response['id']])
+        // ->withSuccess('Application successfully submitted. Please pay amount for further action');
+
     }
 }
