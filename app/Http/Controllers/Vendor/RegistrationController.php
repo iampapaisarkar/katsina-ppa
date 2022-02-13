@@ -23,7 +23,9 @@ class RegistrationController extends Controller
 {
     public function registration()
     {
-        return view('vendor-user.registration');
+        $authUser = Auth::user();
+        $companyDetails = CompanyDetails::where('user_id', $authUser->id)->first();
+        return view('vendor-user.registration', compact('companyDetails'));
     }
 
     public function registrationPreview(RegistrationStoreRequest $request)
@@ -151,6 +153,69 @@ class RegistrationController extends Controller
 
     public function registrationCompanyDetailSubmit(CompanyDetailRequest $request)
     {
+        try {
+            DB::beginTransaction();
+
+            $authUser = Auth::user();
+            $companyDetails = CompanyDetails::where('user_id', $authUser->id)
+            ->where('registration_id', null);
+
+
+            if($companyDetails->exists()){
+                CompanyDetails::where('user_id', $authUser->id)->update([
+                    'area_of_core_competence' => $request->area_of_core_competence,
+                    'type_of_organization' => $request->type_of_organization,
+                    'company_name' => $request->company_name,
+                    'cac_number' => $request->cac_number,
+                    'default' => $request->default,
+                    'share_capital' => $request->share_capital,
+                    'address' => $request->address,
+                    'landmark' => $request->landmark,
+                    'city' => $request->city,
+                    'state' => $request->state,
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'email' => $request->email,
+                    'phone_number' => $request->phone_number,
+                    'position' => $request->position,
+                ]);
+                
+                $message = 'Company Details updated successfully';
+
+            }else{
+
+                CompanyDetails::create([
+                    'user_id' => $authUser->id,
+                    'area_of_core_competence' => $request->area_of_core_competence,
+                    'type_of_organization' => $request->type_of_organization,
+                    'company_name' => $request->company_name,
+                    'cac_number' => $request->cac_number,
+                    'default' => $request->default,
+                    'share_capital' => $request->share_capital,
+                    'address' => $request->address,
+                    'landmark' => $request->landmark,
+                    'city' => $request->city,
+                    'state' => $request->state,
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'email' => $request->email,
+                    'phone_number' => $request->phone_number,
+                    'position' => $request->position,
+                ]);
+
+                $message = 'Company Details stored successfully';
+
+            }
+
+            DB::commit();
+
+            return response()->json($message, 200);
+
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return response()->json('error','There something internal server errore');
+        }
     }
 
     public function registrationCompanyDirectorSubmit(CompanyDirectorRequest $request)
