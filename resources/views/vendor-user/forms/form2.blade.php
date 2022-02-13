@@ -9,6 +9,67 @@
 
     <div data-repeater-list="invoice">
         <div data-repeater-item id="directorRow">
+            @if(!empty($companyDirectors))
+                @foreach($companyDirectors as $key => $companyDirector)
+                <input value="{{$companyDirector->id}}" type="hidden" name="director[{{$key}}][id]"/>
+
+                <div class="row directorRow" id="directorID_{{$key}}">
+                            <div class="col-md-6 col-12">
+                                <div class="mb-1">
+                                    <label class="form-label" for="fname">First Name</label>
+                                    <input value="{{$companyDirector->first_name}}" type="text" name="director[{{$key}}][first_name]" class="form-control" id="fname" aria-describedby="fname"
+                                        placeholder="Directors Firstname" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="mb-1">
+                                    <label class="form-label" for="lname">Last Name</label>
+                                    <input value="{{$companyDirector->last_name}}" type="text" name="director[{{$key}}][last_name]" class="form-control " id="lname" aria-describedby="lname"
+                                        placeholder="Director's Lastname" />
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="mb-1">
+                                    <label class="form-label" for="email-id-column">Email</label>
+                                    <input value="{{$companyDirector->email}}" type="email" name="director[{{$key}}][email]" id="email-id-column" class="form-control " name="email-id-column"
+                                        placeholder="Email" />
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="mb-1">
+                                    <label class="form-label" for="phone-number2">Phone Number</label>
+                                    <input value="{{$companyDirector->phone_number}}" type="text" name="director[{{$key}}][phone_number]" class="form-control  phone-number-mask" placeholder="08021234567"
+                                        id="phone-number2" />
+                                </div>
+                            </div>
+                            <div class="mb-1 col-md-4 col-12">
+                                <label class="form-label" for="vertical-modern-address">Address</label>
+                                <input value="{{$companyDirector->address}}" type="text" name="director[{{$key}}][address]" id="vertical-modern-address" class="form-control"
+                                    placeholder="98 Ibrahim Ado bridge Road, " />
+                            </div>
+                            <div class="col-lg-4 col-md-12 mb-3 mb-sm-0">
+                                <label for="formFile" class="form-label">Upload Passport Photo (IAMGE/1MB max)</label>
+                                <input value="{{$companyDirector->passport}}" class="form-control " name="director[{{$key}}][passport]" type="file" id="formFile" accept="image/png, image/jpeg, " />
+                            </div>
+                            <div class="col-lg-4 col-md-12 mb-3 mb-sm-0">
+                                <label for="formFile" class="form-label">Upload Identification (PDF/2MB max)</label>
+                                <input value="{{$companyDirector->identification}}" class="form-control" name="director[{{$key}}][identification]" type="file" id="formFile" accept="application/pdf" />
+                            </div>
+                            <div class="col-lg-4 col-md-12 mb-3 mb-sm-0">
+                                <label for="formFile" class="form-label">Upload Certificates (PDF/2MB max)</label>
+                                <input value="{{$companyDirector->certificates}}" class="form-control" name="director[{{$key}}][certificates]" type="file" id="formFile" accept="application/pdf" />
+                            </div>
+                            <div class="col-md-12 col-12 mb-50">
+                                <div class="mb-1">
+                                    <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button"  id="deleteDirectorRow_{{$key}}" onclick="deleteDirectorRow({{$key}})">
+                                        <i data-feather="x" class="me-25"></i>
+                                        <span>Delete</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                @endforeach
+            @endif
         </div>
     </div>
     <div class="row">

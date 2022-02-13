@@ -25,7 +25,8 @@ class RegistrationController extends Controller
     {
         $authUser = Auth::user();
         $companyDetails = CompanyDetails::where('user_id', $authUser->id)->first();
-        return view('vendor-user.registration', compact('companyDetails'));
+        $companyDirectors = CompanyDirectors::where('user_id', $authUser->id)->get();
+        return view('vendor-user.registration', compact('companyDetails', 'companyDirectors'));
     }
 
     // public function registrationPreview(RegistrationStoreRequest $request)
@@ -226,44 +227,78 @@ class RegistrationController extends Controller
             $CompanyDirectors = CompanyDirectors::where('user_id', $authUser->id)
             ->where('registration_id', null);
 
+            // return response()->json($request->all(), 200);
+
             if($CompanyDirectors->exists()){
 
-                // Delete old directors 
-                CompanyDirectors::where('user_id', $authUser->id)->delete();
-
-                // Store new directors 
+                // Store OR Update directors 
                 if($request->director){
                     foreach($request->director as $key => $director) {
 
-                        if(isset($director['passport'])){
-                            $passport = FileUpload::upload($director['passport'], $private = true, 'vendor', 'passport'.$key);
-                        }else{
-                            $passport = null;
-                        }
+                        if(isset($director['id'])){ // Update
+                            $previous_company_director = CompanyDirectors::where(['user_id' => $authUser->id, 'id' => $director['id']])->first();
 
-                        if(isset($director['identification'])){
-                            $identification = FileUpload::upload($director['identification'], $private = true, 'vendor', 'identification'.$key);
-                        }else{
-                            $identification = null;
-                        }
-                        
-                        if(isset($director['certificates'])){
-                            $certificates = FileUpload::upload($director['certificates'], $private = true, 'vendor', 'certificates'.$key);
-                        }else{
-                            $certificates = null;
-                        }
+                            // Check Passport Validation 
+                            if(isset($director['passport'])){
+                                $passport = FileUpload::upload($director['passport'], $private = true, 'vendor', 'passport'.$key);
+                            }else{
+                                $passport = $previous_company_director->passport ? $previous_company_director->passport : null;
+                            }
+                            // Check Identification Validation 
+                            if(isset($director['identification'])){
+                                $identification = FileUpload::upload($director['identification'], $private = true, 'vendor', 'identification'.$key);
+                            }else{
+                                $identification = $previous_company_director->identification ? $previous_company_director->identification : null;
+                            }
+                            // Check Certificates Validation 
+                            if(isset($director['certificates'])){
+                                $certificates = FileUpload::upload($director['certificates'], $private = true, 'vendor', 'certificates'.$key);
+                            }else{
+                                $certificates = $previous_company_director->certificates ? $previous_company_director->certificates : null;
+                            }
 
-                        CompanyDirectors::create([
-                            'user_id' => $authUser->id,
-                            'first_name' => $request->first_name,
-                            'last_name' => $request->last_name,
-                            'email' => $request->email,
-                            'phone_number' => $request->phone_number,
-                            'address' => $request->address,
-                            'passport' => $passport,
-                            'identification' => $identification,
-                            'certificates' => $certificates,
-                        ]);
+                            CompanyDirectors::where(['id' => $previous_company_director->id, 'user_id' => $authUser->id])->update([
+                                'first_name' => $director['first_name'],
+                                'last_name' => $director['last_name'],
+                                'email' => $director['email'],
+                                'phone_number' => $director['phone_number'],
+                                'address' => $director['address'],
+                                'passport' => $passport,
+                                'identification' => $identification,
+                                'certificates' => $certificates,
+                            ]);
+
+                        }else{ // Insert
+                            if(isset($director['passport'])){
+                                $passport = FileUpload::upload($director['passport'], $private = true, 'vendor', 'passport'.$key);
+                            }else{
+                                $passport = null;
+                            }
+    
+                            if(isset($director['identification'])){
+                                $identification = FileUpload::upload($director['identification'], $private = true, 'vendor', 'identification'.$key);
+                            }else{
+                                $identification = null;
+                            }
+                            
+                            if(isset($director['certificates'])){
+                                $certificates = FileUpload::upload($director['certificates'], $private = true, 'vendor', 'certificates'.$key);
+                            }else{
+                                $certificates = null;
+                            }
+    
+                            CompanyDirectors::create([
+                                'user_id' => $authUser->id,
+                                'first_name' => $director['first_name'],
+                                'last_name' => $director['last_name'],
+                                'email' => $director['email'],
+                                'phone_number' => $director['phone_number'],
+                                'address' => $director['address'],
+                                'passport' => $passport,
+                                'identification' => $identification,
+                                'certificates' => $certificates,
+                            ]);
+                        }
                     }
                 }
 
@@ -292,11 +327,11 @@ class RegistrationController extends Controller
 
                         CompanyDirectors::create([
                             'user_id' => $authUser->id,
-                            'first_name' => $request->first_name,
-                            'last_name' => $request->last_name,
-                            'email' => $request->email,
-                            'phone_number' => $request->phone_number,
-                            'address' => $request->address,
+                            'first_name' => $director['first_name'],
+                            'last_name' => $director['last_name'],
+                            'email' => $director['email'],
+                            'phone_number' => $director['phone_number'],
+                            'address' => $director['address'],
                             'passport' => $passport,
                             'identification' => $identification,
                             'certificates' => $certificates,
