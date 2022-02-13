@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class InvoiceController extends Controller
 {
@@ -66,5 +67,25 @@ class InvoiceController extends Controller
         ]);
 
         return back()->withSuccess('Payment update successfully');
+    }
+
+    public function download($id){
+        
+        $authUser = Auth::user();
+
+        $invoice = Payment::with('user', 'service', 'extra_service', 'vendor_registration')->where('id', $id);
+
+        if($authUser->hasRole(['ppa'])){
+            $invoice = $invoice->first();
+        }
+        if($authUser->hasRole(['vendor'])){
+            $invoice = $invoice->where('user_id', $authUser->id)->first();
+        }
+
+        $logo = asset('libs/app-assets/images/logo/logo.png');
+        // $logo = "http://127.0.0.1:8000/libs/app-assets/images/logo/logo.png";
+
+        $pdf = PDF::loadView('pdf.invoice', ['invoice' => $invoice, 'logo' => $logo]);
+        return $pdf->stream();
     }
 }

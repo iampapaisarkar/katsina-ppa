@@ -467,8 +467,5 @@ class RegistrationController extends Controller
             return false;
         }
         
-        // return redirect()->route('invoice.show', ['id' => $response['id']])
-        // ->withSuccess('Application successfully submitted. Please pay amount for further action');
-
     }
 }

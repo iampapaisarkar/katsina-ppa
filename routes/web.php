@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth','verified'], ['can:isVendor,isPpa']], func
 
     Route::get('/invoice', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoice.index');
     Route::get('/invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'show'])->name('invoice.show');
+    Route::get('/invoice-download/{id}', [App\Http\Controllers\InvoiceController::class, 'download'])->name('invoice.download');
 
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
     Route::post('/profile-update', [App\Http\Controllers\ProfileController::class, 'profileUpdate'])->name('profile-update');

@@ -92,10 +92,10 @@
                                         <h6 class="mb-2">Payment Details:</h6>
                                         <table>
                                             <tbody>
-                                                <tr>
+                                                <!-- <tr>
                                                     <td class="pe-1">Total Due:</td>
                                                     <td><span class="fw-bold">₦ 120,110.00</span></td>
-                                                </tr>
+                                                </tr> -->
                                                 <!-- <tr>
                                                     <td class="pe-1">Bank Name:</td>
                                                     <td>Zenith Bank</td>
@@ -185,8 +185,8 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <a class="btn btn-outline-secondary w-100 mb-75"
-                                    href="#" target="_blank"> Print </a>
+                                <a class="btn btn-outline-secondary w-100 mb-75" target="_blank"
+                                    href="{{route('invoice.download', $invoice->id)}}" target="_blank"> Print </a>
 
                                 @can('isVendor')
                                 <button class="btn btn-success w-100 mb-75" data-bs-toggle="modal"
@@ -238,7 +238,7 @@
                                 </div>
                                 <div class="mb-1">
                                     <label class="form-label" for="payment-date">Payment Date</label>
-                                    <input name="payment_date" id="payment-date" class="form-control date-picker @error('payment_date') is-invalid @enderror" type="date" />
+                                    <input type="text" id="fp-payment_date" name="payment_date" class="form-control flatpickr-basic @error('payment_date') is-invalid @enderror" placeholder="DD-MM-YYYY" />
                                     @error('payment_date')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
