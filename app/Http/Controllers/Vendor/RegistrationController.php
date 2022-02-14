@@ -112,7 +112,6 @@ class RegistrationController extends Controller
 
     public function registrationCompanyDirectorSubmit(CompanyDirectorRequest $request)
     {
-
         try {
             DB::beginTransaction();
 
@@ -126,7 +125,7 @@ class RegistrationController extends Controller
                 if($request->director){
                     foreach($request->director as $key => $director) {
 
-                        if(isset($director['id'])){ // Update
+                        if(isset($director['id']) && isset($director['first_name']) && $director['first_name'] != ''){ // Update
                             $previous_company_director = CompanyDirectors::where(['user_id' => $authUser->id, 'id' => $director['id']])->first();
 
                             // Check Passport Validation 
