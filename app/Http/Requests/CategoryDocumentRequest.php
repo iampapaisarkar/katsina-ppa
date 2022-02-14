@@ -27,33 +27,33 @@ class CategoryDocumentRequest extends FormRequest
             'registration_category_id' => [
                 'required'
             ],
-            // 'attachment_1' => [
-            //     'required'
-            // ],
-            // 'attachment_2' => [
-            //     'required'
-            // ],
-            // 'attachment_3' => [
-            //     'required'
-            // ],
-            // 'attachment_4' => [
-            //     'required'
-            // ],
-            // 'attachment_5' => [
-            //     'required'
-            // ],
-            // 'attachment_6' => [
-            //     'required'
-            // ],
-            // 'attachment_7' => [
-            //     'required'
-            // ],
-            // 'attachment_8' => [
-            //     'required'
-            // ],
-            // 'attachment_9' => [
-            //     'required'
-            // ]
+            'attachment_1' => [
+                'required'
+            ],
+            'attachment_2' => [
+                'required'
+            ],
+            'attachment_3' => [
+                'required'
+            ],
+            'attachment_4' => [
+                'required'
+            ],
+            'attachment_5' => [
+                'required'
+            ],
+            'attachment_6' => [
+                'required'
+            ],
+            'attachment_7' => [
+                'required'
+            ],
+            'attachment_8' => [
+                'required'
+            ],
+            'attachment_9' => [
+                'required'
+            ]
         ];
     }
 }

@@ -44,6 +44,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('libs/app-assets/css/plugins/charts/chart-apex.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('libs/app-assets/css/plugins/extensions/ext-component-toastr.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('libs/app-assets/css/pages/app-invoice-list.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('libs/app-assets/css/pages/app-invoice.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('libs/app-assets/css/plugins/forms/form-validation.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('libs/app-assets/css/plugins/forms/form-wizard.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('libs/app-assets/css/plugins/forms/pickers/form-flat-pickr.css')}}">
