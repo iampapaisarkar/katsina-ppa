@@ -3,16 +3,14 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use App\Models\CompanyDirector;
 
-class PassportCheckRule implements Rule
+class CertificatesCheckRule implements Rule
 {
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-
     private $id;
     private $key;
     private $message;
@@ -34,10 +32,10 @@ class PassportCheckRule implements Rule
     {
         $CompanyDirector = CompanyDirector::where('id', $this->id)->first();
 
-        if($CompanyDirector && $CompanyDirector->passport){
+        if($CompanyDirector && $CompanyDirector->certificates){
             return true;
         }else{
-            $this->message = 'The director['.$this->id.'][passport] field is required.';
+            $this->message = 'The director['.$this->id.'][certificates] field is required.';
             return false;
         }
         

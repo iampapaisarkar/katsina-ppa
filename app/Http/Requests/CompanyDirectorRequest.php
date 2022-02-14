@@ -5,6 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use App\Rules\PassportCheckRule;
+use App\Rules\IdentificationCheckRule;
+use App\Rules\CertificatesCheckRule;
 
 class CompanyDirectorRequest extends FormRequest
 {
@@ -55,10 +57,18 @@ class CompanyDirectorRequest extends FormRequest
                     }
                 }
                 if(!isset($director['identification'])){
-                    $rules['director['.$key.'][identification]'] = 'required';
+                    if(isset($director['id'])){
+                        $rules['director['.$key.'][identification]'] = [new IdentificationCheckRule($director['id'], $key)];
+                    }else{
+                        $rules['director['.$key.'][identification]'] = 'required';
+                    }
                 }
                 if(!isset($director['certificates'])){
-                    $rules['director['.$key.'][certificates]'] = 'required';
+                    if(isset($director['id'])){
+                        $rules['director['.$key.'][certificates]'] = [new CertificatesCheckRule($director['id'], $key)];
+                    }else{
+                        $rules['director['.$key.'][certificates]'] = 'required';
+                    }
                 }
 
             }
