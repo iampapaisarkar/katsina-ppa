@@ -116,10 +116,10 @@
                                                 @if($invoice->service_type == 'vendor_registration')
                                                     <p class="card-text fw-bold mb-25">Vendor Registration Fee</p>
                                                     <p class="card-text text-nowrap">
-                                                        {{number_format($invoice->service->registration_fee)}}
+                                                        N{{number_format($invoice->service->registration_fee)}}
                                                     </p>
                                                     <p class="card-text text-nowrap">
-                                                        {{$invoice->extra_service->title}}
+                                                        {{$invoice->extra_service->title}} - N{{number_format($invoice->extra_service->registration_fee)}}
                                                     </p>
                                                 @endif
                                             </td>
