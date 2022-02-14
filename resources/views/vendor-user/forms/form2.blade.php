@@ -262,17 +262,11 @@ $(document).ready(function() {
 
                     if(errors.status == 422){
                         var errorMessages = errors.responseJSON.errors
-                        setTimeout(function() {
-                            toastr['error'](
-                                errorMessages.director[0], {
-                                    closeButton: true,
-                                    tapToDismiss: false
-                                }
-                            );
-                        }, 1000);
-                    }else{
+                        var validator = $( "#vendorRegistrationForm2" ).validate();
+                        validator.showErrors(errorMessages);
+                    }
 
-                        setTimeout(function() {
+                    setTimeout(function() {
                         toastr['error'](
                             errors.responseJSON.message, {
                                 closeButton: true,
@@ -280,7 +274,28 @@ $(document).ready(function() {
                             }
                         );
                     }, 1000);
-                    }
+
+                    // if(errors.status == 422){
+                    //     var errorMessages = errors.responseJSON.errors
+                    //     setTimeout(function() {
+                    //         toastr['error'](
+                    //             errorMessages.director[0], {
+                    //                 closeButton: true,
+                    //                 tapToDismiss: false
+                    //             }
+                    //         );
+                    //     }, 1000);
+                    // }else{
+
+                    //     setTimeout(function() {
+                    //         toastr['error'](
+                    //             errors.responseJSON.message, {
+                    //                 closeButton: true,
+                    //                 tapToDismiss: false
+                    //             }
+                    //         );
+                    //     }, 1000);
+                    // }
 
                     $("#form2Next").removeClass('d-none');
                     $("#form2Loader").addClass('d-none');

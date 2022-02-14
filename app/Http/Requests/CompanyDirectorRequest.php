@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class CompanyDirectorRequest extends FormRequest
 {
@@ -21,12 +22,42 @@ class CompanyDirectorRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
-        return [
-            'director' => [
-                'required', 'array'
-            ],
-        ];
+        if($request->director){
+            return [
+                'director.*.first_name' => [
+                    'required'
+                ],
+                'director.*.last_name' => [
+                    'required'
+                ],
+                'director.*.email' => [
+                    'required'
+                ],
+                'director.*.phone_number' => [
+                    'required'
+                ],
+                'director.*.address' => [
+                    'required'
+                ],
+                'director.*.passport' => [
+                    'required'
+                ],
+                'director.*.identification' => [
+                    'required'
+                ],
+                'director.*.certificates' => [
+                    'required'
+                ]
+            ];
+        }else{
+            return [
+                'director' => [
+                    'required', 'array'
+                ],
+            ];
+        }
+        
     }
 }

@@ -112,6 +112,7 @@ class RegistrationController extends Controller
 
     public function registrationCompanyDirectorSubmit(CompanyDirectorRequest $request)
     {
+
         try {
             DB::beginTransaction();
 
