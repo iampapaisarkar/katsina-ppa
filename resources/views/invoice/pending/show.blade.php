@@ -117,24 +117,29 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @if($invoice->service_type == 'vendor_registration')
                                         <tr class="border-bottom">
                                             <td class="py-1">
-                                                @if($invoice->service_type == 'vendor_registration')
-                                                    <p class="card-text fw-bold mb-25">Vendor Registration Fee</p>
-                                                    <p class="card-text text-nowrap">
-                                                        N{{number_format($invoice->service->registration_fee)}}
-                                                    </p>
-                                                    <p class="card-text text-nowrap">
-                                                        {{$invoice->extra_service->title}} - N{{number_format($invoice->extra_service->registration_fee)}}
-                                                    </p>
-                                                @endif
+                                                <p class="card-text fw-bold mb-25">Vendor Registration Fee</p>
+                                                <p class="card-text text-nowrap">
+                                                {{$invoice->extra_service->title}}
+                                                </p>
                                             </td>
-
+                                            
                                             <td class="py-1">
-                                                <span class="fw-bold">₦{{number_format($invoice->amount)}}</span>
+                                                <span class="fw-bold">₦{{number_format($invoice->extra_service->registration_fee)}}</span>
                                             </td>
                                         </tr>
-
+                                        <tr class="border-bottom">
+                                            <td class="py-1">
+                                                <p class="card-text fw-bold mb-25">Vendor Application Fee</p>
+                                            </td>
+                                            
+                                            <td class="py-1">
+                                                <span class="fw-bold">₦{{number_format($invoice->service->registration_fee)}}</span>
+                                            </td>
+                                        </tr>
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>

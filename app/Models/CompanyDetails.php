@@ -4,10 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class CompanyDetails extends Model
 {
     use HasFactory;
+
+    protected $casts = [
+        'default' => 'date'
+    ];
 
     protected $fillable = [
         'user_id',
@@ -28,6 +33,14 @@ class CompanyDetails extends Model
         'phone_number',
         'position',
     ];
+
+    public function setDefaultAttribute( $value ) {
+        if($value){
+            $this->attributes['default'] = Carbon::parse($value)->format('Y-m-d');
+        }
+        return $value;
+    }
+    
 
     public function core_competence() {
         return $this->hasOne(CoreCompetence::class, 'id','area_of_core_competence');
