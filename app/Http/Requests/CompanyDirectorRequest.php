@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
+use App\Rules\PassportCheckRule;
 
 class CompanyDirectorRequest extends FormRequest
 {
@@ -47,7 +48,11 @@ class CompanyDirectorRequest extends FormRequest
                     $rules['director['.$key.'][address]'] = 'required';
                 }
                 if(!isset($director['passport'])){
-                    $rules['director['.$key.'][passport]'] = 'required';
+                    if(isset($director['id'])){
+                        $rules['director['.$key.'][passport]'] = [new PassportCheckRule($director['id'], $key)];
+                    }else{
+                        $rules['director['.$key.'][passport]'] = 'required';
+                    }
                 }
                 if(!isset($director['identification'])){
                     $rules['director['.$key.'][identification]'] = 'required';
