@@ -90,6 +90,7 @@
     <!-- BEGIN: Page JS-->
     <script src="{{ asset('libs/app-assets/js/scripts/pages/dashboard-analytics.js')}}"></script>
     <script src="{{ asset('libs/app-assets/js/scripts/pages/app-invoice-list.js')}}"></script>
+    <script src="{{ asset('libs/app-assets/js/scripts/pages/app-invoice.js')}}"></script>
     <!-- END: Page JS-->
 
     <!-- BEGIN: Page Vendor JS-->
