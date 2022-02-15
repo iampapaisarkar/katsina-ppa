@@ -9,6 +9,10 @@ class Payment extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'payment_date' => 'date'
+    ];
+
     protected $fillable = [
         'user_id', 
         'order_id', 
@@ -30,6 +34,20 @@ class Payment extends Model
         'query_by',
         'approve_by'
     ];
+
+    public function getPaymentDateAttribute( $value ) {
+        if($value){
+            return Carbon::parse($value)->format('d-m-Y');
+        }
+        return null;
+    }
+
+    public function setPaymentDateAttribute( $value ) {
+        if($value){
+            $this->attributes['payment_date'] = Carbon::parse($value)->format('Y-m-d');
+        }
+        return $value;
+    }
 
     public function user() {
         return $this->hasOne(User::class, 'id','user_id');

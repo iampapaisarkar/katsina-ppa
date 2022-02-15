@@ -21,7 +21,7 @@ class CreateCompanyDetailsTable extends Migration
             $table->integer('type_of_organization'); //integer
             $table->string('company_name');
             $table->string('cac_number');
-            $table->date('default');
+            $table->date('date_of_incorporation');
             $table->string('share_capital'); // float
             $table->string('address');
             $table->string('landmark');

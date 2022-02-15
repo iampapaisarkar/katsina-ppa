@@ -120,9 +120,9 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="py-1">Description</th>
+                                            <th class="py-1" width="85%">Description</th>
 
-                                            <th class="py-1">Total</th>
+                                            <th class="py-1" width="15%">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>

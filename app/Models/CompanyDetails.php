@@ -11,7 +11,7 @@ class CompanyDetails extends Model
     use HasFactory;
 
     protected $casts = [
-        'default' => 'date'
+        'date_of_incorporation' => 'date'
     ];
 
     protected $fillable = [
@@ -21,7 +21,7 @@ class CompanyDetails extends Model
         'type_of_organization',
         'company_name',
         'cac_number',
-        'default',
+        'date_of_incorporation',
         'share_capital',
         'address',
         'landmark',
@@ -34,9 +34,16 @@ class CompanyDetails extends Model
         'position',
     ];
 
-    public function setDefaultAttribute( $value ) {
+    public function getDateOfIncorporationAttribute( $value ) {
         if($value){
-            $this->attributes['default'] = Carbon::parse($value)->format('Y-m-d');
+            return Carbon::parse($value)->format('d-m-Y');
+        }
+        return null;
+    }
+
+    public function setDateOfIncorporationAttribute( $value ) {
+        if($value){
+            $this->attributes['date_of_incorporation'] = Carbon::parse($value)->format('Y-m-d');
         }
         return $value;
     }

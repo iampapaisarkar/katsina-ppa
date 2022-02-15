@@ -36,7 +36,7 @@ class CompanyDetailRequest extends FormRequest
             'cac_number' => [
                 'required'
             ],
-            'default' => [
+            'date_of_incorporation' => [
                 'required'
             ],
             'share_capital' => [

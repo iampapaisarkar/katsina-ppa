@@ -13,3 +13,7 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 .content-wrapper {
     min-height: 450px;
 }
+
+.jc-bs3-container {
+    max-width: 100%!important;
+}

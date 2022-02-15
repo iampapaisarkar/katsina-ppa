@@ -34,6 +34,7 @@
         disableFutureDatePickr.flatpickr({
             altInput: true,
             altFormat: 'd-m-Y',
+            dateFormat: 'd-m-Y',
             maxDate: "today",
         });
     }

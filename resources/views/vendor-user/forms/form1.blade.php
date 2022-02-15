@@ -73,9 +73,9 @@
         </div>
         <div class="col-md-6 col-12">
             <div class="mb-1">
-                <label class="form-label" for="fp-default">Default</label>
-                <input value="{{$companyDetails ? $companyDetails->default : ''}}" type="text" id="fp-default" name="default" class="form-control flatpickr-basic @error('default') is-invalid @enderror" placeholder="DD-MM-YYYY" />
-                @error('default')
+                <label class="form-label" for="fp-date_of_incorporation">Date of Incorporation</label>
+                <input value="{{$companyDetails ? $companyDetails->date_of_incorporation : ''}}" type="text" id="fp-date_of_incorporation" name="date_of_incorporation" class="form-control flatpickr-disable-future-date @error('date_of_incorporation') is-invalid @enderror" placeholder="DD-MM-YYYY" />
+                @error('date_of_incorporation')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
