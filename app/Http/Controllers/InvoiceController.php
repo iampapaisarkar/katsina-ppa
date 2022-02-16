@@ -95,7 +95,7 @@ class InvoiceController extends Controller
             'status' => 'pending',
             'is_online' => false,
             'evidence_of_payment' => $evidence_of_payment,
-            'payment_date' => $request->payment_date,
+            'payment_date' => \Carbon\Carbon::parse($request->payment_date)->format('Y-m-d'),
             'payment_method' => $request->payment_method
         ]);
 
