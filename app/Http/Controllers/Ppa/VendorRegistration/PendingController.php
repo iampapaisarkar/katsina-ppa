@@ -25,7 +25,11 @@ class PendingController extends Controller
             'product_services', 
             'category_documents.registration_category'
         )
-        ->where(['type' => 'vendor_registration', 'status' => 'pending']);
+        ->where([
+            'type' => 'vendor_registration',
+            'status' => 'pending',
+            'payment' => true
+        ]);
 
         if($request->per_page){
             $perPage = (integer) $request->per_page;

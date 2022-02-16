@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Payment;
+use App\Models\Registration;
 use App\Http\Services\FileUpload;
 use Illuminate\Support\Facades\Auth;
 use PDF;
@@ -213,6 +214,10 @@ class InvoiceController extends Controller
         Payment::where(['id' => $id])->update([
             'status' => 'paid',
             'approve_by' => Auth::user()->id
+        ]);
+
+        Registration::where('id', Payment::where('id', $id)->first()->registration_id)->update([
+            'payment' => true
         ]);
 
         return redirect('pending-invoice')->withSuccess('Approved successfully');
