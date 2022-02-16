@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ppa\VendorRegistration;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Registration;
 
 class QueriedController extends Controller
 {
@@ -12,9 +13,29 @@ class QueriedController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $registrations = Registration::latest()
+        ->with(
+            'company_details.core_competence', 
+            'company_details.organization_type', 
+            'company_details.company_state', 
+            'company_directors', 
+            'product_service_types', 
+            'product_services', 
+            'category_documents.registration_category'
+        )
+        ->where(['type' => 'vendor_registration', 'status' => 'queried']);
+
+        if($request->per_page){
+            $perPage = (integer) $request->per_page;
+        }else{
+            $perPage = 10;
+        }
+
+        $registrations = $registrations->paginate($perPage);
+
+        return view('ppa.vendor-registration.queried.index', compact('registrations'));
     }
 
     /**
