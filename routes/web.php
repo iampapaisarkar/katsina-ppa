@@ -73,4 +73,8 @@ Route::group(['middleware' => ['auth','verified', 'can:isPpa']], function () {
 
     Route::get('/approved-invoice', [App\Http\Controllers\InvoiceController::class, 'approvedIndex'])->name('invoice.approved.index');
     Route::get('/approved-invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'approvedShow'])->name('invoice.approved.show');
+
+    Route::resource('/vendor-registration-pending', 'App\Http\Controllers\Ppa\VendorRegistration\PendingController');
+    Route::resource('/vendor-registration-queried', 'App\Http\Controllers\Ppa\VendorRegistration\QueriedController');
+    Route::resource('/vendor-registration-approved', 'App\Http\Controllers\Ppa\VendorRegistration\ApprovedController');
 });

@@ -64,6 +64,19 @@
                         </li>
                     </ul>
                 </li>
+
+                <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Vendor Registration</span></a>
+                    <ul class="menu-content">
+                    
+                    <li class=" <?php if ($page=="vendor-registration-pending") { echo "active";} ?>" ><a class="d-flex align-items-center" href="{{route('vendor-registration-pending.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Pending Approval</span></a>
+                        </li>
+                    <li class=" <?php if ($page=="vendor-registration-queried") { echo "active";} ?>" ><a class="d-flex align-items-center" href="{{route('vendor-registration-queried.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Queried</span></a>
+                        </li>
+                    <li class=" <?php if ($page=="vendor-registration-approved") { echo "active";} ?>" ><a class="d-flex align-items-center" href="{{route('vendor-registration-approved.index')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Analytics">Approved</span></a>
+                        </li>
+                        
+                    </ul>
+                </li>
                 @endcan
                 
                 

@@ -40,4 +40,8 @@ class Registration extends Model
     public function category_documents() {
         return $this->hasOne(CategoryDocuments::class, 'registration_id','id');
     }
+
+    public function invoice() {
+        return $this->hasOne(Payment::class, 'registration_id','id')->latest();
+    }
 }
