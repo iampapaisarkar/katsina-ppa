@@ -92,16 +92,20 @@ class PendingController extends Controller
 
         $registration = $registration->first();
 
-        $serviceTypes = [];
-        $services = [];
-        foreach ($registration->product_services as $key => $productService) {
-            if(!in_array($productService->service_type_id, $serviceTypes)){
-                array_push($serviceTypes, $productService->service_type_id);
+        if($registration){
+            $serviceTypes = [];
+            $services = [];
+            foreach ($registration->product_services as $key => $productService) {
+                if(!in_array($productService->service_type_id, $serviceTypes)){
+                    array_push($serviceTypes, $productService->service_type_id);
+                }
+                array_push($services, $productService->service_id);
             }
-            array_push($services, $productService->service_id);
+    
+            return view('ppa.vendor-registration.pending.show', compact('registration', 'serviceTypes', 'services'));
+        }else{
+            return abort(404);
         }
-
-        return view('ppa.vendor-registration.pending.show', compact('registration', 'serviceTypes', 'services'));
     }
 
     /**
@@ -150,7 +154,7 @@ class PendingController extends Controller
             'status' => 'queried',
             'query' => $request->reason,
             'queried_by' => Auth::user()->id,
-            'queried_at' => date()
+            'queried_at' => date('Y-m-d H:i:s')
         ]);
 
         return redirect('vendor-registration-pending')->withSuccess('Queried successfully');
