@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'invoice-queried'])
+@extends('layouts.app', ['page' => 'vendor-registration-pending'])
 
 @section('content')
 <!-- BEGIN: Content-->
@@ -7,207 +7,399 @@
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper container-xxl p-0">
         <div class="content-header row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12">
+                        <h2 class="content-header-title float-start mb-0">Vendor Company Registration</h2>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div class="content-body">
-            <section class="invoice-preview-wrapper">
-                <div class="row invoice-preview">
-                    <!-- Invoice -->
-                    <div class="col-xl-9 col-md-8 col-12">
-                        <div class="card invoice-preview-card">
-                            <div class="card-body invoice-padding pb-0">
-
-                                @if (session('errors'))
-                                <div class="alert alert-danger p-2" role="alert">
-                                    <p>*{{session('errors')->first('reason')}}</p>
+                <!-- Basic multiple Column Form section start -->
+                <section id="multiple-column-form">
+                    <div class="row">
+                        <div class="col-xl-9 col-md-8 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Vendor Company Details</h4>
                                 </div>
-                                @endif
-
-                                @if (session('success'))
-                                <div class="alert alert-success p-2" role="alert">
-                                    {{ session('success') }}
-                                </div>
-                                @endif
-                                <!-- Header starts -->
-                                <div
-                                    class="d-flex justify-content-between flex-md-row flex-column invoice-spacing mt-0">
-                                    <div>
-                                        <div class="logo-wrapper">
-                                            <h4 class="text-center mb-2"><img class="logo"
-                                                    src="{{asset('libs/app-assets/images/logo/logo.png')}}" /></h4>
+                                <div class="card-body">
+                                    <!-- FORM 1-->
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3 class="py-50">COMPANY CORE </h3>
                                         </div>
-                                        <p class="card-text mb-25">Katsina State Bureau of Public Procurement</p>
-                                        <p class="card-text mb-25">Government Office</p>
-                                        <p class="card-text mb-25">I.B.B Way, Dandagoro</p>
-                                        <p class="card-text mb-25">Katsina State, Nigeria</p>
-
-                                    </div>
-                                    <div class="mt-md-0 mt-2">
-                                        <h4 class="invoice-title">
-                                            Invoice
-                                            <span class="invoice-number">#{{$invoice->order_id}}</span>
-                                        </h4>
-                                        <h4 class="invoice-title">
-                                            @if($invoice->status == 'paid')
-                                            <span class="badge badge-glow bg-success">PAID</span>
-                                            @endif
-                                            @if($invoice->status == 'unpaid')
-                                            <span class="badge badge-glow bg-danger">UNPAID</span>
-                                            @endif
-                                            @if($invoice->status == 'queried')
-                                            <span class="badge badge-glow bg-danger">QUERIED</span>
-                                            @endif
-                                            @if($invoice->status == 'pending')
-                                            <span class="badge badge-glow bg-warning">APPROVAL PENDING</span>
-                                            @endif
-                                        </h4>
-                                        <div class="invoice-date-wrapper">
-                                            <p class="invoice-date-title">Date Issued:</p>
-                                            <p class="invoice-date">{{$invoice->created_at->format('d/m/Y')}}</p>
+                                        <div class="mb-1 col-md-6">
+                                            <label class="form-label" for="basicSelect">Area of Core Competence</label>
+                                            <input type="text" readonly value="{{$registration->company_details->core_competence->title}}" class="form-control" />
                                         </div>
-                                        <div class="invoice-date-wrapper">
-                                            <p class="invoice-date-title">Due Date:</p>
-                                            <p class="invoice-date">{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $invoice->created_at)->addDays(env('PAYMENT_DUE_DAYS'))->format('d/m/Y')}}</p>
+                                        <div class="mb-1 col-md-6">
+                                            <label class="form-label" for="basicSelect">Type of Organization </label>
+                                            <input type="text" readonly value="{{$registration->company_details->organization_type->title}}" class="form-control" />
                                         </div>
                                     </div>
-                                </div>
-                                <!-- Header ends -->
-                            </div>
-
-                            <hr class="invoice-spacing" />
-
-                            <!-- Address and Contact starts -->
-                            <div class="card-body invoice-padding pt-0">
-                                <div class="row invoice-spacing">
-                                    <div class="col-xl-8 p-0">
-                                        <h6 class="mb-2">Invoice To:</h6>
-                                        <h6 class="mb-25">{{$invoice->user->first_name}} {{$invoice->user->sur_name}}</h6>
-                                        <p class="card-text mb-25">{{$invoice->vendor_registration->company_details->company_name}}</p>
-                                        <p class="card-text mb-25">{{$invoice->user->phone_number}}</p>
-                                        <p class="card-text mb-0">{{$invoice->user->email}}</p>
-                                    </div>
-                                    <div class="col-xl-4 p-0 mt-xl-0 mt-2">
-                                        <h6 class="mb-2">Payment Details:</h6>
-                                        <table>
-                                            <tbody>
-                                                <!-- <tr>
-                                                    <td class="pe-1">Total Due:</td>
-                                                    <td><span class="fw-bold">₦ 120,110.00</span></td>
-                                                </tr> -->
-                                                <!-- <tr>
-                                                    <td class="pe-1">Bank Name:</td>
-                                                    <td>Zenith Bank</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="pe-1">Account Number:</td>
-                                                    <td>1234567890</td>
-                                                </tr> -->
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Address and Contact ends -->
-
-                            <!-- Invoice Description starts -->
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th class="py-1" width="85%">Description</th>
-
-                                            <th class="py-1" width="15%">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if($invoice->service_type == 'vendor_registration')
-                                        <tr class="border-bottom">
-                                            <td class="py-1">
-                                                <p class="card-text fw-bold mb-25">Vendor Registration Fee</p>
-                                                <p class="card-text text-nowrap">
-                                                {{$invoice->extra_service->title}}
-                                                </p>
-                                            </td>
-                                            
-                                            <td class="py-1">
-                                                <span class="fw-bold">₦{{number_format($invoice->extra_service->registration_fee)}}</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="border-bottom">
-                                            <td class="py-1">
-                                                <p class="card-text fw-bold mb-25">Vendor Application Fee</p>
-                                            </td>
-                                            
-                                            <td class="py-1">
-                                                <span class="fw-bold">₦{{number_format($invoice->service->registration_fee)}}</span>
-                                            </td>
-                                        </tr>
-                                        @endif
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="card-body invoice-padding pb-0">
-                                <div class="row invoice-sales-total-wrapper">
-                                    <div class="col-md-4 order-md-1 order-2 mt-md-0 mt-3">
-                                    </div>
-                                    <div class="col-md-8 d-flex justify-content-end order-md-2 order-1">
-                                        <div class="invoice-total-wrapper">
-
-                                            <hr class="my-50" />
-                                            <div class="invoice-total-item">
-                                                <p class="invoice-total-title">Total:</p>
-                                                <p class="invoice-total-amount">₦{{number_format($invoice->amount)}}</p>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3 class="py-50">BASIC COMPANY DETAILS </h3>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="basicInput">Company Name</label>
+                                                <input type="text" readonly value="{{$registration->company_details->company_name}}" class="form-control" />
                                             </div>
                                         </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="basicInput">CAC Number</label>
+                                                <input type="text" readonly value="{{$registration->company_details->cac_number}}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="fp-default">Date of Incorporation</label>
+                                                <input type="text" readonly value="{{$registration->company_details->date_of_incorporation}}" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-sm-12 mb-2">
+                                            <label class="form-label" for="numeral-formatting">Share Capital (N)</label>
+                                            <input type="text" readonly value="{{$registration->company_details->share_capital}}" class="form-control" />
+                                        </div>
+
                                     </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3 class="py-50">COMPANY ADDRESS </h3>
+                                        </div>
+                                        <div class="mb-1 col-md-6">
+                                            <label class="form-label" for="vertical-modern-address">Address</label>
+                                            <input type="text" readonly value="{{$registration->company_details->address}}" class="form-control" />
+                                        </div>
+                                        <div class="mb-1 col-md-6">
+                                            <label class="form-label" for="vertical-modern-landmark">Landmark</label>
+                                            <input type="text" readonly value="{{$registration->company_details->landmark}}" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-1 col-md-6">
+                                            <label class="form-label" for="city4">City</label>
+                                            <input type="text" readonly value="{{$registration->company_details->city}}" class="form-control" />
+                                        </div>
+                                        <div class="mb-1 col-md-6">
+
+                                            <label class="form-label" for="select2-basic">State</label>
+                                            <input type="text" readonly value="{{$registration->company_details->company_state->title}}" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3 class="py-50">COMPANY CONTACT PERSON </h3>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="first-name-column">First Name</label>
+                                                <input type="text" readonly value="{{$registration->company_details->first_name}}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="last-name-column">Last Name</label>
+                                                <input type="text" readonly value="{{$registration->company_details->last_name}}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="email-id-column">Email</label>
+                                                <input type="text" readonly value="{{$registration->company_details->email}}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="phone-number">Phone Number</label>
+                                                <input type="text" readonly value="{{$registration->company_details->phone_number}}" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="company-column">Position</label>
+                                                <input type="text" readonly value="{{$registration->company_details->position}}" class="form-control" />
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <!-- FORM 1 end-->
+
+                                    <!-- FORM 2-->
+                                    <div class="content-header">
+                                        <h5 class="mb-0">Director's Info</h5>
+                                    </div>
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-12">
+                                            <h3 class="py-50">COMPANY DIRECTORS </h3>
+                                        </div>
+
+                                        @foreach($registration->company_directors as $key => $director)
+                                        <div class="col-md-6 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="fname">First Name</label>
+                                                <input type="text" readonly value="{{$director->first_name}}" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="lname">Last Name</label>
+                                                <input type="text" readonly value="{{$director->last_name}}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="email-id-column">Email</label>
+                                                <input type="text" readonly value="{{$director->email}}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-12">
+                                            <div class="mb-1">
+                                                <label class="form-label" for="phone-number2">Phone Number</label>
+                                                <input type="text" readonly value="{{$director->phone_number}}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="mb-1 col-md-4 col-12">
+                                            <label class="form-label" for="vertical-modern-address">Address</label>
+                                            <input type="text" readonly value="{{$director->address}}" class="form-control" />
+                                        </div>
+                                            
+                                        <div class="col-lg-4 col-md-12 mb-3 mb-sm-0">
+                                            <label for="formFile" class="form-label">Upload Passport Photo (IAMGE/1MB max)</label>
+                                            <br>
+                                            <a href="{{route('vendor-registration-download-director-document', [$director->passport, $director->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12 mb-3 mb-sm-0">
+                                            <label for="formFile" class="form-label">Upload Identification (PDF/2MB max)</label>
+                                            <br>
+                                            <a href="{{route('vendor-registration-download-director-document', [$director->identification, $director->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12 mb-3 mb-sm-0">
+                                            <label for="formFile" class="form-label">Upload Certificates (PDF/2MB max)</label>
+                                            <br>
+                                            <a href="{{route('vendor-registration-download-director-document', [$director->certificates, $director->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <h3 class="py-50">
+                                                <hr />
+                                            </h3>
+                                        </div>
+
+                                        @endforeach
+
+                                    </div>
+                                    <!-- FORM 2 end-->
+
+                                    <!-- FORM 3-->
+                                    <div class="content-header">
+                                        <h5 class="mb-0">Product and Service Offered</h5>
+                                        <small>Select Product and Service</small>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                        <h3 class="py-50">PRODUCTS AND SERVICES </h3>
+                                    </div>
+                                    </div>
+                                    <table id="itemList" border="0" cellpadding="0" cellspacing="0" width="100%" class="cate">
+                                        @foreach(app('App\Http\Services\BackendData')->ServiceTypes() as $key => $ServiceType)
+                                        <tr>
+
+                                            <th width="5%">
+                                                <input 
+                                                disabled
+                                                {{in_array($ServiceType->id, $serviceTypes) ? 'checked' : ''}}
+                                                type="checkbox" 
+                                                id="service_types_{{$ServiceType->id}}" 
+                                                value="{{$ServiceType->id}}"
+                                                data-index="{{$ServiceType->id}}" 
+                                                onClick="checkAll({{$ServiceType}})" 
+                                                />
+                                            </th>
+                                            <th width="95%">
+                                                {{$ServiceType->title}}
+                                            </th>
+                                        </tr>
+
+                                            @foreach($ServiceType->services as $service)
+                                            <tr>
+                                                <td width="5%">
+                                                    <input 
+                                                    disabled
+                                                    {{in_array($service->id, $services) ? 'checked' : ''}}
+                                                    type="checkbox" 
+                                                    id="services_{{$ServiceType->id}}_{{$service->id}}" 
+                                                    value="{{$service->id}}"
+                                                    unchecked 
+                                                    onClick="onCheckBoxClick({{$service->id}})" 
+                                                    />
+                                                </td>
+                                                <td colspan="2" width="95%">
+                                                    {{$service->title}}
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        @endforeach
+                                    </table>
+                                    <!-- FORM 3 end-->
+
+
+                                    <!-- FORM 4-->
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3 class="py-50">REGISTRATION CATEGORY </h3>
+                                        </div>
+                                        <div class="mb-1 col-md-12">
+                                            <label class="form-label" for="basicSelect">Registration Categories</label>
+                                            <input type="text" readonly value="{{$registration->category_documents->registration_category->title}}" class="form-control" />
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3 class="py-50">DOCUMENTS FOR UPLOAD </h3>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <label for="formFile" class="form-label">Application Letter with Company Letterhead for Registration addressed to the General Manager (PPA) (PDF/2MB max)</label>
+                                            <br>
+                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_1, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <hr />
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <label for="formFile" class="form-label">Certificate of Incorporation/Registration of Business Name (CAC Certificate) (PDF/2MB max)</label>
+                                            <br>
+                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_2, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <hr />
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <label for="formFile" class="form-label">CAC Form 1.1: (Statement of Share Capital) (PDF/2MB max)</label>
+                                            <br>
+                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_3, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <hr />
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <label for="formFile" class="form-label">CAC Form 7/7A: (Particulars of First Director/Notice of Change of Directors\ for Business Name, Particulars of Proprietorship) (PDF/2MB max)</label>
+                                            <br>
+                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_4, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <hr />
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <label for="formFile" class="form-label">Copy of Company Memorandum & Articles of Association (PDF/2MB max)</label>
+                                            <br>
+                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_5, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <hr />
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <label for="formFile" class="form-label">Current 3 years Personal-Katsina State Government Tax Clearance Certificate as well as Development Levy of Chief Executive Officer and One (1) Director. (In case of Business Names One(1) Director is sufficient) (PDF/2MB max)</label>
+                                            <br>
+                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_6, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <hr />
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <label for="formFile" class="form-label">Company Profile detailing the company's structure, Key personnel Supported with Professional Licenses/Certificates, curriculum Vitae and Similar jobs executed in the past (PDF/2MB max)</label>
+                                            <br>
+                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_7, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <hr />
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <label for="formFile" class="form-label">Curriculum Vitae of key staff supported by Professional Licenses/Certificates (PDF/2MB max)</label>
+                                            <br>
+                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_8, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <hr />
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <label for="formFile" class="form-label">Applicants Managing Director/Chief Executive Officer's Declaration on oath as to the authenticity of all submitted documents and engagement of professionals (PDF/2MB max)</label>
+                                            <br>
+                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_9, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                        </div>
+                                    </div>
+                                    <!-- FORM 4 end-->
                                 </div>
                             </div>
-                            <!-- Invoice Description ends -->
+                        </div>
 
-                            <hr class="invoice-spacing" />
-
-                            <!-- Invoice Note starts -->
-                            <div class="card-body invoice-padding pt-0">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span class="fw-bold">Note:</span>
-                                        <span>When you make payment at the bank, please indicate the invoice number on
-                                            the teller.</span>
-                                    </div>
+                        <!-- Actions -->
+                        <div class="col-xl-3 col-md-4 col-12 invoice-actions mt-md-0 mt-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    
+                                    
+                                    <button class="btn btn-warning w-100 mb-75" data-bs-toggle="modal" data-bs-target="#QueryPayment">
+                                       Query Application
+                                    </button>
+                                    <button class="btn btn-success w-100 mb-75" data-bs-toggle="modal" data-bs-target="">
+                                       Approve Application
+                                    </button>
                                 </div>
                             </div>
-                            <!-- Invoice Note ends -->
+                        </div>
+                        <!-- /Actions -->
+                    </div>
+                </section>
+                <!-- Basic Floating Label Form section end -->
+
+                <!-- Edit User Modal -->
+                <div class="modal fade" id="QueryPayment" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
+                        <div class="modal-content">
+                            <div class="modal-header bg-transparent">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body pb-5 px-sm-5 pt-50">
+                                <div class="text-center mb-2">
+                                    <h1 class="mb-1">Query Vendor Company Registration</h1>
+                                    
+                                </div>
+                                <form id="editUserForm" class="row gy-1 pt-75" onSubmit="return false">
+                                    <div class="col-12 col-md-12">
+                                        <label class="form-label" for="modalEditUserFirstName">Company Name</label>
+                                        <input type="text" id="modalEditUserFirstName" name="modalEditUserFirstName" class="form-control" placeholder="" value="XYZ Limited" data-msg="Please enter Company Name" readonly />
+                                    </div>
+                                    <div class="col-12 col-md-12">
+                                        <!--<label class="form-label" for="modalEditUserLastName">Reason</label>-->
+                                        <div class="form-floating m-25">
+                                                <textarea class="form-control" placeholder="Reason for Query" id="floatingTextarea2" style="height: 100px"></textarea>
+                                                <label for="floatingTextarea2">Reason for Query</label>
+                                            </div>
+                                    </div>
+                                    
+                                    <div class="col-12 text-center mt-2 pt-50">
+                                        <button type="submit" class="btn btn-primary me-1">Submit</button>
+                                        <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
+                                            Discard
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                    <!-- /Invoice -->
-
-                    <!-- Invoice Actions -->
-                    <div class="col-xl-3 col-md-4 col-12 invoice-actions mt-md-0 mt-2">
-                        <div class="card">
-                            <div class="card-body">
-
-                                <a class="btn btn-outline-secondary w-100 mb-75" target="_blank"
-                                    href="{{route('invoice.download', $invoice->id)}}" target="_blank"> Print </a>
-
-                                <a class="btn btn-secondary w-100 mb-75"
-                                href="{{route('download-pending-invoice-evidence', $invoice->id)}}" target="_blank">
-                                    Download Evidence
-                                </a>
-                                <hr/>
-                                <div class="card shadow-none bg-transparent border-secondary">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Queried By</h4>
-                                        <p class="card-text">{{$invoice->queried_by->first_name}} {{$invoice->queried_by->sur_name}}</p>
-                                        <p class="card-text"><span class="badge badge-light-secondary">{{$invoice->updated_at->format('d M Y / h:i A')}}</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Invoice Actions -->
                 </div>
-            </section>
+                <!--/ Edit User Modal -->
         </div>
     </div>
 </div>

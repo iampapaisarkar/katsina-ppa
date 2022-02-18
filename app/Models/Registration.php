@@ -14,7 +14,11 @@ class Registration extends Model
         'payment',
         'status',
         'type',
-        'query'
+        'query',
+        'queried_by',
+        'queried_at',
+        'approved_by',
+        'approved_at',
     ];
 
     public function company_details() {

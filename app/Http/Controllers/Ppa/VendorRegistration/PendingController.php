@@ -71,7 +71,35 @@ class PendingController extends Controller
      */
     public function show($id)
     {
-        //
+        $registration = Registration::latest()
+        ->with(
+            'company_details.core_competence', 
+            'company_details.organization_type', 
+            'company_details.company_state', 
+            'company_directors', 
+            'product_service_types', 
+            'product_services', 
+            'category_documents.registration_category'
+        )
+        ->where([
+            'type' => 'vendor_registration',
+            'status' => 'pending',
+            'payment' => true,
+            'id' => $id
+        ]);
+
+        $registration = $registration->first();
+
+        $serviceTypes = [];
+        $services = [];
+        foreach ($registration->product_services as $key => $productService) {
+            if(!in_array($productService->service_type_id, $serviceTypes)){
+                array_push($serviceTypes, $productService->service_type_id);
+            }
+            array_push($services, $productService->service_id);
+        }
+
+        return view('ppa.vendor-registration.pending.show', compact('registration', 'serviceTypes', 'services'));
     }
 
     /**

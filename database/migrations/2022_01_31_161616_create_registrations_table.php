@@ -20,6 +20,10 @@ class CreateRegistrationsTable extends Migration
             $table->string('status');
             $table->string('type');
             $table->longtext('query')->nullable();
+            $table->integer('queried_by')->nullable();
+            $table->datetime('queried_at')->nullable();
+            $table->integer('approved_by')->nullable();
+            $table->datetime('approved_at')->nullable();
             $table->timestamps();
         });
     }
