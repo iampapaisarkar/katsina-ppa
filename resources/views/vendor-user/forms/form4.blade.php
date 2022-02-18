@@ -1,5 +1,7 @@
 <form id="vendorRegistrationForm4">
 @csrf
+
+<input type="hidden" name="id" value="{{$categoryDocuments ? $categoryDocuments->id : ''}}">
 <div id="social-links-vertical-modern" class="content" role="tabpanel"
     aria-labelledby="social-links-vertical-modern-trigger">
     <div class="content-header">

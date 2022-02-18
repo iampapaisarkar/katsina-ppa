@@ -50,8 +50,7 @@ class RegistrationController extends Controller
             DB::beginTransaction();
 
             $authUser = Auth::user();
-            $companyDetails = CompanyDetails::where('user_id', $authUser->id)
-            ->where('registration_id', null);
+            $companyDetails = CompanyDetails::where('user_id', $authUser->id);
 
             if($companyDetails->exists()){
                 CompanyDetails::where('user_id', $authUser->id)->update([
@@ -116,8 +115,7 @@ class RegistrationController extends Controller
             DB::beginTransaction();
 
             $authUser = Auth::user();
-            $CompanyDirectors = CompanyDirectors::where('user_id', $authUser->id)
-            ->where('registration_id', null);
+            $CompanyDirectors = CompanyDirectors::where('user_id', $authUser->id);
 
             if($CompanyDirectors->exists()){
 
@@ -249,8 +247,7 @@ class RegistrationController extends Controller
             DB::beginTransaction();
 
             $authUser = Auth::user();
-            $ProductServices = ProductServices::where('user_id', $authUser->id)
-            ->where('registration_id', null);
+            $ProductServices = ProductServices::where('user_id', $authUser->id);
 
             if($ProductServices->exists()){
 
@@ -315,8 +312,7 @@ class RegistrationController extends Controller
             DB::beginTransaction();
 
             $authUser = Auth::user();
-            $CategoryDocuments = CategoryDocuments::where('user_id', $authUser->id)
-            ->where('registration_id', null);
+            $CategoryDocuments = CategoryDocuments::where('user_id', $authUser->id);
 
             if($CategoryDocuments->exists()){
 
