@@ -176,17 +176,17 @@
                                         <div class="col-lg-4 col-md-12 mb-3 mb-sm-0">
                                             <label for="formFile" class="form-label">Upload Passport Photo (IAMGE/1MB max)</label>
                                             <br>
-                                            <a href="{{route('vendor-registration-download-director-document', [$director->passport, $director->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                            <a href="{{route('vendor-registration-download-director-document', ['passport', $director->passport, $director->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
                                         </div>
                                         <div class="col-lg-4 col-md-12 mb-3 mb-sm-0">
                                             <label for="formFile" class="form-label">Upload Identification (PDF/2MB max)</label>
                                             <br>
-                                            <a href="{{route('vendor-registration-download-director-document', [$director->identification, $director->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                            <a href="{{route('vendor-registration-download-director-document', ['identification', $director->identification, $director->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
                                         </div>
                                         <div class="col-lg-4 col-md-12 mb-3 mb-sm-0">
                                             <label for="formFile" class="form-label">Upload Certificates (PDF/2MB max)</label>
                                             <br>
-                                            <a href="{{route('vendor-registration-download-director-document', [$director->certificates, $director->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                            <a href="{{route('vendor-registration-download-director-document', ['certificates', $director->certificates, $director->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
                                         </div>
 
                                         <div class="col-12">
@@ -271,7 +271,7 @@
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <label for="formFile" class="form-label">Application Letter with Company Letterhead for Registration addressed to the General Manager (PPA) (PDF/2MB max)</label>
                                             <br>
-                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_1, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                            <a href="{{route('vendor-registration-download-category-document', ['attachment_1', $registration->category_documents->attachment_1, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
                                         </div>
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <hr />
@@ -279,7 +279,7 @@
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <label for="formFile" class="form-label">Certificate of Incorporation/Registration of Business Name (CAC Certificate) (PDF/2MB max)</label>
                                             <br>
-                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_2, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                            <a href="{{route('vendor-registration-download-category-document', ['attachment_2', $registration->category_documents->attachment_2, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
                                         </div>
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <hr />
@@ -287,7 +287,7 @@
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <label for="formFile" class="form-label">CAC Form 1.1: (Statement of Share Capital) (PDF/2MB max)</label>
                                             <br>
-                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_3, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                            <a href="{{route('vendor-registration-download-category-document', ['attachment_3', $registration->category_documents->attachment_3, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
                                         </div>
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <hr />
@@ -295,7 +295,7 @@
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <label for="formFile" class="form-label">CAC Form 7/7A: (Particulars of First Director/Notice of Change of Directors\ for Business Name, Particulars of Proprietorship) (PDF/2MB max)</label>
                                             <br>
-                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_4, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                            <a href="{{route('vendor-registration-download-category-document', ['attachment_4', $registration->category_documents->attachment_4, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
                                         </div>
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <hr />
@@ -303,7 +303,7 @@
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <label for="formFile" class="form-label">Copy of Company Memorandum & Articles of Association (PDF/2MB max)</label>
                                             <br>
-                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_5, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                            <a href="{{route('vendor-registration-download-category-document', ['attachment_5', $registration->category_documents->attachment_5, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
                                         </div>
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <hr />
@@ -311,7 +311,7 @@
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <label for="formFile" class="form-label">Current 3 years Personal-Katsina State Government Tax Clearance Certificate as well as Development Levy of Chief Executive Officer and One (1) Director. (In case of Business Names One(1) Director is sufficient) (PDF/2MB max)</label>
                                             <br>
-                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_6, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                            <a href="{{route('vendor-registration-download-category-document', ['attachment_6', $registration->category_documents->attachment_6, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
                                         </div>
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <hr />
@@ -319,7 +319,7 @@
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <label for="formFile" class="form-label">Company Profile detailing the company's structure, Key personnel Supported with Professional Licenses/Certificates, curriculum Vitae and Similar jobs executed in the past (PDF/2MB max)</label>
                                             <br>
-                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_7, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                            <a href="{{route('vendor-registration-download-category-document', ['attachment_7', $registration->category_documents->attachment_7, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
                                         </div>
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <hr />
@@ -327,7 +327,7 @@
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <label for="formFile" class="form-label">Curriculum Vitae of key staff supported by Professional Licenses/Certificates (PDF/2MB max)</label>
                                             <br>
-                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_8, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                            <a href="{{route('vendor-registration-download-category-document', ['attachment_8', $registration->category_documents->attachment_8, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
                                         </div>
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <hr />
@@ -335,7 +335,7 @@
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <label for="formFile" class="form-label">Applicants Managing Director/Chief Executive Officer's Declaration on oath as to the authenticity of all submitted documents and engagement of professionals (PDF/2MB max)</label>
                                             <br>
-                                            <a href="{{route('vendor-registration-download-category-document', [$registration->category_documents->attachment_9, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                            <a href="{{route('vendor-registration-download-category-document', ['attachment_9', $registration->category_documents->attachment_9, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
                                         </div>
                                     </div>
                                     <!-- FORM 4 end-->
