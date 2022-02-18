@@ -27,7 +27,7 @@ class QueriedController extends Controller
         )
         ->where([
             'type' => 'vendor_registration',
-            'status' => 'pending',
+            'status' => 'queried',
             'payment' => true
         ]);
 

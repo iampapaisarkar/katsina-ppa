@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Ppa\VendorRegistration;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Registration;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PendingController extends Controller
 {
@@ -134,5 +136,34 @@ class PendingController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function queryRegistration(Request $request, $id)
+    {
+        $this->validate($request, [
+            'reason' => [
+                'required', 'min:10', 'max:255'
+            ]
+        ]);
+
+        Registration::where('id', $id)->update([
+            'status' => 'queried',
+            'query' => $request->reason,
+            'queried_by' => Auth::user()->id,
+            'queried_at' => date()
+        ]);
+
+        return redirect('vendor-registration-pending')->withSuccess('Queried successfully');
+    }
+
+    public function approvedRegistration(Request $request, $id)
+    {
+        Registration::where('id', $id)->update([
+            'status' => 'approved',
+            'approved_by' => Auth::user()->id,
+            'approved_at' => date('Y-m-d H:i:s')
+        ]);
+
+        return redirect('vendor-registration-pending')->withSuccess('Approved successfully');
     }
 }

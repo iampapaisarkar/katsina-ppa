@@ -27,7 +27,7 @@ class ApprovedController extends Controller
         )
         ->where([
             'type' => 'vendor_registration',
-            'status' => 'pending',
+            'status' => 'approved',
             'payment' => true
         ]);
 

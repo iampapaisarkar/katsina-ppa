@@ -75,6 +75,9 @@ Route::group(['middleware' => ['auth','verified', 'can:isPpa']], function () {
     Route::get('/approved-invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'approvedShow'])->name('invoice.approved.show');
 
     Route::resource('/vendor-registration-pending', 'App\Http\Controllers\Ppa\VendorRegistration\PendingController');
+    Route::post('/vendor-registration-submit-query/{id}', [App\Http\Controllers\Ppa\VendorRegistration\PendingController::class, 'queryRegistration'])->name('vendor-registration-submit-query');
+    Route::post('/vendor-registration-submit-approved/{id}', [App\Http\Controllers\Ppa\VendorRegistration\PendingController::class, 'approvedRegistration'])->name('vendor-registration-submit-approved');
+
     Route::resource('/vendor-registration-queried', 'App\Http\Controllers\Ppa\VendorRegistration\QueriedController');
     Route::resource('/vendor-registration-approved', 'App\Http\Controllers\Ppa\VendorRegistration\ApprovedController');
     

@@ -26,6 +26,19 @@
                                     <h4 class="card-title">Vendor Company Details</h4>
                                 </div>
                                 <div class="card-body">
+                                    
+                                    @if (session('errors'))
+                                    <div class="alert alert-danger p-2" role="alert">
+                                        <p>*{{session('errors')->first('reason')}}</p>
+                                    </div>
+                                    @endif
+
+                                    @if (session('success'))
+                                    <div class="alert alert-success p-2" role="alert">
+                                        {{ session('success') }}
+                                    </div>
+                                    @endif
+
                                     <!-- FORM 1-->
                                     <div class="row">
                                         <div class="col-12">
@@ -352,8 +365,8 @@
                                     <button class="btn btn-warning w-100 mb-75" data-bs-toggle="modal" data-bs-target="#QueryPayment">
                                        Query Application
                                     </button>
-                                    <button class="btn btn-success w-100 mb-75" data-bs-toggle="modal" data-bs-target="">
-                                       Approve Application
+                                    <button onclick="approved(event)" type="button" class="btn btn-success w-100 mb-75">
+                                        Approve Application
                                     </button>
                                 </div>
                             </div>
@@ -375,17 +388,21 @@
                                     <h1 class="mb-1">Query Vendor Company Registration</h1>
                                     
                                 </div>
-                                <form id="editUserForm" class="row gy-1 pt-75" onSubmit="return false">
+                                <form class="auth-register-form mt-2" action="{{ route('vendor-registration-submit-query', $registration->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
                                     <div class="col-12 col-md-12">
                                         <label class="form-label" for="modalEditUserFirstName">Company Name</label>
-                                        <input type="text" id="modalEditUserFirstName" name="modalEditUserFirstName" class="form-control" placeholder="" value="XYZ Limited" data-msg="Please enter Company Name" readonly />
+                                        <input type="text" value="{{$registration->company_details->company_name}}" id="modalEditUserFirstName" name="modalEditUserFirstName" class="form-control" placeholder="" data-msg="Please enter Company Name" readonly />
                                     </div>
                                     <div class="col-12 col-md-12">
-                                        <!--<label class="form-label" for="modalEditUserLastName">Reason</label>-->
                                         <div class="form-floating m-25">
-                                                <textarea class="form-control" placeholder="Reason for Query" id="floatingTextarea2" style="height: 100px"></textarea>
-                                                <label for="floatingTextarea2">Reason for Query</label>
-                                            </div>
+                                            <textarea name="reason" class="form-control @error('reason') is-invalid @enderror" placeholder="Reason for Query" id="floatingTextarea2" style="height: 100px"></textarea>
+                                            @error('reason')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
                                     </div>
                                     
                                     <div class="col-12 text-center mt-2 pt-50">
@@ -404,4 +421,33 @@
     </div>
 </div>
 <!-- END: Content-->
+
+<form id="approved-form" action="{{ route('vendor-registration-submit-approved', $registration->id) }}" method="POST" class="d-none">
+@csrf
+</form>
+
+<script>
+	function approved(event){
+		event.preventDefault();
+
+		$.confirm({
+			title: 'Approved',
+			content: 'Are you sure want to approve?',
+			buttons: {   
+				ok: {
+					text: "YES",
+					btnClass: 'btn-primary',
+					keys: ['enter'],
+					action: function(){
+						document.getElementById('approved-form').submit();
+					}
+				},
+				cancel: function(){
+						console.log('the user clicked cancel');
+				}
+			}
+		});
+
+	}
+</script>
 @endsection
