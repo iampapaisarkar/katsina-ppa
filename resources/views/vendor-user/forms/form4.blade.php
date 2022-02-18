@@ -196,8 +196,11 @@
                             );
                         }, 1000);
 
-                        if(response.data){
+                        if(response.status == 'create'){
                             window.location.href = '<?php echo asset('') ?>' + 'invoice/' + response.data.id ;
+                        }
+                        if(response.status == 'update'){
+                            window.location.href = '<?php echo asset('') ?>' + 'registration-status';
                         }
                     },
                     error: function(errors){

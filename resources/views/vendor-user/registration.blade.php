@@ -18,6 +18,27 @@
                 
             </div>
             <div class="content-body">
+            @if(app('App\Http\Services\CheckVendorRegistration')->status()['success'] == true)
+                <div class="col-md-12 col-xl-12">
+                    <div class="card bg-{{app('App\Http\Services\CheckVendorRegistration')->status()['color']}} text-white">
+                        <div class="card-body">
+                            <h2 class="card-title text-white"><i data-feather="{{app('App\Http\Services\CheckVendorRegistration')->status()['icon']}}"></i> {{app('App\Http\Services\CheckVendorRegistration')->status()['title']}}</h2>
+                            <h4 class="card-text">{{app('App\Http\Services\CheckVendorRegistration')->status()['caption']}}</h4>
+                            <p class="card-text">{{app('App\Http\Services\CheckVendorRegistration')->status()['message']}}</p>
+                            @if(isset(app('App\Http\Services\CheckVendorRegistration')->status()['reason']))
+                            <p class="card-text">
+                            <ul>
+                                <li><p>{{app('App\Http\Services\CheckVendorRegistration')->status()['reason']}}</p></li>
+                            </ul>
+                            </p>
+                            <p class="card-text">
+                                <div class="alert alert-light p-1"><h5 class="m-0"><strong>*PLEASE UPDATE & SUBMIT APPLICATION AGAIN</strong></h5></div>
+                            </p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            @endif
             @if(app('App\Http\Services\CheckVendorRegistration')->canRegistration()['success'] == true)
                 @if (session('status'))
                     <div class="alert alert-success p-2" role="alert">

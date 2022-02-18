@@ -33,7 +33,6 @@
                                 <p class="card-text">{{app('App\Http\Services\CheckVendorRegistration')->status()['message']}}</p>
 
                                 @if(isset(app('App\Http\Services\CheckVendorRegistration')->status()['reason']))
-                                <p class="card-text">REASON(S)</p>
                                 <p class="card-text">
                                 <ul>
                                     <li><p>{{app('App\Http\Services\CheckVendorRegistration')->status()['reason']}}</p></li>

@@ -36,7 +36,7 @@ class RegistrationController extends Controller
             array_push($services, $productService->service_id);
         }
         $categoryDocuments = CategoryDocuments::where('user_id', $authUser->id)->first();
-
+        
         return view('vendor-user.registration', compact('companyDetails', 'companyDirectors', 'serviceTypes', 'services', 'categoryDocuments'));
     }
 
@@ -410,13 +410,23 @@ class RegistrationController extends Controller
                 $message = 'Category & Documents stored successfully';
             }
 
+            $registration = Registration::where('user_id', Auth::user()->id)->first();
 
-            $response = $this->registrationSubmit();
+            if($registration && $registration->status == 'queried'){
+                $response = $this->registrationUpdate($registration->id);
+            }else{
+                $response = $this->registrationSubmit();
+            }
 
         DB::commit();
 
             if($response){
-                return response()->json(['message' => 'Application successfully submitted. Please pay amount for further action', 'data' => $response], 200);
+                if($response['status'] == 'create'){
+                    return response()->json(['message' => 'Application successfully submitted. Please pay amount for further action', 'status' => 'create', 'data' => $response['payment']], 200);
+                }
+                if($response['status'] == 'update'){
+                    return response()->json(['message' => 'Application successfully updated.', 'status' => 'update'], 200);
+                }
             }else{
                 return response()->json(['message' => $message], 200);
             }
@@ -459,13 +469,31 @@ class RegistrationController extends Controller
                 'registration_id' => $registration->id
             ]);
 
+
+
             $response = Checkout::checkout($registration = ['id' => $registration->id], 'vendor_registration');
 
-            return $response;
+            return [
+                'status' => 'create',
+                'payment' => $response
+            ];
 
         }else{
             return false;
         }
         
+    }
+
+    public function registrationUpdate($id)
+    {
+        $authUser = Auth::user();
+      
+        $registration = Registration::where(['id' => $id, 'user_id' => $authUser->id])->update([
+            'payment' => true,
+            'status' => 'pending',
+        ]);
+        return [
+            'status' => 'update'
+        ];
     }
 }

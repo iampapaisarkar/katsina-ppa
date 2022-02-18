@@ -19,6 +19,11 @@ class CheckVendorRegistration
                 'success' => true,
             ];
         }else{
+            if($registration->status == 'queried'){
+                return [
+                    'success' => true,
+                ];
+            }
             return [
                 'success' => false,
                 'message' => 'You have already submit registration form.'
@@ -34,22 +39,6 @@ class CheckVendorRegistration
         ->latest()->first();
 
         if($registration){
-            // if($registration->status == 'send_to_state_office'){
-            //     return $response = [
-            //         'success' => true,
-            //         'message' => 'Document Verification Pending',
-            //         'color' => 'warning',
-            //     ];
-            // }
-            // if($registration->status == 'queried_by_state_office'){
-            //     return $response = [
-            //         'success' => true,
-            //         'message' => 'Document Verification Queried',
-            //         'color' => 'danger',
-            //         'reason' => $registration->query,
-            //         'link' => route('ppmv-application-edit', $registration->id)
-            //     ];
-            // }
             if($registration->status == 'pending'){
                 return $response = [
                     'success' => true,
@@ -59,30 +48,32 @@ class CheckVendorRegistration
                     'color' => 'warning',
                     'icon' => 'layers'
                 ];
-
-                // return $response = [
-                //     'success' => true,
-                //     'title' => 'Congratulations',
-                //     'caption' => 'Your vendor registration has been approved.',
-                //     'message' => 'You are now open to bid for and hundreds of public opportunities
-                //     published weekly from various Ministries, Departments and Agencies onbehalf of the
-                //     Katsina State Government. These opportunities are published here as they are
-                //     advertised to give you the opportunity to participate.',
-                //     'color' => 'success',
-                //     'icon' => 'award',
-                //     'download-link' => '-'
-                // ];
-
-                // return $response = [
-                //     'success' => true,
-                //     'title' => 'Registration Queried',
-                //     'caption' => 'Your vendor registration has been queried.',
-                //     'message' => 'REASON(S)',
-                //     'reason' => '-',
-                //     'color' => 'danger',
-                //     'icon' => 'alert-triangle',
-                //     'edit-link' => '-'
-                // ];
+            }
+            if($registration->status == 'queried'){
+                return $response = [
+                    'success' => true,
+                    'title' => 'Registration Queried',
+                    'caption' => 'Your vendor registration has been queried.',
+                    'message' => 'REASON(S)',
+                    'reason' => $registration->query,
+                    'color' => 'danger',
+                    'icon' => 'alert-triangle',
+                    'edit-link' => route('registration')
+                ];
+            }
+            if($registration->status == 'approved'){
+                return $response = [
+                    'success' => true,
+                    'title' => 'Congratulations',
+                    'caption' => 'Your vendor registration has been approved.',
+                    'message' => 'You are now open to bid for and hundreds of public opportunities
+                    published weekly from various Ministries, Departments and Agencies onbehalf of the
+                    Katsina State Government. These opportunities are published here as they are
+                    advertised to give you the opportunity to participate.',
+                    'color' => 'success',
+                    'icon' => 'award',
+                    'download-link' => '-'
+                ];
             }
         }else{
             return $response = [
