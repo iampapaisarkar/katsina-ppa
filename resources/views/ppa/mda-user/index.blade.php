@@ -250,6 +250,7 @@
                 action="">
                 @csrf
                 @method('PUT')
+                    <input id="editId" type="hidden" name="id">
                     <div class="col-12 col-md-6">
                         <label class="form-label" for="editMdaType">MDA</label>
                         <select id="editMdaType" name="mda_type" class="select2 form-select
@@ -376,6 +377,7 @@ function deleteData(id) {
 function editData(data){
     var _edit_route = '{{env('APP_URL')}}' + '/mda-user/' + data.id;
     $("#editDataForm").attr("action", _edit_route);
+    $("#editId").val(data.id);
     $("#editFirstName").val(data.first_name);
     $("#editLastName").val(data.sur_name);
     $("#editEmail").val(data.email);

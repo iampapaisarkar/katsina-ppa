@@ -5,6 +5,7 @@ namespace App\Http\Requests\Mda;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class MdaUpdateRequest extends FormRequest
 {
@@ -23,7 +24,7 @@ class MdaUpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
         return [
             'mda_type' => [
@@ -39,7 +40,7 @@ class MdaUpdateRequest extends FormRequest
                 'required'
             ],
             'email' => [
-                'required', Rule::unique((new User)->getTable())->ignore($this->id ?? null)
+                'required', Rule::unique((new User)->getTable())->ignore($request->id ?? null)
             ],
             'phone_number' => [
                 'required'

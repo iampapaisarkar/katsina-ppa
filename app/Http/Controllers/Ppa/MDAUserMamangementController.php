@@ -77,7 +77,7 @@ class MDAUserMamangementController extends Controller
             $role = Role::where('id', $request->role)->first();
 
             if(!Role::where('id', $request->role)->exists()){
-                return back()->withError('Ivalid role selected. please select a valid role.');
+                return back()->withError('Invalid role selected. please select a valid role.');
             }
 
             UserRole::create([
@@ -128,7 +128,42 @@ class MDAUserMamangementController extends Controller
      */
     public function update(MdaUpdateRequest $request, $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+
+            $user = User::where('id', $id)->update([
+                'first_name' => $request->first_name,
+                'sur_name' => $request->last_name,
+                'email' => $request->email,
+                'phone_number' => $request->phone_number,
+                'mda' => $request->mda_type,
+            ]);
+
+            $role = Role::where('id', $request->role)->first();
+
+            if(!Role::where('id', $request->role)->exists()){
+                return back()->withError('Invalid role selected. please select a valid role.');
+            }
+
+            if(UserRole::where('user_id', $id)->first()->role_id != $request->role){
+
+                UserRole::where('user_id', $id)->delete();
+
+                UserRole::create([
+                    'user_id' => $id,
+                    'role_id' => $request->role
+                ]);
+            }
+
+            DB::commit();
+
+            return back()->withSuccess('Mda updated successfully');
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->withError('There something internal server error');
+        }
     }
 
     /**
