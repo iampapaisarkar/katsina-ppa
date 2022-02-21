@@ -24,9 +24,17 @@ class RoleSeeder extends Seeder
             'code' => 'ppa',
             ],
             [
-            'role' => 'MDA',
-            'code' => 'mda',
+            'role' => 'Head',
+            'code' => 'mda_head',
             ],
+            [
+            'role' => 'Member',
+            'code' => 'mda_member',
+            ],
+            [
+            'role' => 'Ministry',
+            'code' => 'mda_ministry',
+            ]
         ];
 
         Role::insert($roles);

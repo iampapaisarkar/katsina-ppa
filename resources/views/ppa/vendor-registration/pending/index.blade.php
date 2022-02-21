@@ -39,9 +39,6 @@
                             <tr>
                                 <!--<th></th>
                                     <th></th>-->
-                                <th>
-                                    <span class="align-middle">INVOICE#</span>
-                                </th>
                                 <th>DATE</th>
                                 <th>COMPANY</th>
                                 <th>TYPE</th>
@@ -52,9 +49,6 @@
                         <tbody>
                             @foreach($registrations as $registration)
                             <tr>
-                                <td>
-                                    <a href="#">{{$registration->invoice->order_id}}</a>
-                                </td>
                                 <td><small class="text-muted">{{$registration->created_at->format('d M Y')}}</small></td>
                                 <td>{{$registration->company_details->company_name}}</td>
                                 <td>

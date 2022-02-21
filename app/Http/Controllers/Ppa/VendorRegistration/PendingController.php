@@ -146,7 +146,7 @@ class PendingController extends Controller
     {
         $this->validate($request, [
             'reason' => [
-                'required', 'min:10', 'max:255'
+                'required', 'min:10'
             ]
         ]);
 
