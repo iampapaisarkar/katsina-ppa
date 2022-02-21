@@ -76,10 +76,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($users as $user)
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{$user->mda_type->title}}</td>
+                                <td>{{$user->first_name}} {{$user->sur_name}}</td>
+                                <td>{{$user->role->role}}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="btn btn-sm dropdown-toggle hide-arrow py-0"
@@ -87,29 +88,38 @@
                                             <i data-feather="more-vertical"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="#"  onclick="editData({{$user}})">
                                                 <i data-feather="edit-2" class="me-50"></i>
                                                 <span>Edit</span>
                                             </a>
-                                            <a class="dropdown-item" href="#">
-                                                <i data-feather="trash" class="me-50"></i>
-                                                <span>Delete</span>
-                                            </a>
+
+                                            <form id="delete-form_{{$user->id}}"
+                                                action="{{ route('mda-user.destroy', $user->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <a onclick="deleteData({{$user->id}})" class="dropdown-item" href="#">
+                                                    <i data-feather="trash" class="me-50"></i>
+                                                    <span>Delete</span>
+                                                </a>
+                                            </form>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
                 </div>
+                {{$users->links()}}
             </section>
         </div>
     </div>
 </div>
 <!-- END: Content-->
 
-<!-- Edit User Modal -->
+<!-- Create Modal -->
 <div class="modal fade" id="editUser" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
         <div class="modal-content">
@@ -131,7 +141,7 @@
                         <select id="createMdaType" name="mda_type" class="select2 form-select
                         @error('mda_type') is-invalid @enderror">
                             <option value="">Select MDA</option>
-                            @foreach(app('App\Http\Services\BackendData')->MdaTypes() as $MdaType)
+                            @foreach(app('App\Http\Services\BackendData')->Mdas() as $MdaType)
                             @if(old('mda_type') == $MdaType->id)
                             <option selected value="{{$MdaType->id}}">{{$MdaType->title}}</option>
                             @endif
@@ -223,5 +233,179 @@
         </div>
     </div>
 </div>
-<!--/ Edit User Modal -->
+<!--/ Create Modal -->
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editData" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
+        <div class="modal-content">
+            <div class="modal-header bg-transparent">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pb-5 px-sm-5 pt-50">
+                <div class="text-center mb-2">
+                    <h1 class="mb-1">Edit</h1>
+                </div>
+                <form id="editDataForm" class="row gy-1 pt-75" method="POST"
+                action="">
+                @csrf
+                @method('PUT')
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="editMdaType">MDA</label>
+                        <select id="editMdaType" name="mda_type" class="select2 form-select
+                        @error('mda_type') is-invalid @enderror">
+                            <option value="">Select MDA</option>
+                            @foreach(app('App\Http\Services\BackendData')->Mdas() as $MdaType)
+                            @if(old('mda_type') == $MdaType->id)
+                            <option selected value="{{$MdaType->id}}">{{$MdaType->title}}</option>
+                            @endif
+                            <option value="{{$MdaType->id}}">{{$MdaType->title}}</option>
+                            @endforeach
+                        </select>
+                        @error('mda_type')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="editRole">Role</label>
+                        <select id="editRole" name="role" class="select2 form-select
+                        @error('role') is-invalid @enderror">
+                            <option value="">Select Role</option>
+                            @foreach(app('App\Http\Services\BackendData')->mdaRoles() as $mdaRole)
+                            @if(old('role') == $mdaRole->id)
+                            <option selected value="{{$MdaType->id}}">{{$MdaType->title}}</option>
+                            @endif
+                            <option value="{{$mdaRole->id}}">{{$mdaRole->role}}</option>
+                            @endforeach
+                        </select>
+                        @error('role')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="editFirstName">First Name</label>
+                        <input name="first_name" type="text" id="editFirstName"
+                            class="form-control @error('first_name') is-invalid @enderror" placeholder="John"
+                            value="{{old('first_name')}}" data-msg="Please enter first name" />
+                        @error('first_name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="editLastName">Last Name</label>
+                        <input name="last_name" type="text" id="editLastName"
+                            class="form-control @error('last_name') is-invalid @enderror" placeholder="Doe"
+                            value="{{old('last_name')}}" data-msg="Please enter last name" />
+                        @error('last_name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="editEmail">Email</label>
+                        <input name="email" type="email" id="editEmail"
+                            class="form-control @error('email') is-invalid @enderror" placeholder="john@test.com"
+                            value="{{old('email')}}" data-msg="Please enter email" />
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="editPhoneNumber">Phone</label>
+                        <input name="phone_number" type="text" id="editPhoneNumber"
+                            class="form-control @error('phone_number') is-invalid @enderror" placeholder="08021234567"
+                            value="{{old('phone_number')}}" data-msg="Please enter phone number" />
+                        @error('phone_number')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="col-12 text-center mt-2 pt-50">
+                        <button type="submit" class="btn btn-primary me-1">Submit</button>
+                        <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                            aria-label="Close">
+                            Discard
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ Edit Modal -->
+
+<script>
+function deleteData(id) {
+    event.preventDefault();
+
+    $.confirm({
+        title: 'Delete',
+        content: 'Are you sure want to delete this data?',
+        buttons: {
+            ok: {
+                text: "YES",
+                btnClass: 'btn-primary',
+                keys: ['enter'],
+                action: function() {
+                    document.getElementById('delete-form_'+id).submit();
+                }
+            },
+            cancel: function() {
+                console.log('the user clicked cancel');
+            }
+        }
+    });
+
+}
+
+function editData(data){
+    var _edit_route = '{{env('APP_URL')}}' + '/mda-user/' + data.id;
+    $("#editDataForm").attr("action", _edit_route);
+    $("#editFirstName").val(data.first_name);
+    $("#editLastName").val(data.sur_name);
+    $("#editEmail").val(data.email);
+    $("#editPhoneNumber").val(data.phone_number);
+    
+    var MDATypes = <?php echo json_encode(app('App\Http\Services\BackendData')->Mdas()); ?>;
+    var _mda_options_html = '';
+
+    $.each( MDATypes, function( key, value ) {
+        if(data.mda == value.id){
+            _mda_options_html += '<option selected hidden value="'+value.id+'">'+value.title+'</option>';
+        }
+        _mda_options_html += '<option value="'+value.id+'">'+value.title+'</option>';
+    });
+    
+    $("#editMdaType").html(_mda_options_html);
+
+    var MDARoles = <?php echo json_encode(app('App\Http\Services\BackendData')->mdaRoles()); ?>;
+    var _role_options_html = '';
+
+    $.each( MDARoles, function( key, value ) {
+        if(data.role_id == value.id){
+            _role_options_html += '<option selected hidden value="'+value.id+'">'+value.role+'</option>';
+        }
+        _role_options_html += '<option value="'+value.id+'">'+value.role+'</option>';
+    });
+    
+    $("#editRole").html(_role_options_html);
+
+    $("#editData").modal("show")
+}
+</script>
 @endsection

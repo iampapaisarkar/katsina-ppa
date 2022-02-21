@@ -21,7 +21,25 @@ class MDAUserMamangementController extends Controller
      */
     public function index(Request $request)
     {
-        return view('ppa.mda-user.index');
+        $users = User::select('users.*', 'user_roles.role_id')
+        ->latest()
+        ->join('user_roles', 'user_roles.user_id', 'users.id')
+        ->join('roles', 'roles.id', 'user_roles.role_id')
+        ->whereIn('roles.id', [3,4,5])
+        ->with(
+            'mda_type', 
+            'role',
+        );
+
+        if($request->per_page){
+            $perPage = (integer) $request->per_page;
+        }else{
+            $perPage = 10;
+        }
+
+        $users = $users->paginate($perPage);
+
+        return view('ppa.mda-user.index', compact('users'));
     }
 
     /**
@@ -121,6 +139,19 @@ class MDAUserMamangementController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            User::where('id', $id)->delete();
+            UserRole::where('user_id', $id)->delete();
+
+            DB::commit();
+
+            return back()->withSuccess('Mda user deleted successfully');
+
+        }catch(Exception $e) {
+            DB::rollback();
+            return back()->withError('There something internal server error');
+        }
     }
 }

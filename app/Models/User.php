@@ -72,4 +72,8 @@ class User extends Authenticatable implements MustVerifyEmail
         ->join('roles', 'roles.id', 'user_roles.role_id')
         ->select('roles.code', 'roles.role', 'roles.id as role_id', 'user_roles.role_id', 'user_roles.user_id');
     }
+
+    public function mda_type() {
+        return $this->hasOne(Mda::class,'id', 'mda');
+    }
 }
