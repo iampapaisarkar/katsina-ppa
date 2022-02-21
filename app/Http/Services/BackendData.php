@@ -10,6 +10,7 @@ use App\Models\RegistrationCategory;
 use App\Models\Service;
 use App\Models\ServiceType;
 use App\Models\State;
+use App\Models\Role;
 use DB;
 
 class BackendData
@@ -44,5 +45,9 @@ class BackendData
 
     public static function States(){
         return State::get();
+    }
+
+    public static function mdaRoles(){
+        return Role::whereIn('id', [3,4,5])->get();
     }
 }

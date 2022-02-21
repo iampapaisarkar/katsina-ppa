@@ -83,4 +83,6 @@ Route::group(['middleware' => ['auth','verified', 'can:isPpa']], function () {
     
     Route::get('/vendor-registration-download-director-document/{field}/{name}/{id}', [App\Http\Controllers\Ppa\DownloadController::class, 'downloadDirectorDocument'])->name('vendor-registration-download-director-document');
     Route::get('/vendor-registration-download-category-document/{field}/{name}/{id}', [App\Http\Controllers\Ppa\DownloadController::class, 'downloadCategoryDocument'])->name('vendor-registration-download-category-document');
+
+    Route::resource('/mda-user', 'App\Http\Controllers\Ppa\MDAUserMamangementController');
 });

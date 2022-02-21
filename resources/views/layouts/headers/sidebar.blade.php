@@ -48,6 +48,12 @@
                         </li>
                     </ul>
                 </li>
+                
+                <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">MDA USERS Management</span><i data-feather="more-horizontal"></i>
+                </li>
+                
+                <li class=" <?php if ($page=="mda-user") { echo "active";} ?> nav-item"><a class="d-flex align-items-center" href="{{route('mda-user.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Dashboard">MDA Users</span></a>
+                </li>
 
                 <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Vendor Management</span><i data-feather="more-horizontal"></i>
                 </li>
