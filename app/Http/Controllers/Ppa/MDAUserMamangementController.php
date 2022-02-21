@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Mda\MdaStoreRequest;
 use App\Http\Requests\Mda\MdaUpdateRequest;
+use App\Http\Services\SendEmailService;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\UserRole;
@@ -44,13 +45,18 @@ class MDAUserMamangementController extends Controller
         try {
             DB::beginTransaction();
 
+            $token = md5(uniqid(rand(), true));
+
             $user = User::create([
                 'first_name' => $request->first_name,
                 'sur_name' => $request->last_name,
                 'email' => $request->email,
                 'phone_number' => $request->phone_number,
                 'mda' => $request->mda_type,
+                'remember_token' => $token
             ]);
+
+            $role = Role::where('id', $request->role)->first();
 
             if(!Role::where('id', $request->role)->exists()){
                 return back()->withError('Ivalid role selected. please select a valid role.');
@@ -61,7 +67,7 @@ class MDAUserMamangementController extends Controller
                 'role_id' => $request->role
             ]);
 
-            $user->sendEmailVerificationNotification();
+            SendEmailService::sendVerifyMdaEmail($user, $role, $token);
 
             DB::commit();
 
