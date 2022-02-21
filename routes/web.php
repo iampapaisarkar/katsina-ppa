@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/verify-mda-user', [App\Http\Controllers\Auth\VerificationMDAController::class, 'verifyMdaUser'])->name('verify-mda-user');
+Route::post('/update-mda-user-password', [App\Http\Controllers\Auth\VerificationMDAController::class, 'updateMdaUserPassword'])->name('update-mda-user-password');
+
 if(Auth::check()){
 	Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 }else{

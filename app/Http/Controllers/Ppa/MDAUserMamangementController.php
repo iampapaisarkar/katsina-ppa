@@ -53,7 +53,7 @@ class MDAUserMamangementController extends Controller
                 'email' => $request->email,
                 'phone_number' => $request->phone_number,
                 'mda' => $request->mda_type,
-                'remember_token' => $token
+                'token' => $token
             ]);
 
             $role = Role::where('id', $request->role)->first();

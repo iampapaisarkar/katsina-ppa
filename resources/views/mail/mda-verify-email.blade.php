@@ -4,7 +4,7 @@
 <div>Hello {{$data['user_name']}}, <br>
 CONGRATULATIONS.
 </div>
-<div>you have been invited to the {{$data['mda_type']}} role in a MDA user. please accept our invitation before expire. and set your password after verifying.</div>
+<div>you have been invited to the {{$data['mda_type']}} role in a MDA user. please accept our invitation and set your password after verifying.</div>
 <br>
 <div>Thank you.</div>
 
@@ -28,7 +28,7 @@ CONGRATULATIONS.
 </tr>
 </table>
 
-<h6><strong>EXPIRE IN {{$data['expire_in']}} MINUTES</strong></h6>
+<!-- <h6><strong>EXPIRE IN {{$data['expire_in']}} MINUTES</strong></h6> -->
 
 {{ config('app.name') }}
 @endcomponent

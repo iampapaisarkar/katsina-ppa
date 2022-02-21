@@ -13,7 +13,7 @@ class SendEmailService
             DB::beginTransaction();
 
             $data = [
-                'verify_url' => url('/') .'?token='. $token . '&email='. $user->email,
+                'verify_url' => route('verify-mda-user') .'?token='. $token . '&email='. $user->email,
                 'user_name' => $user->first_name .' '. $user->sur_name,
                 'mda_type' => $role->role,
                 'expire_in' => env('MDA_VERIFY_EXPIRE_IN')
