@@ -19,24 +19,36 @@
         <div class="content-body">
             
             @if (session('errors'))
-            <div class="alert alert-danger p-2" role="alert">
-                <p>*{{session('errors')->first('mda_type')}}</p>
-            </div>
-            <div class="alert alert-danger p-2" role="alert">
-                <p>*{{session('errors')->first('role')}}</p>
-            </div>
-            <div class="alert alert-danger p-2" role="alert">
-                <p>*{{session('errors')->first('first_name')}}</p>
-            </div>
-            <div class="alert alert-danger p-2" role="alert">
-                <p>*{{session('errors')->first('last_name')}}</p>
-            </div>
-            <div class="alert alert-danger p-2" role="alert">
-                <p>*{{session('errors')->first('email')}}</p>
-            </div>
-            <div class="alert alert-danger p-2" role="alert">
-                <p>*{{session('errors')->first('phone_number')}}</p>
-            </div>
+                @if(session('errors')->first('mda_type'))
+                <div class="alert alert-danger p-2" role="alert">
+                    <p>*{{session('errors')->first('mda_type')}}</p>
+                </div>
+                @endif
+                @if(session('errors')->first('role'))
+                <div class="alert alert-danger p-2" role="alert">
+                    <p>*{{session('errors')->first('role')}}</p>
+                </div>
+                @endif
+                @if(session('errors')->first('first_name'))
+                <div class="alert alert-danger p-2" role="alert">
+                    <p>*{{session('errors')->first('first_name')}}</p>
+                </div>
+                @endif
+                @if(session('errors')->first('last_name'))
+                <div class="alert alert-danger p-2" role="alert">
+                    <p>*{{session('errors')->first('last_name')}}</p>
+                </div>
+                @endif
+                @if(session('errors')->first('email'))
+                <div class="alert alert-danger p-2" role="alert">
+                    <p>*{{session('errors')->first('email')}}</p>
+                </div>
+                @endif
+                @if(session('errors')->first('phone_number'))
+                <div class="alert alert-danger p-2" role="alert">
+                    <p>*{{session('errors')->first('phone_number')}}</p>
+                </div>
+                @endif
             @endif
 
             @if (session('success'))
@@ -120,6 +132,9 @@
                         @error('mda_type') is-invalid @enderror">
                             <option value="">Select MDA</option>
                             @foreach(app('App\Http\Services\BackendData')->MdaTypes() as $MdaType)
+                            @if(old('mda_type') == $MdaType->id)
+                            <option selected value="{{$MdaType->id}}">{{$MdaType->title}}</option>
+                            @endif
                             <option value="{{$MdaType->id}}">{{$MdaType->title}}</option>
                             @endforeach
                         </select>
@@ -135,6 +150,9 @@
                         @error('role') is-invalid @enderror">
                             <option value="">Select Role</option>
                             @foreach(app('App\Http\Services\BackendData')->mdaRoles() as $mdaRole)
+                            @if(old('role') == $mdaRole->id)
+                            <option selected value="{{$MdaType->id}}">{{$MdaType->title}}</option>
+                            @endif
                             <option value="{{$mdaRole->id}}">{{$mdaRole->role}}</option>
                             @endforeach
                         </select>
@@ -150,7 +168,7 @@
                         <label class="form-label" for="createFirstName">First Name</label>
                         <input name="first_name" type="text" id="createFirstName"
                             class="form-control @error('first_name') is-invalid @enderror" placeholder="John"
-                            value=" " data-msg="Please enter first name" />
+                            value="{{old('first_name')}}" data-msg="Please enter first name" />
                         @error('first_name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -161,7 +179,7 @@
                         <label class="form-label" for="createLastName">Last Name</label>
                         <input name="last_name" type="text" id="createLastName"
                             class="form-control @error('last_name') is-invalid @enderror" placeholder="Doe"
-                            value=" " data-msg="Please enter last name" />
+                            value="{{old('last_name')}}" data-msg="Please enter last name" />
                         @error('last_name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -173,7 +191,7 @@
                         <label class="form-label" for="createEmail">Email</label>
                         <input name="email" type="email" id="createEmail"
                             class="form-control @error('email') is-invalid @enderror" placeholder="john@test.com"
-                            value=" " data-msg="Please enter email" />
+                            value="{{old('email')}}" data-msg="Please enter email" />
                         @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -185,7 +203,7 @@
                         <label class="form-label" for="createPhoneNumber">Phone</label>
                         <input name="phone_number" type="text" id="createPhoneNumber"
                             class="form-control @error('phone_number') is-invalid @enderror" placeholder="08021234567"
-                            value=" " data-msg="Please enter phone number" />
+                            value="{{old('phone_number')}}" data-msg="Please enter phone number" />
                         @error('phone_number')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
