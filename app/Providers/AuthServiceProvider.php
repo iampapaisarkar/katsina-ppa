@@ -32,6 +32,30 @@ class AuthServiceProvider extends ServiceProvider
                 return false;
             }
         });
+
+        Gate::define('isMdaHead', function($user){
+            if($user->role->code == 'mda_head'){
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+        Gate::define('isMdaMember', function($user){
+            if($user->role->code == 'mda_member'){
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+        Gate::define('isMdaMinistry', function($user){
+            if($user->role->code == 'mda_ministry'){
+                return true;
+            }else{
+                return false;
+            }
+        });
         
         Gate::define('isVendor', function($user){
             if($user->role->code == 'vendor'){

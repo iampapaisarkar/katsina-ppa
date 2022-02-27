@@ -24,7 +24,7 @@ if(Auth::check()){
 
 Auth::routes(['verify' => true]);
 
-Route::group(['middleware' => ['auth','verified'], ['can:isVendor,isPpa']], function () {
+Route::group(['middleware' => ['auth','verified'], ['can:isVendor,isPpa,isMdaHead,isMdaMember,isMdaMinistry']], function () {
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
     Route::get('/invoice-download/{id}', [App\Http\Controllers\InvoiceController::class, 'download'])->name('invoice.download');
@@ -88,4 +88,9 @@ Route::group(['middleware' => ['auth','verified', 'can:isPpa']], function () {
     Route::get('/vendor-registration-download-category-document/{field}/{name}/{id}', [App\Http\Controllers\Ppa\DownloadController::class, 'downloadCategoryDocument'])->name('vendor-registration-download-category-document');
 
     Route::resource('/mda-user', 'App\Http\Controllers\Ppa\MDAUserMamangementController');
+});
+
+
+Route::group(['middleware' => ['auth','verified'], ['can:isMdaHead,isMdaMember,isMdaMinistry']], function () {
+    Route::resource('/plans', 'App\Http\Controllers\Mda\PlansController');
 });

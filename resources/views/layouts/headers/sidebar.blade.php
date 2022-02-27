@@ -84,6 +84,18 @@
                     </ul>
                 </li>
                 @endcan
+
+
+                @can('isMdaHead')
+                <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">ANNUAL PROCUREMENT PLAN</span><i data-feather="more-horizontal"></i>
+                </li>
+                
+                <li class=" <?php if ($page=="plan") { echo "active";} ?> nav-item"><a class="d-flex align-items-center" href="{{route('plans.index')}}"><i data-feather="list"></i><span class="menu-title text-truncate" data-i18n="Dashboard">Procurement Plans</span></a>
+                </li>
+
+                <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Vendor Management</span><i data-feather="more-horizontal"></i>
+                </li>
+                @endcan
                 
                 
                 @can('isVendor')
