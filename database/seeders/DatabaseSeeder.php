@@ -26,5 +26,10 @@ class DatabaseSeeder extends Seeder
         $this->call([MdaTypeSeeder::class]);
         $this->call([MdaSeeder::class]);
         $this->call([AdditionalFeeSeeder::class]);
+
+        $this->call([ProcessTypeSeeder::class]);
+        $this->call([ProcurementTyeSeeder::class]);
+        $this->call([ProcurementMethodSeeder::class]);
+
     }
 }
