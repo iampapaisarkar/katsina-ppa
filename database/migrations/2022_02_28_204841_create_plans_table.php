@@ -15,7 +15,7 @@ class CreatePlansTable extends Migration
     {
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
-            $table->date('year');
+            $table->string('year');
             $table->string('description');
             $table->integer('uploaded_by');
             $table->string('status');

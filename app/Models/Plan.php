@@ -9,10 +9,6 @@ class Plan extends Model
 {
     use HasFactory;
 
-    protected $casts = [
-        'year' => 'date'
-    ];
-
     protected $fillable = [
         'year', 
         'description', 
