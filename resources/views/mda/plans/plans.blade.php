@@ -37,11 +37,11 @@
         </div>
         @endif -->
 
-        @if (session('errors'))
+        <!-- @if (session('errors'))
         <div class="alert alert-danger p-2" role="alert">
             {{ session('errors') }}
         </div>
-        @endif
+        @endif -->
 
         <div class="content-body">
             <a href="{{route('plan-template-download')}}" class="btn btn-secondary"><i data-feather="download" ></i>  <span>DOWNLOAD TEMPLATE</span></a>
