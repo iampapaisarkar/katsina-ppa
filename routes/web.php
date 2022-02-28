@@ -92,5 +92,7 @@ Route::group(['middleware' => ['auth','verified', 'can:isPpa']], function () {
 
 
 Route::group(['middleware' => ['auth','verified'], ['can:isMdaHead,isMdaMember,isMdaMinistry']], function () {
-    Route::resource('/plans', 'App\Http\Controllers\Mda\PlansController');
+    Route::get('/plans', [App\Http\Controllers\Mda\PlanController::class, 'plans'])->name('plans');
+    Route::get('/plans/{planId}/projects', [App\Http\Controllers\Mda\PlanController::class, 'projects'])->name('plan-projects');
+    Route::get('/plans/{planId}/projects/{projectId}/details', [App\Http\Controllers\Mda\PlanController::class, 'projectDetails'])->name('plan-project-details');
 });
