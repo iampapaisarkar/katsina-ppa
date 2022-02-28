@@ -14,8 +14,21 @@ use Excel;
 
 class PlanController extends Controller
 {
-    public function plans(){
-        return view('mda.plans.plans');
+    public function plans(Request $request){
+
+        $authUser = Auth::user();
+
+        $plans = Plan::with('upload_by')->where('uploaded_by', $authUser->id);
+
+        if($request->per_page){
+            $perPage = (integer) $request->per_page;
+        }else{
+            $perPage = 10;
+        }
+
+        $plans = $plans->latest()->paginate($perPage);
+
+        return view('mda.plans.plans', compact('plans'));
     }
 
     public function planTemplateDownload(){

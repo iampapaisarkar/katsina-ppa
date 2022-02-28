@@ -111,7 +111,7 @@ class PlanProject extends Model
         return $value;
     }
 
-    
+
 
     public function getDateOfAccountingOfficerApprovalAttribute( $value ) {
         if($value){
@@ -167,6 +167,15 @@ class PlanProject extends Model
             return Carbon::parse($value)->format('d/m/Y');
         }
         return null;
+    }
+
+
+    public function plan() {
+        return $this->hasOne(Plan::class, 'id','plan_id');
+    }
+
+    public function user() {
+        return $this->hasOne(User::class, 'id','user_id');
     }
 
 }

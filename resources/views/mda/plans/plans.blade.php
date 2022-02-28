@@ -62,25 +62,38 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($plans as $plan)
                                 <tr>
-                                    <td><small class="text-muted">5 Jan 2022</small></td>
+                                    <td><small class="text-muted">{{$plan->created_at->format('d M Y')}}</small></td>
                                     <td>
-                                        <a href="mda-procurement-plan-view.php">2022</a>
+                                        <a href="mda-procurement-plan-view.php">{{$plan->year}}</a>
                                     </td>
                                     <td>
-                                        2022 Annual Procurement Plan
+                                        {{$plan->description}}
                                     </td>
-                                    <td><small class="text-muted">Khadija Aminu </small></td>
-                                    <td><span class="badge badge-light-success badge-pill">APPROVED</span></td>
+                                    <td><small class="text-muted">{{$plan->upload_by->first_name}} {{$plan->upload_by->sur_name}} </small></td>
                                     <td>
-                                        <a href="{{route('plan-projects', 1)}}" class="btn btn-success btn-sm">
+                                        @if($plan->status == 'approved')
+                                        <span class="badge badge-light-success badge-pill">APPROVED</span>
+                                        @endif
+                                        @if($plan->status == 'reject')
+                                        <span class="badge badge-light-danger badge-pill">REJECT</span>
+                                        @endif
+                                        @if($plan->status == 'pending')
+                                        <span class="badge badge-light-warning badge-pill">PENDING</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{route('plan-projects', $plan->id)}}" class="btn btn-success btn-sm">
                                             <i data-feather="eye" ></i>
                                             <span>VIEW</span>
                                         </a>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
+                        {{$plans->links()}}
                     </div>
                 </div>
             </div>

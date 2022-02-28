@@ -15,4 +15,12 @@ class Plan extends Model
         'uploaded_by', 
         'status'
     ];
+
+    public function upload_by() {
+        return $this->hasOne(User::class, 'id','uploaded_by');
+    }
+
+    public function projects() {
+        return $this->hasOne(PlanProject::class, 'plan_id','id');
+    }
 }
