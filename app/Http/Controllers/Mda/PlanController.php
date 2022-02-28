@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mda;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Rules\PlanYearCheckRule;
 use App\Imports\PlanImport;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Plan;
@@ -40,7 +41,7 @@ class PlanController extends Controller
 
         $this->validate($request, [
             'plan_year' => [
-                'required'
+                'required', new PlanYearCheckRule()
             ],
             'plan_mda' => [
                 'required'

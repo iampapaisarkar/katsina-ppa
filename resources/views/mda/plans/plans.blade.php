@@ -31,11 +31,11 @@
         </div>
         @endif
 
-        @if (session('error'))
+        <!-- @if (session('error'))
         <div class="alert alert-danger p-2" role="alert">
             {{ session('error') }}
         </div>
-        @endif
+        @endif -->
 
         @if (session('errors'))
         <div class="alert alert-danger p-2" role="alert">
