@@ -18,9 +18,9 @@
                 <p>*{{session('errors')->first('plan_mda')}}</p>
             </div>
             @endif
-            @if(session('errors')->first('plan'))
+            @if(session('errors')->first('plan_attachment'))
             <div class="alert alert-danger p-2" role="alert">
-                <p>*{{session('errors')->first('plan')}}</p>
+                <p>*{{session('errors')->first('plan_attachment')}}</p>
             </div>
             @endif
         @endif
@@ -30,6 +30,19 @@
             {{ session('success') }}
         </div>
         @endif
+
+        @if (session('error'))
+        <div class="alert alert-danger p-2" role="alert">
+            {{ session('error') }}
+        </div>
+        @endif
+
+        @if (session('errors'))
+        <div class="alert alert-danger p-2" role="alert">
+            {{ session('errors') }}
+        </div>
+        @endif
+
         <div class="content-body">
             <a href="{{route('plan-template-download')}}" class="btn btn-secondary"><i data-feather="download" ></i>  <span>DOWNLOAD TEMPLATE</span></a>
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editUser"><i data-feather='upload'></i>  <span>UPLOAD NEW ANNUAL PRODUREMENT PLAN</span></button>
@@ -90,7 +103,8 @@
                     
                 </div>
                 <form id="createDataForm" class="row gy-1 pt-75" method="POST"
-                action="{{route('plan-upload')}}">
+                action="{{route('plan-upload')}}"
+                enctype="multipart/form-data">
                 @csrf
                 @method('POST')
                     
@@ -126,8 +140,8 @@
                     </div>
                     <div class="col-12 col-md-12">
                         <label class="form-label" for="plan">Procurment Plan Template</label>
-                        <input class="form-control  @error('plan') is-invalid @enderror" name="plan" type="file" id="plan" accept="application/msexcel" />
-                        @error('plan')
+                        <input class="form-control  @error('plan_attachment') is-invalid @enderror" name="plan_attachment" type="file" id="plan" accept="application/msexcel" />
+                        @error('plan_attachment')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class PlanProject extends Model
 {
@@ -53,4 +54,119 @@ class PlanProject extends Model
         'contract_signing_date',
         'completion_date'
     ];
+
+    public function setDateOfAccountingOfficerApprovalAttribute( $value ) {
+        if($value){
+            $this->attributes['date_of_accounting_officer_approval'] = Carbon::parse(str_replace('/', '-', $value))->format('Y-m-d');
+        }
+        return $value;
+    }
+
+    public function setProjectCommencementDateAttribute( $value ) {
+        if($value){
+            $this->attributes['project_commencement_date'] = Carbon::parse(str_replace('/', '-', $value))->format('Y-m-d');
+        }
+        return $value;
+    }
+
+    public function setDateOfPsstApprovalAttribute( $value ) {
+        if($value){
+            $this->attributes['date_of_psst_approval'] = Carbon::parse(str_replace('/', '-', $value))->format('Y-m-d');
+        }
+        return $value;
+    }
+
+    public function setAdvertisementDateAttribute( $value ) {
+        if($value){
+            $this->attributes['advertisement_date'] = Carbon::parse(str_replace('/', '-', $value))->format('Y-m-d');
+        }
+        return $value;
+    }
+
+    public function setBidClosingOpeningDateAttribute( $value ) {
+        if($value){
+            $this->attributes['bid_closing_opening_date'] = Carbon::parse(str_replace('/', '-', $value))->format('Y-m-d');
+        }
+        return $value;
+    }
+
+    public function setAwardNotificationDateAttribute( $value ) {
+        if($value){
+            $this->attributes['award_notification_date'] = Carbon::parse(str_replace('/', '-', $value))->format('Y-m-d');
+        }
+        return $value;
+    }
+
+    public function setContractSigningDateAttribute( $value ) {
+        if($value){
+            $this->attributes['contract_signing_date'] = Carbon::parse(str_replace('/', '-', $value))->format('Y-m-d');
+        }
+        return $value;
+    }
+
+    public function setCompletionDateAttribute( $value ) {
+        if($value){
+            $this->attributes['completion_date'] = Carbon::parse(str_replace('/', '-', $value))->format('Y-m-d');
+        }
+        return $value;
+    }
+
+    
+
+    public function getDateOfAccountingOfficerApprovalAttribute( $value ) {
+        if($value){
+            return Carbon::parse($value)->format('d/m/Y');
+        }
+        return $value;
+    }
+
+    public function getProjectCommencementDateAttribute( $value ) {
+        if($value){
+            return Carbon::parse($value)->format('d/m/Y');
+        }
+        return null;
+    }
+
+    public function getDateOfPsstApprovalAttribute( $value ) {
+        if($value){
+            return Carbon::parse($value)->format('d/m/Y');
+        }
+        return null;
+    }
+
+    public function getAdvertisementDateAttribute( $value ) {
+        if($value){
+            return Carbon::parse($value)->format('d/m/Y');
+        }
+        return null;
+    }
+
+    public function getBidClosingOpeningDateAttribute( $value ) {
+        if($value){
+            return Carbon::parse($value)->format('d/m/Y');
+        }
+        return null;
+    }
+
+    public function getAwardNotificationDateAttribute( $value ) {
+        if($value){
+            return Carbon::parse($value)->format('d/m/Y');
+        }
+        return null;
+    }
+
+    public function getContractSigningDateAttribute( $value ) {
+        if($value){
+            return Carbon::parse($value)->format('d/m/Y');
+        }
+        return null;
+    }
+
+    public function getCompletionDateAttribute( $value ) {
+        if($value){
+            return Carbon::parse($value)->format('d/m/Y');
+        }
+        return null;
+    }
+
 }
