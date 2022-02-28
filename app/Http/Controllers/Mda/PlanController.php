@@ -12,6 +12,11 @@ class PlanController extends Controller
         return view('mda.plans.plans');
     }
 
+    public function planTemplateDownload(){
+        $template = public_path('libs'. DIRECTORY_SEPARATOR . 'Katsina_BPP_Procurement_Plan_template.xls');
+        return response()->download($template);
+    }
+
     public function planUpload(PlanUplaodRequest $request){
         return back()->withSuccess('Plan Uploaded successfully!');
     }

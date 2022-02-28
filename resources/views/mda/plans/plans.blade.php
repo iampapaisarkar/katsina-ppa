@@ -31,7 +31,7 @@
         </div>
         @endif
         <div class="content-body">
-            <a href="#" class="btn btn-secondary"><i data-feather="download" ></i>  <span>DOWNLOAD TEMPLATE</span></a>
+            <a href="{{route('plan-template-download')}}" class="btn btn-secondary"><i data-feather="download" ></i>  <span>DOWNLOAD TEMPLATE</span></a>
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editUser"><i data-feather='upload'></i>  <span>UPLOAD NEW ANNUAL PRODUREMENT PLAN</span></button>
             <!-- Basic Tables start -->
             <div class="row" id="basic-table">
