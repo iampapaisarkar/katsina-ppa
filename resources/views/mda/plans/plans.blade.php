@@ -8,12 +8,21 @@
     <div class="content-wrapper container-xxl p-0">
        
         @if (session('errors'))
-        <div class="alert alert-danger p-2" role="alert">
-            <p>*{{session('errors')->first('title')}}</p>
-        </div>
-        <div class="alert alert-danger p-2" role="alert">
-            <p>*{{session('errors')->first('type')}}</p>
-        </div>
+            @if(session('errors')->first('plan_year'))
+            <div class="alert alert-danger p-2" role="alert">
+                <p>*{{session('errors')->first('plan_year')}}</p>
+            </div>
+            @endif
+            @if(session('errors')->first('plan_mda'))
+            <div class="alert alert-danger p-2" role="alert">
+                <p>*{{session('errors')->first('plan_mda')}}</p>
+            </div>
+            @endif
+            @if(session('errors')->first('plan'))
+            <div class="alert alert-danger p-2" role="alert">
+                <p>*{{session('errors')->first('plan')}}</p>
+            </div>
+            @endif
         @endif
 
         @if (session('success'))
@@ -80,32 +89,49 @@
                     <h1 class="mb-1">Add New</h1>
                     
                 </div>
-                <form id="editUserForm" class="row gy-1 pt-75" onSubmit="return false">
+                <form id="createDataForm" class="row gy-1 pt-75" method="POST"
+                action="{{route('plan-upload')}}">
+                @csrf
+                @method('POST')
                     
                     <div class="col-12 col-md-6">
-                        <label class="form-label" for="modalType">Financial Year</label>
-                        <select id="modalType" name="modalType" class="select2 form-select">
+                        <label class="form-label" for="planYear">Financial Year</label>
+                        <select id="planYear" name="plan_year" class="select2 form-select @error('plan_year') is-invalid @enderror">
                             <option value="">Select Year</option>
                             <option value="2022">2022</option>
                             <option value="2023">2023</option>
                             <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                            <option value="2029">2029</option>
+                            <option value="2030">2030</option>
                         </select>
+                        @error('plan_year')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     
                     <div class="col-12 col-md-6">
-                        <label class="form-label" for="modalEditUserFirstName">MDA </label>
-                        <input type="text" id="modalEditUserFirstName" name="modalEditUserFirstName" class="form-control" placeholder="MDA" value="Ministry of Education" data-msg="Please enter Title" readonly />
+                        <label class="form-label" for="planMda">MDA </label>
+                        <input type="text" id="planMda" name="plan_mda" class="form-control  @error('plan_mda') is-invalid @enderror" value="{{Auth::user()->mda_type()->first()->title}}" readonly />
+                        @error('plan_mda')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div class="col-12 col-md-12">
-                        <label class="form-label" for="modalType">Procurment Plan Template</label>
-                        <input class="form-control" type="file" id="formFile" accept="application/msexcel" />
-                        <!--<select id="modalType" name="modalType" class="select2 form-select">
-                            <option value="">Select Type</option>
-                            <option value="Ministry">Ministry</option>
-                            <option value="Department">Department</option>
-                            <option value="Agency">Agency</option>
-                            
-                        </select>-->
+                        <label class="form-label" for="plan">Procurment Plan Template</label>
+                        <input class="form-control  @error('plan') is-invalid @enderror" name="plan" type="file" id="plan" accept="application/msexcel" />
+                        @error('plan')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     
                     <div class="col-12 text-center mt-2 pt-50">
