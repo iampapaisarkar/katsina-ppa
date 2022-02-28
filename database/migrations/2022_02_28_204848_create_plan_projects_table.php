@@ -17,6 +17,7 @@ class CreatePlanProjectsTable extends Migration
             $table->id();
             $table->integer('plan_id');
             $table->integer('user_id');
+            $table->string('status');
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('process_type');

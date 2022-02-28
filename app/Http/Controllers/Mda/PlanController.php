@@ -73,6 +73,7 @@ class PlanController extends Controller
                 PlanProject::Create([
                     'plan_id' => $plan->id,
                     'user_id' => $authUser->id,
+                    'status' => 'pending',
                     'name' => $result['project_name'], 
                     'description' => $result['description'], 
                     'process_type' => $result['process_type'], 
@@ -115,8 +116,23 @@ class PlanController extends Controller
         }  
     }
 
-    public function projects(){
-        return view('mda.plans.projects');
+    public function projects(Request $request, $planId){
+
+        $authUser = Auth::user();
+
+        $plan = Plan::with('upload_by')->where(['uploaded_by' => $authUser->id, 'id' => $planId])->first();
+
+        $projects = PlanProject::with('user')->where('user_id', $authUser->id);
+
+        if($request->per_page){
+            $perPage = (integer) $request->per_page;
+        }else{
+            $perPage = 10;
+        }
+
+        $projects = $projects->latest()->paginate($perPage);
+
+        return view('mda.plans.projects', compact('plan', 'projects'));
     }
 
     public function projectDetails(){

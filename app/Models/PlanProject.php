@@ -24,6 +24,7 @@ class PlanProject extends Model
     protected $fillable = [
         'plan_id',
         'user_id',
+        'status',
         'name', 
         'description', 
         'process_type', 

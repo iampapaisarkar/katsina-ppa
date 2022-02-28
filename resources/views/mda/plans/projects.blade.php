@@ -10,13 +10,13 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-start mb-0">2022 Procurement Plan</h2>
+                        <h2 class="content-header-title float-start mb-0">{{$plan->year}} Procurement Plan</h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('plans')}}">Home</a>
                                 </li>
                                 
-                                <li class="breadcrumb-item active">2022 Procurement Plan
+                                <li class="breadcrumb-item active">{{$plan->year}} Procurement Plan
                                 </li>
                             </ol>
                         </div>
@@ -27,7 +27,7 @@
         <div class="content-body">
             <div class="row d-flex align-items-end">
                     <div class="col-md-4 col-12">
-                        <h4>Financial Year: 2022</h4>
+                        <h4>Financial Year: {{$plan->year}}</h4>
                     </div>
             </div>
             <!-- Basic Tables start -->
@@ -46,25 +46,35 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($projects as $project)
                                 <tr>
-                                    <td>Supply of 10 Hilux Vehicles for SUBEB</td>
+                                    <td>{{$project->name}}</td>
                                     <td>
-                                        Supplies
+                                        {{$project->category}}
                                     </td>
                                     <td>
-                                        Selective Domestic Bidding (SDB)
+                                        {{$project->procurement_method}}
                                     </td>
-                                    <td>12,000,000</td>
-                                    <td><span class="badge badge-light-success badge-pill">AWARDED</span></td>
+                                    <td>{{$project->estimate_cost}}</td>
                                     <td>
-                                        <a href="{{route('plan-project-details', [1, 2])}}" class="btn btn-success btn-sm">
+                                        @if($project->status == 'awarded')
+                                        <span class="badge badge-light-success badge-pill">AWARDED</span>
+                                        @endif
+                                        @if($project->status == 'pending')
+                                        <span class="badge badge-light-warning badge-pill">PENDING</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{route('plan-project-details', [$plan->id, $project->id])}}" class="btn btn-success btn-sm">
                                             <i data-feather="eye" ></i>
                                             <span>VIEW</span>
                                         </a>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
+                        {{$projects->links()}}
                     </div>
                 </div>
             </div>
