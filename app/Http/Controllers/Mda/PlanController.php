@@ -122,7 +122,7 @@ class PlanController extends Controller
 
         $plan = Plan::with('upload_by')->where(['uploaded_by' => $authUser->id, 'id' => $planId])->first();
 
-        $projects = PlanProject::with('user')->where('user_id', $authUser->id);
+        $projects = PlanProject::with('user')->where(['user_id' => $authUser->id, 'plan_id' => $planId]);
 
         if($request->per_page){
             $perPage = (integer) $request->per_page;
