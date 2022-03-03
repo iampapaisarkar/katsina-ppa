@@ -161,7 +161,7 @@
                             <option value="">Select Role</option>
                             @foreach(app('App\Http\Services\BackendData')->mdaRoles() as $mdaRole)
                             @if(old('role') == $mdaRole->id)
-                            <option selected value="{{$MdaType->id}}">{{$MdaType->title}}</option>
+                            <option selected value="{{$mdaRole->id}}">{{$mdaRole->role}}</option>
                             @endif
                             <option value="{{$mdaRole->id}}">{{$mdaRole->role}}</option>
                             @endforeach
@@ -276,7 +276,7 @@
                             <option value="">Select Role</option>
                             @foreach(app('App\Http\Services\BackendData')->mdaRoles() as $mdaRole)
                             @if(old('role') == $mdaRole->id)
-                            <option selected value="{{$MdaType->id}}">{{$MdaType->title}}</option>
+                            <option selected value="{{$mdaRole->id}}">{{$mdaRole->role}}</option>
                             @endif
                             <option value="{{$mdaRole->id}}">{{$mdaRole->role}}</option>
                             @endforeach

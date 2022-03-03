@@ -59,17 +59,6 @@ class UserSeeder extends Seeder
             'mda' => 2,
             'created_at' => now(),
             'updated_at' => now()
-            ],
-            [
-            'first_name' => 'MDA',
-            'sur_name' => 'Ministry',
-            'email' => 'mdaministry@test.com',
-            'phone_number' => '9002094533',
-            'email_verified_at' => now(),
-            'password' => Hash::make('123456'),
-            'mda' => 3,
-            'created_at' => now(),
-            'updated_at' => now()
             ]
         ];
         User::insert($users);

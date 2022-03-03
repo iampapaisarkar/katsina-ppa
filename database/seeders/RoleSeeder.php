@@ -30,10 +30,6 @@ class RoleSeeder extends Seeder
             [
             'role' => 'Member',
             'code' => 'mda_member',
-            ],
-            [
-            'role' => 'Ministry',
-            'code' => 'mda_ministry',
             ]
         ];
 

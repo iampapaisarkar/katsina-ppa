@@ -17,6 +17,7 @@ class CreateMdasTable extends Migration
             $table->id();
             $table->string('title');
             $table->integer('type');
+            $table->boolean('has_head')->default(false);
             $table->timestamps();
         });
     }
