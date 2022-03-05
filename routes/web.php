@@ -97,4 +97,5 @@ Route::group(['middleware' => ['auth','verified'], ['can:isMdaHead,isMdaMember,i
     Route::post('/plan-upload', [App\Http\Controllers\Mda\PlanController::class, 'planUpload'])->name('plan-upload');
     Route::get('/plans/{planId}/projects', [App\Http\Controllers\Mda\PlanController::class, 'projects'])->name('plan-projects');
     Route::get('/plans/{planId}/projects/{projectId}/details', [App\Http\Controllers\Mda\PlanController::class, 'projectDetails'])->name('plan-project-details');
+    Route::get('/plans/{planId}/projects/{projectId}/details-edit', [App\Http\Controllers\Mda\PlanController::class, 'projectDetailsEdit'])->name('plan-project-details-edit');
 });

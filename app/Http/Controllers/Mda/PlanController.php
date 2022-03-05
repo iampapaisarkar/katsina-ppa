@@ -131,20 +131,47 @@ class PlanController extends Controller
 
         $plan = Plan::with('upload_by')->where(['uploaded_by' => $authUser->id, 'id' => $planId])->first();
 
-        $projects = PlanProject::with('user')->where(['user_id' => $authUser->id, 'plan_id' => $planId]);
+        if($plan){
+            $projects = PlanProject::with('user')->where(['user_id' => $authUser->id, 'plan_id' => $planId]);
 
-        if($request->per_page){
-            $perPage = (integer) $request->per_page;
+            if($request->per_page){
+                $perPage = (integer) $request->per_page;
+            }else{
+                $perPage = 10;
+            }
+
+            $projects = $projects->latest()->paginate($perPage);
+
+            return view('mda.plans.projects', compact('plan', 'projects'));
         }else{
-            $perPage = 10;
+            return abort(404);
         }
-
-        $projects = $projects->latest()->paginate($perPage);
-
-        return view('mda.plans.projects', compact('plan', 'projects'));
+        
     }
 
-    public function projectDetails(){
-        return view('mda.plans.project-details');
+    public function projectDetails(Request $request, $planId, $projectId){
+
+        $authUser = Auth::user();
+        $plan = Plan::with('upload_by')->where(['uploaded_by' => $authUser->id, 'id' => $planId])->first();
+        $project = PlanProject::with('user')->where(['user_id' => $authUser->id, 'plan_id' => $planId, 'id' => $projectId])->first();
+
+        if($plan && $project){
+            return view('mda.plans.project-details', compact('plan', 'project'));
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function projectDetailsEdit(Request $request, $planId, $projectId){
+
+        $authUser = Auth::user();
+        $plan = Plan::with('upload_by')->where(['uploaded_by' => $authUser->id, 'id' => $planId])->first();
+        $project = PlanProject::with('user')->where(['user_id' => $authUser->id, 'plan_id' => $planId, 'id' => $projectId])->first();
+
+        if($plan && $project){
+            return view('mda.plans.project-details-edit', compact('plan', 'project'));
+        }else{
+            return abort(404);
+        }
     }
 }

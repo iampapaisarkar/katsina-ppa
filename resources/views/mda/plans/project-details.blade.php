@@ -15,10 +15,10 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('plans')}}">Home</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('plan-projects', 1)}}">2022 Procurement
+                                <li class="breadcrumb-item"><a href="{{route('plan-projects', $plan->id)}}">{{$plan->year}} Procurement
                                         Plan</a>
                                 </li>
-                                <li class="breadcrumb-item active">Supply of 10 Hilux Vehicles for SUBEB
+                                <li class="breadcrumb-item active">{{$project->name}}
                                 </li>
                             </ol>
                         </div>
@@ -32,7 +32,7 @@
                 <div class="row d-flex align-items-end">
 
                     <div class="col-md-4 col-12">
-                        <h4>Financial Year: 2022</h4>
+                        <h4>Financial Year: {{$plan->year}}</h4>
                     </div>
 
                     <div class="col-md-4 col-12">
@@ -57,150 +57,148 @@
                                 <tbody>
                                     <tr>
                                         <td><b>Subject<b /></td>
-                                        <td>Supply of 10 Hilux Vehicles for SUBEB</td>
+                                        <td>{{$project->name}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Description<b /></td>
-                                        <td>Lorem ipsum dolor sit amet consectetur adipiscing elit</td>
+                                        <td>{{$project->description}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Process Type<b /></td>
-                                        <td>Procurement</td>
+                                        <td>{{$project->process_type}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Category<b /></td>
-                                        <td>Supplies</td>
+                                        <td>{{$project->category}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Procurement / Disposal Method<b /></td>
-                                        <td>Open Domestic Bidding (ODB)</td>
+                                        <td>{{$project->procurement_method}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Estimated Cost / Reserve Price<b /></td>
-                                        <td>35,000,000</td>
+                                        <td>{{$project->estimate_cost}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>GL Code<b /></td>
-                                        <td>KT2325345</td>
+                                        <td>{{$project->gl_code}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Programme<b /></td>
-                                        <td>Lorem ipsum dolor sit amet consectetur adipiscing elit</td>
+                                        <td>{{$project->programme}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Sub-Programme<b /></td>
-                                        <td>Lorem ipsum dolor sit amet consectetur adipiscing elit</td>
+                                        <td>{{$project->sub_programme}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Quantities<b /></td>
-                                        <td>10</td>
+                                        <td>{{$project->quantities}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Source of Funds<b /></td>
-                                        <td>State</td>
+                                        <td>{{$project->source_of_funds}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Asset Location<b /></td>
-                                        <td>Katsina</td>
+                                        <td>{{$project->asset_location}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Justification<b /></td>
-                                        <td>Lorem ipsum dolor sit amet consectetur adipiscing elit</td>
+                                        <td>{{$project->justification}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Feasibility Studies/Condition Survey<b /></td>
-                                        <td>Lorem ipsum dolor sit amet consectetur adipiscing elit</td>
+                                        <td>{{$project->feasibility_studies}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Awarding Authority<b /></td>
-                                        <td>Lorem ipsum dolor sit amet consectetur adipiscing elit</td>
+                                        <td>{{$project->awarding_authority}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Budgetary Provision in Naira<b /></td>
-                                        <td>36,000,000</td>
+                                        <td>{{$project->budgetary_provision_in_naira}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Preparation of designs drawings and specifications<b /></td>
-                                        <td>Lorem ipsum dolor sit amet consectetur adipiscing elit</td>
+                                        <td>{{$project->preparation_of_designs}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Preparation of Tender Documents<b /></td>
-                                        <td>Lorem ipsum dolor sit amet consectetur adipiscing elit</td>
+                                        <td>{{$project->preparation_of_tender_documents}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Issued No objection certificate<b /></td>
-                                        <td>Lorem ipsum dolor sit amet consectetur adipiscing elit</td>
+                                        <td>{{$project->issued_no_objection_certificate}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Date of Accounting Officer Approval<b /></td>
-                                        <td>Lorem ipsum dolor sit amet consectetur adipiscing elit</td>
+                                        <td>{{$project->date_of_accounting_officer_approval}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Contract Type<b /></td>
-                                        <td>Lorem ipsum dolor sit amet consectetur adipiscing elit</td>
+                                        <td>{{$project->contract_type}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Project Commencement Date<b /></td>
-                                        <td>12-12-2022</td>
+                                        <td>{{$project->project_commencement_date}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>If Strategic Asset (Date of PSST Approval)<b /></td>
-                                        <td>12-12-2022</td>
+                                        <td>{{$project->date_of_psst_approval}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Advertisement date<b /></td>
-                                        <td>12-12-2022</td>
+                                        <td>{{$project->advertisement_date}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Bid Closing / Opening date<b /></td>
-                                        <td>12-12-2022</td>
+                                        <td>{{$project->bid_closing_opening_date}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Approval of Evaluation Report<b /></td>
-                                        <td>Lorem ipsum dolor sit amet consectetur adipiscing elit</td>
+                                        <td>{{$project->approval_of_evaluation_report}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Award Notification Date<b /></td>
-                                        <td>12-12-2022</td>
+                                        <td>{{$project->award_notification_date}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Contract Signing Date<b /></td>
-                                        <td>12-12-2022</td>
+                                        <td>{{$project->contract_signing_date}}</td>
                                     </tr>
 
                                     <tr>
                                         <td><b>Completion date<b /></td>
-                                        <td>12-12-2022</td>
+                                        <td>{{$project->completion_date}}</td>
                                     </tr>
-
-
                                 </tbody>
                             </table>
                         </div>
@@ -213,7 +211,7 @@
                     <div class="col-xl-3 col-md-4 col-12 invoice-actions mt-md-0 mt-2">
                         <div class="card">
                             <div class="card-body">
-                                <a href="mda-procurement-plan-view-details-edit.php">
+                                <a href="{{route('plan-project-details-edit', [$plan->id, $project->id])}}">
                                     <button class="btn btn-success w-100 mb-75" data-bs-toggle="modal"
                                         data-bs-target="">
                                         Edit Details
@@ -222,7 +220,7 @@
                             </div>
                         </div>
 
-                        <div class="card">
+                        <!-- <div class="card">
                             <div class="card-body">
                                 <p>An Update Request is currently being proccessed</p>
                                 <button class="btn btn-success w-100 mb-75" data-bs-toggle="modal" data-bs-target=""
@@ -230,7 +228,7 @@
                                     Edit Details
                                 </button>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- /Actions -->
                 </div>
