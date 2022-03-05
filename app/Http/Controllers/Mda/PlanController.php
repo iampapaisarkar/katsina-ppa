@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Rules\PlanYearCheckRule;
 use App\Imports\PlanImport;
+use App\Imports\PlanSecondSheetImport;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Plan;
 use App\Models\PlanProject;
@@ -65,11 +66,19 @@ class PlanController extends Controller
             ]);
 
             $import = new PlanImport;
+
+            // $import = $import->onlySheets('DATA');
+
             Excel::import($import, $request->file('plan_attachment'));
 
             $results = $import->getImportedData();
 
+            // dd($results);
+
             foreach($results as $result){
+
+                $planProject = new PlanProject();
+
                 PlanProject::Create([
                     'plan_id' => $plan->id,
                     'user_id' => $authUser->id,
@@ -93,16 +102,16 @@ class PlanController extends Controller
                     'preparation_of_designs' => $result['preparation_of_designs_drawings_and_specifications'],
                     'preparation_of_tender_documents' => $result['preparation_of_tender_documents'],
                     'issued_no_objection_certificate' => $result['issued_no_objection_certificate'],
-                    'date_of_accounting_officer_approval' => $result['date_of_accounting_officer_approval'],
+                    'date_of_accounting_officer_approval' => $planProject->transformDate($result['date_of_accounting_officer_approval']),
                     'contract_type' => $result['contract_type'],
-                    'project_commencement_date' => $result['project_commencement_date'],
-                    'date_of_psst_approval' => $result['if_strategic_asset_date_of_psst_approval'],
-                    'advertisement_date' => $result['advertisement_date'],
-                    'bid_closing_opening_date' => $result['bid_closing_opening_date'],
+                    'project_commencement_date' => $planProject->transformDate($result['project_commencement_date']),
+                    'date_of_psst_approval' => $planProject->transformDate($result['if_strategic_asset_date_of_psst_approval']),
+                    'advertisement_date' => $planProject->transformDate($result['advertisement_date']),
+                    'bid_closing_opening_date' => $planProject->transformDate($result['bid_closing_opening_date']),
                     'approval_of_evaluation_report' => $result['approval_of_evaluation_report'],
-                    'award_notification_date' => $result['award_notification_date'],
-                    'contract_signing_date' => $result['contract_signing_date'],
-                    'completion_date' => $result['completion_date']
+                    'award_notification_date' => $planProject->transformDate($result['award_notification_date']),
+                    'contract_signing_date' => $planProject->transformDate($result['contract_signing_date']),
+                    'completion_date' => $planProject->transformDate($result['completion_date'])
                 ]);
             }
 

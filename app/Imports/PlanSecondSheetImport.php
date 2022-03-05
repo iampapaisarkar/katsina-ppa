@@ -11,8 +11,9 @@ use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class PlanImport implements ToCollection, WithHeadingRow, WithBatchInserts, WithChunkReading, WithValidation, WithMultipleSheets
+class PlanSecondSheetImport implements ToCollection, WithHeadingRow, WithBatchInserts, WithChunkReading, WithValidation, WithMultipleSheets
 {
+
     /**
      * @return array
      */
