@@ -74,7 +74,15 @@
                                         <tr>
                                             <td> <b>Process Type<b /> </td>
                                             <td>
-                                            <input value="{{$project->process_type}}" type="text" class="form-control @error('process_type') is-invalid @enderror" name="process_type" id="process_type"/>
+                                            <select class="form-select @error('process_type') is-invalid @enderror" name="process_type" id="process_type">
+                                                <option value="">select one</option>
+                                                @foreach(app('App\Http\Services\BackendData')->processTypes() as $processType)
+                                                @if((old('process_type') && (old('process_type') == $processType->type)) || ($processType && $processType->type == $project->process_type))
+                                                <option hidden value="{{$processType->type}}" selected>{{$processType->type}}</option>
+                                                @endif
+                                                <option value="{{$processType->type}}">{{$processType->type}}</option>
+                                                @endforeach
+                                            </select>
                                             @error('process_type')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -85,7 +93,15 @@
                                         <tr>
                                             <td> <b>Category<b /> </td>
                                             <td>
-                                            <input value="{{$project->category}}" type="text" class="form-control @error('category') is-invalid @enderror" name="category" id="category"/>
+                                            <select class="form-select @error('category') is-invalid @enderror" name="category" id="category">
+                                                <option value="">select one</option>
+                                                @foreach(app('App\Http\Services\BackendData')->procurementTypes() as $procurementType)
+                                                @if((old('category') && (old('category') == $procurementType->type)) || ($procurementType && $procurementType->type == $project->category))
+                                                <option hidden value="{{$procurementType->type}}" selected>{{$procurementType->type}}</option>
+                                                @endif
+                                                <option value="{{$procurementType->type}}">{{$procurementType->type}}</option>
+                                                @endforeach
+                                            </select>
                                             @error('category')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -96,7 +112,15 @@
                                         <tr>
                                             <td> <b>Procurement / Disposal Method<b /> </td>
                                             <td>
-                                            <input value="{{$project->procurement_method}}" type="text" class="form-control @error('procurement_method') is-invalid @enderror" name="procurement_method" id="procurement_method"/>
+                                            <select class="form-select @error('procurement_method') is-invalid @enderror" name="procurement_method" id="procurement_method">
+                                                <option value="">select one</option>
+                                                @foreach(app('App\Http\Services\BackendData')->procurementMethods() as $procurementMethod)
+                                                @if((old('procurement_method') && (old('procurement_method') == $procurementMethod->method)) || ($procurementMethod && $procurementMethod->method == $project->procurement_method))
+                                                <option hidden value="{{$procurementMethod->method}}" selected>{{$procurementMethod->method}}</option>
+                                                @endif
+                                                <option value="{{$procurementMethod->method}}">{{$procurementMethod->method}}</option>
+                                                @endforeach
+                                            </select>
                                             @error('procurement_method')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

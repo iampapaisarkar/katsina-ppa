@@ -11,6 +11,11 @@ use App\Models\Service;
 use App\Models\ServiceType;
 use App\Models\State;
 use App\Models\Role;
+
+use App\Models\ProcessType;
+use App\Models\ProcurementMethod;
+use App\Models\ProcurementTye;
+
 use DB;
 
 class BackendData
@@ -49,5 +54,17 @@ class BackendData
 
     public static function mdaRoles(){
         return Role::whereIn('id', [3,4,5])->get();
+    }
+
+    public static function processTypes(){
+        return ProcessType::get();
+    }
+    
+    public static function procurementMethods(){
+        return ProcurementMethod::get();
+    }
+
+    public static function procurementTypes(){
+        return ProcurementTye::get();
     }
 }

@@ -89,6 +89,9 @@ class ProcurementMethodSeeder extends Seeder
             ],
             [
             'method' => 'Disposal by donation (DD)',
+            ],
+            [
+            'method' => 'Open International Bidding (OIB)',
             ]
         ];
 
