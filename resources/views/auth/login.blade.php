@@ -39,7 +39,7 @@
                                 @csrf
                                     <div class="mb-1">
                                         <label class="form-label" for="login-email">Email</label>
-                                        <input class="form-control @error('email') is-invalid @enderror" id="login-email" type="text" name="email" placeholder="nasiru@example.com" aria-describedby="login-email" autofocus="" tabindex="1" value="vendor@test.com" />
+                                        <input class="form-control @error('email') is-invalid @enderror" id="login-email" type="text" name="email" placeholder="nasiru@example.com" aria-describedby="login-email" autofocus="" tabindex="1" />
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -51,7 +51,7 @@
                                             <label class="form-label" for="login-password">Password</label><a href="{{ route('password.request') }}"><small>Forgot Password?</small></a>
                                         </div>
                                         <div class="input-group input-group-merge form-password-toggle">
-                                            <input class="form-control form-control-merge @error('password') is-invalid @enderror" id="login-password" type="password" name="password" placeholder="············" aria-describedby="login-password" tabindex="2" value="123456" /><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
+                                            <input class="form-control form-control-merge @error('password') is-invalid @enderror" id="login-password" type="password" name="password" placeholder="············" aria-describedby="login-password" tabindex="2"/><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
