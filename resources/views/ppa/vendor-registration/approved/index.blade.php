@@ -63,7 +63,7 @@
                                     @endif
                                 </td>
                                 @php 
-                                $registrationCount = Registration::where([
+                                $registrationCount = App\Models\Registration::where([
                                     'type' => 'vendor_registration',
                                     'status' => 'approved',
                                     'payment' => true
