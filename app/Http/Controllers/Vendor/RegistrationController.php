@@ -58,7 +58,7 @@ class RegistrationController extends Controller
                     'type_of_organization' => $request->type_of_organization,
                     'company_name' => $request->company_name,
                     'cac_number' => $request->cac_number,
-                    'date_of_incorporation' => $request->date_of_incorporation,
+                    'date_of_incorporation' => \Carbon\Carbon::parse($request->date_of_incorporation)->format('Y-m-d'),
                     'share_capital' => $request->share_capital,
                     'address' => $request->address,
                     'landmark' => $request->landmark,
