@@ -526,7 +526,7 @@ class RegistrationController extends Controller
         ->first();
        
         $backgroundURL = env('APP_URL') . '/libs/app-assets/images/certificate-bg.png';
-        $certificationNO = 'KTBPP/'.\Carbon\Carbon::parse($data->company_details->date_of_incorporation)->format('Y').'/'.$data->company_details->organization_type->code.'/'.$data->company_details->core_competence->code.'/'.sprintf("%06s", $registrationCount);
+        $certificationNO = 'KTBPP/'.\Carbon\Carbon::createFromFormat('Y-m-d', $data->company_details->date_of_incorporation)->format('Y').'/'.$data->company_details->organization_type->code.'/'.$data->company_details->core_competence->code.'/'.sprintf("%06s", $registrationCount);
         $pdf = PDF::loadView('pdf.certificate', ['data' => $data, 'background' => $backgroundURL, 'certificationNO' => $certificationNO]);
         return $pdf->stream();
     }
