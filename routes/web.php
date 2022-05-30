@@ -50,6 +50,8 @@ Route::group(['middleware' => ['auth','verified', 'can:isVendor']], function () 
     Route::get('/invoice', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoice.index');
     Route::get('/invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'show'])->name('invoice.show');
     Route::post('/payment-update/{id}', [App\Http\Controllers\InvoiceController::class, 'paymentUpdate'])->name('payment-update');
+
+    Route::get('/download-certificate/{id}', [App\Http\Controllers\Vendor\RegistrationController::class, 'downloadCertificate'])->name('download-certificate');
 });
 
 Route::group(['middleware' => ['auth','verified', 'can:isPpa']], function () {

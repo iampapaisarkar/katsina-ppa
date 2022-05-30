@@ -15,9 +15,12 @@ use App\Models\CompanyDirectors;
 use App\Models\ProductServices;
 use App\Models\CategoryDocuments;
 use Illuminate\Support\Facades\Auth;
-use DB;
 use App\Http\Services\FileUpload;
 use App\Http\Services\Checkout;
+use DB;
+use PDF;
+use File;
+use Storage;
 
 class RegistrationController extends Controller
 {
@@ -493,5 +496,16 @@ class RegistrationController extends Controller
         return [
             'status' => 'update'
         ];
+    }
+
+    public function downloadCertificate($id)
+    {
+        $authUser = Auth::user();
+      
+        $data = Registration::where(['id' => $id, 'user_id' => $authUser->id])->first();
+       
+        $backgroundURL = env('APP_URL') . '/libs/app-assets/images/certificate-bg.png';
+        $pdf = PDF::loadView('pdf.certificate', ['data' => $data, 'background' => $backgroundURL]);
+        return $pdf->stream();
     }
 }

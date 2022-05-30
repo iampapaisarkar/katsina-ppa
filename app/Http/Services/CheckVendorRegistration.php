@@ -72,7 +72,7 @@ class CheckVendorRegistration
                     advertised to give you the opportunity to participate.',
                     'color' => 'success',
                     'icon' => 'award',
-                    'download-link' => '-'
+                    'download-link' => route('download-certificate', $registration->id)
                 ];
             }
         }else{

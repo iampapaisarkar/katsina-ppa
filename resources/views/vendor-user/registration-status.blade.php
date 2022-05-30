@@ -48,7 +48,7 @@
 
                                 @if(isset(app('App\Http\Services\CheckVendorRegistration')->status()['download-link']))
                                 <p class="card-text">
-                                    <a href="{{app('App\Http\Services\CheckVendorRegistration')->status()['download-link']}}" class="btn btn-secondary ">
+                                    <a target="_blank" href="{{app('App\Http\Services\CheckVendorRegistration')->status()['download-link']}}" class="btn btn-secondary ">
                                         <i data-feather="award"></i>
                                         <span>Downlaod Certificate</span>
                                     </a>
