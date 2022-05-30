@@ -110,14 +110,14 @@
     <div class="head2">Bureau of Public Procurement</div>
 
     <div class="date">Date:</div>
-    <div class="datetime">30/05/2022</div>
+    <div class="datetime">{{$data->updated_at->format('d/m/Y')}}</div>
 
     <div class="title1">CERTIFICATION <br> OF REGISTRATION</div>
     <div class="title3">THIS IS TO CERTIFY</div>
-    <div class="title4">COMPANY NAME</div>
+    <div class="title4">{{$data->company_details->company_name}}</div>
     <div class="title5">ORGANIZATION TYPE</div>
-    <div class="title11">as a registered contractor within area of core competence</div>
-    <div class="title12">WORKS (Contractors)</div>
+    <div class="title11">{{$data->company_details->organization_type->title}}</div>
+    <div class="title12">{{$data->company_details->core_competence->title}}</div>
     <div class="title6">{{$certificationNO}}</div>
     
     <div class="title8">Director General</div>
