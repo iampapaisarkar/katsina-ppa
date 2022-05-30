@@ -2,7 +2,7 @@
 
 
 @if($data['type'] == 'vendor-registration')
-# Payment Query – {{env('APP_NAME')}}
+# Payment Query – Katsina PPA Portal
 <p>Hello {{$data['user']['first_name']}} {{$data['user']['sur_name']}},</p>
 <p>The payment made for your Application for Vendor Registration has been queried due to the following reason: </p>
 <p><strong>Payment Query Reason:</strong></p>

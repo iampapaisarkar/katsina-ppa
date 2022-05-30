@@ -2,7 +2,7 @@
 
 
 @if($data['type'] == 'vendor-registration')
-# Vendor Registration Application Approved – {{env('APP_NAME')}}
+# Vendor Registration Application Approved – Katsina PPA Portal
 <p>Hello {{$data['user']['first_name']}} {{$data['user']['sur_name']}},</p>
 <p>The Vendor Registration for {{$data['company_name']}} has been approved.</p>
 <h3><strong>Vendor ID:</strong> {{$data['vendor-id']}}</h3><br>
