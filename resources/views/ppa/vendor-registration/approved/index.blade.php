@@ -42,6 +42,7 @@
                                 <th>DATE</th>
                                 <th>COMPANY</th>
                                 <th>TYPE</th>
+                                <th>VENDOR ID</th>
                                 <th>STATUS</th>
                                 <th>ACTION</th>
                             </tr>
@@ -61,6 +62,14 @@
                                     <small class="text-muted">Vendor Renewal</small>
                                     @endif
                                 </td>
+                                @php 
+                                $registrationCount = Registration::where([
+                                    'type' => 'vendor_registration',
+                                    'status' => 'approved',
+                                    'payment' => true
+                                ])->count();
+                                @endphp
+                                <td>{{'KTBPP/'.date('y', strtotime($registration->company_details->date_of_incorporation)).'/'.$registration->company_details->organization_type->code.'/'.$registration->company_details->core_competence->code.'/'.sprintf("%06s", $registrationCount)}}</td>
                                 <td>
                                     @if($registration->status == 'pending')
                                     <span class="badge badge-light-warning badge-pill">Pending Approval</span>
