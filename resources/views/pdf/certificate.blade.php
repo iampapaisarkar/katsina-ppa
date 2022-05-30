@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Certificate -  </title>
+        <title>Certificate -  {{$certificationNO}}</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,29 +14,117 @@
             size: 570pt 800pt; 
             padding: 0;
             margin: 0;
+            font-family: serif;
         }
-        span.cls_002{font-family:Arial,serif;font-size:24.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
-        div.cls_002{font-family:Arial,serif;font-size:24.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
-        span.cls_003{font-family:Arial,serif;font-size:14.1px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-        div.cls_003{font-family:Arial,serif;font-size:14.1px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-        span.cls_004{font-family:Arial,serif;font-size:14.1px;color:rgb(74,78,77);font-weight:normal;font-style:normal;text-decoration: none}
-        div.cls_004{font-family:Arial,serif;font-size:14.1px;color:rgb(74,78,77);font-weight:normal;font-style:normal;text-decoration: none}
-        span.cls_005{font-family:Arial,serif;font-size:24.1px;color:rgb(187,28,37);font-weight:normal;font-style:normal;text-decoration: none}
-        div.cls_005{font-family:Arial,serif;font-size:24.1px;color:rgb(187,28,37);font-weight:normal;font-style:normal;text-decoration: none}
-        span.cls_006{font-family:Arial,serif;font-size:47.5px;color:rgb(187,28,37);font-weight:normal;font-style:normal;text-decoration: none}
-        div.cls_006{font-family:Arial,serif;font-size:47.5px;color:rgb(187,28,37);font-weight:normal;font-style:normal;text-decoration: none}
-        span.cls_007{font-family:Arial,serif;font-size:18.1px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-        div.cls_007{font-family:Arial,serif;font-size:18.1px;color:rgb(0,0,0);font-weight:normal;font-style:normal;text-decoration: none}
-        span.cls_008{font-family:Arial,serif;font-size:18.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
-        div.cls_008{font-family:Arial,serif;font-size:18.1px;color:rgb(0,0,0);font-weight:bold;font-style:normal;text-decoration: none}
-        span.cls_009{font-family:Arial,serif;font-size:14.6px;color:rgb(74,78,77);font-weight:normal;font-style:normal;text-decoration: none}
-        div.cls_009{font-family:Arial,serif;font-size:14.6px;color:rgb(74,78,77);font-weight:normal;font-style:normal;text-decoration: none}
-        span.cls_010{font-family:Arial,serif;font-size:10.1px;color:rgb(74,78,77);font-weight:normal;font-style:normal;text-decoration: none}
-        div.cls_010{font-family:Arial,serif;font-size:10.1px;color:rgb(74,78,77);font-weight:normal;font-style:normal;text-decoration: none}
+        .head1{
+            text-align: center;
+            margin-top: 20px;
+            font-size: 30px;
+            color: #000;
+        }
+        .head2{
+            text-align: center;
+            margin-top: 0;
+            font-size: 30px;
+            color: #000;
+        }
+        .date{
+            position: absolute;
+            right: 200px;
+            top: 210px;
+            font-size: 20px;
+        }
+        .datetime{
+            position: absolute;
+            right: 90px;
+            top: 210px;
+            font-size: 20px;
+        }
+        .title1{
+            text-align: center;
+            margin-top: 215px;
+            font-size: 30px;
+            color: #6e6e6e;
+        }
+        .title3{
+            text-align: center;
+            margin-top: 10px;
+            font-size: 20px;
+            color: #6e6e6e;
+        }
+        .title4{
+            text-align: center;
+            margin-top: 20px;
+            font-size: 50px;
+            color: #0c6606;   
+        }
+        .title5{
+            text-align: center;
+            margin-top: 10px;
+            font-size: 30px;
+            color: #6e6e6e;   
+        }
+        .title11{
+            text-align: center;
+            margin-top: 10px;
+            font-size: 20px;
+            color: #000;  
+        }
+        .title12{
+            text-align: center;
+            margin-top: 10px;
+            font-size: 40px;
+            color: #000;  
+        }
+        .title6{
+            text-align: center;
+            margin-top: 50px;
+            font-size: 50px;
+            color: red;  
+        }
+        .title8{
+            text-align: center;
+            margin-top: 130px;
+            font-size: 30px;
+            font-weight: bold;
+            color: #545454;  
+        }
+        .title9{
+            text-align: center;
+            margin-top: 0;
+            font-size: 20px;
+            font-weight: bold;
+            color: #545454;  
+        }
+        .title10{
+            text-align: center;
+            margin-top: 0;
+            font-size: 20px;
+            color: #545454;  
+        }
     </style>
-<body style="background-image: url({{$background}}); width: 100%; height: 100%;">
-<div style="padding-top: 70px;padding-left: 70px;padding-right: 70px;">
-    dsdgfhdsgf
+<body style="background-image: url({{$background}}); width: 100%; height: 100%; background-size: cover;"">
+<div style="padding-top: 0;padding-left: 70px;padding-right: 70px;">
+
+    <div class="head1">KATSINA STATE</div>
+    <div class="head2">Bureau of Public Procurement</div>
+
+    <div class="date">Date:</div>
+    <div class="datetime">30/05/2022</div>
+
+    <div class="title1">CERTIFICATION <br> OF REGISTRATION</div>
+    <div class="title3">THIS IS TO CERTIFY</div>
+    <div class="title4">COMPANY NAME</div>
+    <div class="title5">ORGANIZATION TYPE</div>
+    <div class="title11">as a registered contractor within area of core competence</div>
+    <div class="title12">WORKS (Contractors)</div>
+    <div class="title6">{{$certificationNO}}</div>
+    
+    <div class="title8">Director General</div>
+
+    <div class="title9">Katsina State</div>
+    <div class="title10">bureau of public procurement</div>
+
 </div>
 
 </body>

@@ -501,7 +501,13 @@ class RegistrationController extends Controller
     public function downloadCertificate($id)
     {
         $authUser = Auth::user();
-      
+
+        $registrationCount = Registration::where([
+            'type' => 'vendor_registration',
+            'status' => 'approved',
+            'payment' => true
+        ])->count();
+
         $data = Registration::with(
             'company_details.core_competence', 
             'company_details.organization_type', 
@@ -520,7 +526,8 @@ class RegistrationController extends Controller
         ->first();
        
         $backgroundURL = env('APP_URL') . '/libs/app-assets/images/certificate-bg.png';
-        $pdf = PDF::loadView('pdf.certificate', ['data' => $data, 'background' => $backgroundURL]);
+        $certificationNO = 'KTBPP/'.\Carbon\Carbon::parse($data->company_details->date_of_incorporation)->format('Y').'/'.$data->company_details->organization_type->title.'/'.$data->company_details->core_competence->title.'/'.sprintf("%06s", $registrationCount);
+        $pdf = PDF::loadView('pdf.certificate', ['data' => $data, 'background' => $backgroundURL, 'certificationNO' => $certificationNO]);
         return $pdf->stream();
     }
 }
