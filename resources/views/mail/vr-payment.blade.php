@@ -3,10 +3,10 @@
 
 @if($data['type'] == 'vendor-registration')
 # Payment Query – {{env('APP_NAME')}}
-<h5>Hello {{$data['user']['first_name']}} {{$data['user']['sur_name']}},</h5> <br>
-<h5>The payment made for your Application for Vendor Registration has been queried due to the following reason: </h5> <br>
-<h5><strong>Payment Query Reason:</strong></h5>
-<h5>{{$data['query']}}</h5> <br>
+<p>Hello {{$data['user']['first_name']}} {{$data['user']['sur_name']}},</p>
+<p>The payment made for your Application for Vendor Registration has been queried due to the following reason: </p>
+<p><strong>Payment Query Reason:</strong></p>
+<p>{{$data['query']}}</p>
 @endif
 
 <div>Kindly log in into you profile to make the necessary adjustment in the payment.</div>
