@@ -2,17 +2,13 @@
 
 namespace App\Http\Services;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Service;
-use App\Models\ChildService;
-use App\Models\ServiceFeeMeta;
-use App\Models\Payment;
 use DB;
 use Mail;
 use App\Mail\VendorRegistrationPayment;
 use App\Mail\VendorRegistrationQuery;
 use App\Mail\VendorRegistrationApproved;
 
-class EmailSend
+class MailSend
 {
     public static function sendVendorRegistrationPayment($data){
 
