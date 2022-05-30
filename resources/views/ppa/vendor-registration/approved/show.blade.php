@@ -285,9 +285,17 @@
                                             <h3 class="py-50">DOCUMENTS FOR UPLOAD </h3>
                                         </div>
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
-                                            <label for="formFile" class="form-label">Application Letter with Company Letterhead for Registration addressed to the General Manager (PPA) (PDF/2MB max)</label>
+                                            <label for="formFile" class="form-label">Banker's Reference showing capability of financing contracts within the classification applied for (PDF/2MB max)</label>
                                             <br>
                                             <a href="{{route('vendor-registration-download-category-document', ['attachment_1', $registration->category_documents->attachment_1, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <hr />
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+                                            <label for="formFile" class="form-label">Value Added Tax (VAT) Certificate (PDF/2MB max)</label>
+                                            <br>
+                                            <a href="{{route('vendor-registration-download-category-document', ['attachment_9', $registration->category_documents->attachment_9, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
                                         </div>
                                         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
                                             <hr />
@@ -344,14 +352,6 @@
                                             <label for="formFile" class="form-label">Curriculum Vitae of key staff supported by Professional Licenses/Certificates (PDF/2MB max)</label>
                                             <br>
                                             <a href="{{route('vendor-registration-download-category-document', ['attachment_8', $registration->category_documents->attachment_8, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
-                                            <hr />
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
-                                            <label for="formFile" class="form-label">Applicants Managing Director/Chief Executive Officer's Declaration on oath as to the authenticity of all submitted documents and engagement of professionals (PDF/2MB max)</label>
-                                            <br>
-                                            <a href="{{route('vendor-registration-download-category-document', ['attachment_9', $registration->category_documents->attachment_9, $registration->category_documents->id])}}" class="btn btn-secondary" target="_blank">DOWNLOAD DOCUMENT</a>
                                         </div>
                                     </div>
                                     <!-- FORM 4 end-->

@@ -36,10 +36,21 @@
             <h3 class="py-50">DOCUMENTS FOR UPLOAD </h3>
         </div>
         <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
-            <label for="formFile" class="form-label">Application Letter with Company Letterhead for Registration
-                addressed to the General Manager (PPA) (PDF/2MB max)</label>
+            <label for="formFile" class="form-label">Banker's Reference showing capability of financing contracts within the classification applied for (PDF/2MB max)</label>
             <input name="attachment_1" class="form-select @error('attachment_1') is-invalid @enderror" type="file" id="formFile1" accept="application/pdf" />
             @error('attachment_1')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+            <hr />
+        </div>
+        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
+            <label for="formFile" class="form-label">Value Added Tax (VAT) Certificate (PDF/2MB max)</label>
+            <input name="attachment_9" class="form-select @error('attachment_9') is-invalid @enderror" type="file" id="formFile9" accept="application/pdf" />
+            @error('attachment_9')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -132,20 +143,6 @@
                 Licenses/Certificates (PDF/2MB max)</label>
             <input name="attachment_8" class="form-select @error('attachment_8') is-invalid @enderror" type="file" id="formFile8" accept="application/pdf" />
             @error('attachment_8')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
-        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
-            <hr />
-        </div>
-        <div class="col-lg-12 col-md-12 mb-3 mb-sm-0">
-            <label for="formFile" class="form-label">Applicants Managing Director/Chief Executive Officer's Declaration
-                on oath as to the authenticity of all submitted documents and engagement of professionals (PDF/2MB
-                max)</label>
-            <input name="attachment_9" class="form-select @error('attachment_9') is-invalid @enderror" type="file" id="formFile9" accept="application/pdf" />
-            @error('attachment_9')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
