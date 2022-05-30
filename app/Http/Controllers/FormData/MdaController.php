@@ -96,7 +96,7 @@ class MdaController extends Controller
     {
         Mda::where('id', $id)->update([
             'title' => $request->title,
-            'code' => $request->title,
+            'code' => $request->code,
             'type' => $request->type
         ]);
 
