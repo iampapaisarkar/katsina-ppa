@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call([ServiceSeeder::class]);
         $this->call([ServiceTypeSeeder::class]);
         $this->call([StateSeeder::class]);
+        $this->call([CountrySeeder::class]);
         $this->call([MdaTypeSeeder::class]);
         $this->call([MdaSeeder::class]);
         $this->call([AdditionalFeeSeeder::class]);
