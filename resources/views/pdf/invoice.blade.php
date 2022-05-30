@@ -180,15 +180,22 @@
                 @if($invoice->service_type == 'vendor_registration')
                     <p class="card-text fw-bold mb-25">Vendor Registration Fee</p>
                     <p class="card-text text-nowrap">
-                        {{number_format($invoice->service->registration_fee)}}
-                    </p>
-                    <p class="card-text text-nowrap">
                         {{$invoice->extra_service->title}}
                     </p>
                 @endif
                 </div>
             </td>
-            <td class="unit"><div style="font-size: 17px;">N{{number_format($invoice->amount)}}</div></td>
+            <td class="unit">
+              <p class="card-text text-nowrap">
+              ₦{{number_format($invoice->service->registration_fee)}}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td class="desc">
+              <p class="card-text fw-bold mb-25">Vendor Application Fee</p>
+            </td>
+            <td class="unit"><div style="font-size: 17px;">₦{{number_format($invoice->amount)}}</div></td>
           </tr>
         </tbody>
         <tfoot>
@@ -198,7 +205,7 @@
                 <strong>TOTAL</strong>
                 </div>
             </td>
-            <td class="unit"><div style="font-size: 20px;"><strong>N{{number_format($invoice->amount)}}</strong></div></td>
+            <td class="unit"><div style="font-size: 20px;"><strong>₦{{number_format($invoice->amount)}}</strong></div></td>
           </tr>
         </tfoot>
       </table>

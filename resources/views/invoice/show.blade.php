@@ -267,7 +267,7 @@
                                 </div>
                                 <div class="mb-1">
                                     <label class="form-label" for="amount">Payment Amount</label>
-                                    <input name="amount" id="amount" class="form-control @error('amount') is-invalid @enderror" type="text" value="{{$invoice->amount}}" readonly />
+                                    <input name="amount" id="amount" class="form-control @error('amount') is-invalid @enderror" type="text" value="{{number_format($invoice->amount)}}" readonly />
                                     @error('amount')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

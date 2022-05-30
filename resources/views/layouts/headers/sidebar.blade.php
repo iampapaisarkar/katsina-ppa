@@ -6,7 +6,7 @@
                 <a class="navbar-brand" href="dashboard.php">
                 <!--
                 <h4 class="text-center mb-2"><img class="logo" src="../app-assets/images/logo/logo.png" /></h4>-->
-                        <h2 class="brand-text">Katsina PPA</h2>
+                        <h2 class="brand-text">Katsina BPP</h2>
                     </a></li>
                 <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pe-0" data-bs-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i></a></li>
             </ul>
