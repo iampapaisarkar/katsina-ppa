@@ -21,6 +21,10 @@ class Registration extends Model
         'approved_at',
     ];
 
+    public function user() {
+        return $this->hasOne(User::class, 'id','user_id');
+    }
+
     public function query_by() {
         return $this->hasOne(User::class, 'id','queried_by');
     }

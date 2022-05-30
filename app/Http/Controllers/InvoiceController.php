@@ -8,6 +8,7 @@ use App\Models\Registration;
 use App\Http\Services\FileUpload;
 use Illuminate\Support\Facades\Auth;
 use PDF;
+use App\Http\Servies\MailSend;
 
 class InvoiceController extends Controller
 {
@@ -205,6 +206,16 @@ class InvoiceController extends Controller
             'query' => $request->reason,
             'query_by' => Auth::user()->id,
         ]);
+
+        $payment = Payment::with('user')->where(['id' => $id])->first();
+
+        $data = [
+            'user' => $payment->user,
+            'type' => 'vendor-registration',
+            'status' => 'query',
+            'query' => $request->reason,
+        ];
+        MailSend::sendVendorRegistrationPayment($data);
 
         return redirect('pending-invoice')->withSuccess('Queried successfully');
     }

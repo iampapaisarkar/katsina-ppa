@@ -157,6 +157,26 @@ class PendingController extends Controller
             'queried_at' => date('Y-m-d H:i:s')
         ]);
 
+        $registration = Registration::with(
+            'user', 
+            'company_details.core_competence', 
+            'company_details.organization_type', 
+            'company_details.company_country', 
+            'company_directors', 
+            'product_service_types', 
+            'product_services', 
+            'category_documents.registration_category')
+        ->where(['id' => $id])->first();
+
+        $data = [
+            'user' => $registration->user,
+            'type' => 'vendor-registration',
+            'status' => 'query',
+            'company_name' => $registration->company_details->company_name,
+            'query' => $request->reason,
+        ];
+        MailSend::sendVendorRegistrationQuery($data);
+
         return redirect('vendor-registration-pending')->withSuccess('Queried successfully');
     }
 
@@ -167,6 +187,32 @@ class PendingController extends Controller
             'approved_by' => Auth::user()->id,
             'approved_at' => date('Y-m-d H:i:s')
         ]);
+
+        $registration = Registration::with(
+            'user', 
+            'company_details.core_competence', 
+            'company_details.organization_type', 
+            'company_details.company_country', 
+            'company_directors', 
+            'product_service_types', 
+            'product_services', 
+            'category_documents.registration_category')
+        ->where(['id' => $id])->first();
+
+        $registrationCount = App\Models\Registration::where([
+            'type' => 'vendor_registration',
+            'status' => 'approved',
+            'payment' => true
+        ])->count();
+
+        $data = [
+            'user' => $registration->user,
+            'type' => 'vendor-registration',
+            'company_name' => $registration->company_details->company_name,
+            'status' => 'approved',
+            'vendor-id' => 'KTBPP/'.date('y', strtotime($registration->company_details->date_of_incorporation)).'/'.$registration->company_details->organization_type->code.'/'.$registration->company_details->core_competence->code.'/'.sprintf("%06s", $registrationCount),
+        ];
+        MailSend::sendVendorRegistrationApproved($data);
 
         return redirect('vendor-registration-pending')->withSuccess('Approved successfully');
     }
