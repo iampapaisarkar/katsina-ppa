@@ -502,7 +502,22 @@ class RegistrationController extends Controller
     {
         $authUser = Auth::user();
       
-        $data = Registration::where(['id' => $id, 'user_id' => $authUser->id])->first();
+        $data = Registration::with(
+            'company_details.core_competence', 
+            'company_details.organization_type', 
+            'company_details.company_country', 
+            'company_directors', 
+            'product_service_types', 
+            'product_services', 
+            'category_documents.registration_category'
+        )
+        ->where([
+            'type' => 'vendor_registration',
+            'status' => 'approved',
+            'payment' => true
+        ])
+        ->where(['id' => $id, 'user_id' => $authUser->id])
+        ->first();
        
         $backgroundURL = env('APP_URL') . '/libs/app-assets/images/certificate-bg.png';
         $pdf = PDF::loadView('pdf.certificate', ['data' => $data, 'background' => $backgroundURL]);
