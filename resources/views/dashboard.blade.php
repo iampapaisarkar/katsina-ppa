@@ -35,6 +35,7 @@
                         </div>
                         <!-- Greetings Card ends -->
 
+                        @can('isPpa')
                         <!-- Subscribers Chart Card starts -->
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
@@ -51,7 +52,9 @@
                             </div>
                         </div>
                         <!-- Subscribers Chart Card ends -->
+                        @endcan
 
+                        @can('isPpa')
                         <!-- Orders Chart Card starts -->
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
@@ -68,8 +71,12 @@
                             </div>
                         </div>
                         <!-- Orders Chart Card ends -->
+                        @endcan
+
                     </div>
 
+
+                    @can('isPpa')
                     <div class="row match-height">
                         <!-- Avg Sessions Chart Card starts -->
                         <div class="col-lg-6 col-12">
@@ -178,7 +185,7 @@
                         </div>
                         <!-- Support Tracker Chart Card ends -->
                     </div>
-
+                    @endcan
                     
 
                     <!-- List DataTable -->
