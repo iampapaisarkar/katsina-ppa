@@ -10,7 +10,7 @@ class Mda extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'type', 'has_head'
+        'title', 'code', 'type', 'has_head'
     ];
 
     public function mda_type() {

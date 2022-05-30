@@ -27,6 +27,9 @@ class MdaRequest extends FormRequest
             'title' => [
                 'required'
             ],
+            'code' => [
+                'required'
+            ],
             'type' => [
                 'required'
             ]

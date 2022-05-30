@@ -56,6 +56,7 @@ class MdaController extends Controller
     {
         Mda::create([
             'title' => $request->title,
+            'code' => $request->code,
             'type' => $request->type
         ]);
 
@@ -95,6 +96,7 @@ class MdaController extends Controller
     {
         Mda::where('id', $id)->update([
             'title' => $request->title,
+            'code' => $request->title,
             'type' => $request->type
         ]);
 

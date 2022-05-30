@@ -21,6 +21,9 @@
         <div class="alert alert-danger p-2" role="alert">
             <p>*{{session('errors')->first('title')}}</p>
         </div>
+         <div class="alert alert-danger p-2" role="alert">
+            <p>*{{session('errors')->first('code')}}</p>
+        </div>
         <div class="alert alert-danger p-2" role="alert">
             <p>*{{session('errors')->first('type')}}</p>
         </div>
@@ -55,6 +58,7 @@
                                 <thead>
                                     <tr>
                                         <th>MDA Name</th>
+                                        <th>MDA Code</th>
                                         <th>MDA Types</th>
 
                                         <th>Actions</th>
@@ -65,6 +69,9 @@
                                     <tr>
                                         <td>
                                             <span class="fw-bold">{{$Mda->title}}</span>
+                                        </td>
+                                         <td>
+                                            <span class="fw-bold">{{$Mda->code}}</span>
                                         </td>
                                         <td>{{$Mda->mda_type->title}}</td>
                                         <td>
@@ -132,6 +139,17 @@
                                     @enderror
                                 </div>
                                 <div class="col-12 col-md-6">
+                                    <label class="form-label" for="createCode">MDA Code</label>
+                                    <input name="code" type="text" id="createCode"
+                                        class="form-control @error('code') is-invalid @enderror" placeholder="John"
+                                        value=" " data-msg="Please enter code" />
+                                    @error('code')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="col-12 col-md-6">
                                     <label class="form-label" for="createType">MDA Type</label>
                                     <select id="createType" name="type" class="select2 form-select
                                     @error('type') is-invalid @enderror">
@@ -178,11 +196,22 @@
                                 @method('PUT')
 
                                 <div class="col-12 col-md-6">
-                                    <label class="form-label" for="editTitle">Title</label>
+                                    <label class="form-label" for="editTitle">MDA Title</label>
                                     <input name="title" type="text" id="editTitle"
                                         class="form-control @error('title') is-invalid @enderror" placeholder="John"
                                         value=" " data-msg="Please enter Title" />
                                     @error('title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label class="form-label" for="editCode">MDA Code</label>
+                                    <input name="code" type="text" id="editCode"
+                                        class="form-control @error('code') is-invalid @enderror" placeholder="John"
+                                        value=" " data-msg="Please enter code" />
+                                    @error('code')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -250,6 +279,7 @@ function editData(data){
     var _edit_route = '{{env('APP_URL')}}' + '/mda/' + data.id;
     $("#editFormForm").attr("action", _edit_route);
     $("#editTitle").val(data.title);
+    $("#editCode").val(data.code);
     
     var MDATypes = <?php echo json_encode(app('App\Http\Services\BackendData')->MdaTypes()); ?>;
     var _options_html = '';

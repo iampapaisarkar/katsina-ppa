@@ -17,16 +17,19 @@ class MdaSeeder extends Seeder
         $Mda = [
             [
             'title' => 'Ministry of Health',
+            'code' => 'moh',
             'type' => 1,
             'has_head' => true,
             ],
             [
             'title' => 'Ministry of Education',
+            'code' => 'moe',
             'type' => 1,
             'has_head' => true,
             ],
             [
             'title' => 'Ministry of Works & Housing',
+            'code' => 'mowh',
             'type' => 1,
             'has_head' => false,
             ]
