@@ -10,6 +10,7 @@ use App\Models\RegistrationCategory;
 use App\Models\Service;
 use App\Models\ServiceType;
 use App\Models\State;
+use App\Models\Country;
 use App\Models\Role;
 
 use App\Models\ProcessType;
@@ -50,6 +51,10 @@ class BackendData
 
     public static function States(){
         return State::get();
+    }
+
+    public static function Countries(){
+        return Country::get();
     }
 
     public static function mdaRoles(){

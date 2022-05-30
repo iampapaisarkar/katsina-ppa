@@ -26,7 +26,8 @@ class CreateCompanyDetailsTable extends Migration
             $table->string('address');
             $table->string('landmark');
             $table->string('city');
-            $table->integer('state'); //integer
+            $table->string('state'); //string
+            $table->integer('country'); //integer
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');

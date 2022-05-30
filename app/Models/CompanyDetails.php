@@ -27,6 +27,7 @@ class CompanyDetails extends Model
         'landmark',
         'city',
         'state',
+        'country',
         'first_name',
         'last_name',
         'email',

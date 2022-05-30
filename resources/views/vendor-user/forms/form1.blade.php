@@ -130,18 +130,27 @@
             @enderror
         </div>
         <div class="mb-1 col-md-6">
+            <label class="form-label" for="state4">State</label>
+            <input value="{{$companyDetails ? $companyDetails->state : ''}}" type="text" name="state" id="state4" class="form-control @error('state') is-invalid @enderror" placeholder="Kankara" />
+            @error('state')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+        <div class="mb-1 col-md-6">
 
-            <label class="form-label" for="select2-basic">State</label>
-            <select name="state" class="select2 form-select @error('state') is-invalid @enderror" id="select2-basic">
-                <option value="">Select State</option>
-                @foreach(app('App\Http\Services\BackendData')->States() as $State)
-                @if((old('state') && (old('state') == $State->id)) || ($companyDetails && $companyDetails->state == $State->id))
-                <option value="{{$State->id}}" selected>{{$State->title}}</option>
+            <label class="form-label" for="select2-basic">Country</label>
+            <select name="country" class="select2 form-select @error('country') is-invalid @enderror" id="select2-basic2">
+                <option value="">Select Country</option>
+                @foreach(app('App\Http\Services\BackendData')->Countries() as $country)
+                @if((old('country') && (old('country') == $country->id)) || ($companyDetails && $companyDetails->country == $country->id))
+                <option value="{{$country->id}}" selected>{{$country->title}}</option>
                 @endif
-                <option value="{{$State->id}}">{{$State->title}}</option>
+                <option value="{{$country->id}}">{{$country->title}}</option>
                 @endforeach
             </select>
-            @error('state')
+            @error('country')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>

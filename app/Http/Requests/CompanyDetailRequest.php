@@ -54,6 +54,9 @@ class CompanyDetailRequest extends FormRequest
             'state' => [
                 'required'
             ],
+            'country' => [
+                'required'
+            ],
             'first_name' => [
                 'required'
             ],
