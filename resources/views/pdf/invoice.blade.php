@@ -175,17 +175,17 @@
         </thead>
         <tbody>
           <tr>
-            <td class="desc">
+            <td class="desc" style="background-color: #fff; border-bottom: 1px solid #d7d7d7;">
                 <div style="font-size: 17px;">
                 @if($invoice->service_type == 'vendor_registration')
-                    <p class="card-text fw-bold mb-25">Vendor Registration Fee</p>
-                    <p class="card-text text-nowrap">
+                    <p class="card-text mb-25">Vendor Registration Fee</p>
+                    <p class="card-text text-nowrap" style="color: #858585; font-size: 14px;">
                         {{$invoice->extra_service->title}}
                     </p>
                 @endif
                 </div>
             </td>
-            <td class="unit">
+            <td class="unit" style="background-color: #fff; border-bottom: 1px solid #d7d7d7;>
               <p class="card-text text-nowrap">
               N{{number_format($invoice->service->registration_fee)}}
               </p>
@@ -193,7 +193,9 @@
           </tr>
           <tr>
             <td class="desc">
-              <p class="card-text fw-bold mb-25">Vendor Application Fee</p>
+                <div style="font-size: 17px;">
+                  <p class="card-text fw-bold mb-25">Vendor Application Fee</p>
+                </div>
             </td>
             <td class="unit"><div style="font-size: 17px;">N{{number_format($invoice->amount)}}</div></td>
           </tr>
