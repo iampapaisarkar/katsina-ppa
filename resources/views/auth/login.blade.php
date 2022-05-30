@@ -33,7 +33,7 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
-                                <h2 class="card-title fw-bold mb-1">Welcome to Katsina PPA Portal</h2>
+                                <h2 class="card-title fw-bold mb-1">Welcome to Katsina BPP Portal</h2>
                                 <p class="card-text mb-2">Please sign-in to your account and start the process</p>
                                 <form class="auth-login-form mt-2" action="{{ route('login') }}" method="POST">
                                 @csrf

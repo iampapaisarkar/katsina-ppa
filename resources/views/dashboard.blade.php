@@ -27,7 +27,7 @@
                                         <h1 class="mb-1 text-white">Welcome <br/>
                                         {{Auth::user()->first_name}} {{Auth::user()->sur_name}},</h1>
                                         <p class="card-text m-auto w-75">
-                                            You are now open to Business Opportunities from Katsina State PPA Portal
+                                            You are now open to Business Opportunities from Katsina State BPP Portal
                                         </p>
                                     </div>
                                 </div>
