@@ -19,7 +19,7 @@ class ApprovedController extends Controller
         ->with(
             'company_details.core_competence', 
             'company_details.organization_type', 
-            'company_details.company_state', 
+            'company_details.company_country', 
             'company_directors', 
             'product_service_types', 
             'product_services', 
@@ -75,7 +75,7 @@ class ApprovedController extends Controller
         ->with(
             'company_details.core_competence', 
             'company_details.organization_type', 
-            'company_details.company_state', 
+            'company_details.company_country', 
             'company_directors', 
             'product_service_types', 
             'product_services', 

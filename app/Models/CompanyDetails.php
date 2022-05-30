@@ -58,7 +58,11 @@ class CompanyDetails extends Model
         return $this->hasOne(OrganizationType::class, 'id','type_of_organization');
     }
 
-    public function company_state() {
-        return $this->hasOne(State::class, 'id','state');
+    // public function company_state() {
+    //     return $this->hasOne(State::class, 'id','state');
+    // }
+
+    public function company_country() {
+        return $this->hasOne(Country::class, 'id','country');
     }
 }

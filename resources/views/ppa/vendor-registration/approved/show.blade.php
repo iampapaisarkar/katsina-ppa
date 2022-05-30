@@ -101,9 +101,12 @@
                                             <input type="text" readonly value="{{$registration->company_details->city}}" class="form-control" />
                                         </div>
                                         <div class="mb-1 col-md-6">
-
                                             <label class="form-label" for="select2-basic">State</label>
-                                            <input type="text" readonly value="{{$registration->company_details->company_state->title}}" class="form-control" />
+                                            <input type="text" readonly value="{{$registration->company_details->state}}" class="form-control" />
+                                        </div>
+                                        <div class="mb-1 col-md-6">
+                                            <label class="form-label" for="select2-basic">Country</label>
+                                            <input type="text" readonly value="{{$registration->company_details->company_country->title}}" class="form-control" />
                                         </div>
                                     </div>
                                     <div class="row">
