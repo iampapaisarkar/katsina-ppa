@@ -200,7 +200,7 @@ class PendingController extends Controller
             'category_documents.registration_category')
         ->where(['id' => $id])->first();
 
-        $registrationCount = App\Models\Registration::where([
+        $registrationCount = Registration::where([
             'type' => 'vendor_registration',
             'status' => 'approved',
             'payment' => true
