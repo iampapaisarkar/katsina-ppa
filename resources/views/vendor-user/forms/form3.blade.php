@@ -18,7 +18,7 @@
             <tr>
 
                 <th width="5%">
-                    <input 
+                    <!-- <input 
                     {{in_array($ServiceType->id, $serviceTypes) ? 'checked' : ''}}
                     type="checkbox" 
                     name="services[{{$key}}][service_type]" 
@@ -26,7 +26,7 @@
                     value="{{$ServiceType->id}}"
                     data-index="{{$ServiceType->id}}" 
                     onClick="checkAll({{$ServiceType}})" 
-                    />
+                    /> -->
                 </th>
                 <th width="95%">
                     {{$ServiceType->title}}
