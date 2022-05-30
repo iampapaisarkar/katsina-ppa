@@ -8,7 +8,7 @@ use App\Models\Registration;
 use App\Http\Services\FileUpload;
 use Illuminate\Support\Facades\Auth;
 use PDF;
-use App\Http\Servies\MailSend;
+use App\Http\Services\MailSend;
 
 class InvoiceController extends Controller
 {

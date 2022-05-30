@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Registration;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Servies\MailSend;
+use App\Http\Services\MailSend;
 
 class PendingController extends Controller
 {
