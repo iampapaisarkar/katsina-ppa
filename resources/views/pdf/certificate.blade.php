@@ -54,8 +54,8 @@
         }
         .title4{
             text-align: center;
-            margin-top: 20px;
-            font-size: 50px;
+            margin-top: 10px;
+            font-size: 40px;
             color: #0c6606;   
         }
         .title5{
@@ -77,14 +77,17 @@
             color: #000;  
         }
         .title6{
+            position: absolute;
+            top: 680px;
+            left: 50%;
+            transform: translateX(-50%);
             text-align: center;
-            margin-top: 50px;
             font-size: 50px;
             color: red;  
         }
         .title8{
             text-align: center;
-            margin-top: 130px;
+            margin-top: 280px;
             font-size: 30px;
             font-weight: bold;
             color: #545454;  
