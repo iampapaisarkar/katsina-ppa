@@ -211,7 +211,7 @@ class PendingController extends Controller
             'type' => 'vendor-registration',
             'company_name' => $registration->company_details->company_name,
             'status' => 'approved',
-            'vendor-id' => 'KTBPP/'.date('y', strtotime($registration->created_at)).'/'.$registration->company_details->organization_type->code.'/'.$registration->company_details->core_competence->code.'/'.sprintf("%06s", $registrationCount),
+            'vendor-id' => 'KTBPP/'.date('y', strtotime($registration->created_at)).'/'.$registration->company_details->organization_type->code.'/'.$registration->company_details->core_competence->code.'/'.sprintf("%06s", $registration->id),
         ];
         MailSend::sendVendorRegistrationApproved($data);
 
