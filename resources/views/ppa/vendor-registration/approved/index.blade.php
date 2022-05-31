@@ -69,7 +69,7 @@
                                     'payment' => true
                                 ])->count();
                                 @endphp
-                                <td>{{'KTBPP/'.date('y', strtotime($registration->company_details->date_of_incorporation)).'/'.$registration->company_details->organization_type->code.'/'.$registration->company_details->core_competence->code.'/'.sprintf("%06s", $registrationCount)}}</td>
+                                <td>{{'KTBPP/'.date('y', strtotime($registration->created_at)).'/'.$registration->company_details->organization_type->code.'/'.$registration->company_details->core_competence->code.'/'.sprintf("%06s", $registrationCount)}}</td>
                                 <td>
                                     @if($registration->status == 'pending')
                                     <span class="badge badge-light-warning badge-pill">Pending Approval</span>
