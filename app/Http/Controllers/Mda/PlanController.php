@@ -37,7 +37,8 @@ class PlanController extends Controller
     }
 
     public function planTemplateDownload(){
-        $template = public_path('libs'. DIRECTORY_SEPARATOR . 'Katsina_BPP_Procurement_Plan_template.xlsx');
+        // $template = public_path('libs'. DIRECTORY_SEPARATOR . 'Katsina_BPP_Procurement_Plan_template.xlsx');
+        $template = 'libs'. DIRECTORY_SEPARATOR . 'Katsina_BPP_Procurement_Plan_template.xlsx';
         return response()->download($template);
     }
 

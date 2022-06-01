@@ -89,7 +89,7 @@ class MDAUserMamangementController extends Controller
 
             DB::commit();
 
-            return back()->withSuccess('Mda created successfully');
+            return back()->withSuccess('Mda user created successfully');
 
         }catch(Exception $e) {
             DB::rollback();
@@ -158,7 +158,7 @@ class MDAUserMamangementController extends Controller
 
             DB::commit();
 
-            return back()->withSuccess('Mda updated successfully');
+            return back()->withSuccess('Mda user updated successfully');
 
         }catch(Exception $e) {
             DB::rollback();

@@ -5,6 +5,7 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use App\Models\Mda;
 use App\Models\Role;
+use App\Models\User;
 
 class CheckMdaHeadRule implements Rule
 {
@@ -32,19 +33,34 @@ class CheckMdaHeadRule implements Rule
      */
     public function passes($attribute, $value)
     {
+
         $mda = Mda::where('id', $this->id)->first();
-        $role = Role::where('id', $this->role)->first();
-        if($role->code == 'mda_head'){
 
-            if($mda && $mda->has_head == true){
-                $this->message = 'You can not add more HEAD for '.$mda->title.' MDA.';
-                return false;
-            }else{
-                return true;
-            }
+        $existsMDAHead = User::join('user_roles', 'user_roles.user_id', 'users.id')
+        ->join('roles', 'roles.id', 'user_roles.role_id')
+        ->where('roles.code', 'mda_head');
 
+        if($existsMDAHead->exists()){
+            $this->message = 'You can not add more HEAD for '.$mda->title.' MDA.';
+            return false;
         }
-        return true;
+        else{
+            return true;
+        }
+
+        // $mda = Mda::where('id', $this->id)->first();
+        // $role = Role::where('id', $this->role)->first();
+        // if($role->code == 'mda_head'){
+
+        //     if($mda && $mda->has_head == true){
+        //         $this->message = 'You can not add more HEAD for '.$mda->title.' MDA.';
+        //         return false;
+        //     }else{
+        //         return true;
+        //     }
+
+        // }
+        // return true;
     }
 
     /**
