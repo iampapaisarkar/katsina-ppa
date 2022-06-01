@@ -38,6 +38,8 @@ class CheckMdaHeadRule implements Rule
 
         $existsMDAHead = User::join('user_roles', 'user_roles.user_id', 'users.id')
         ->join('roles', 'roles.id', 'user_roles.role_id')
+        ->join('mdas', 'mdas.id', 'users.mda')
+        ->where('mdas.id', $this->id)
         ->where('roles.code', 'mda_head');
 
         if($existsMDAHead->exists()){
