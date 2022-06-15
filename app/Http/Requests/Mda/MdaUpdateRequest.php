@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Rules\CheckMdaHeadRule;
 
 class MdaUpdateRequest extends FormRequest
 {
@@ -28,7 +29,7 @@ class MdaUpdateRequest extends FormRequest
     {
         return [
             'mda_type' => [
-                'required'
+                'required', new CheckMdaHeadRule($this->mda_type, $this->role)
             ],
             'role' => [
                 'required'

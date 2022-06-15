@@ -14,13 +14,13 @@ class CheckMdaHeadRule implements Rule
      *
      * @return void
      */
-    private $id;
+    private $mda_type;
     private $role;
     private $message;
 
-    public function __construct($id = null, $role = null)
+    public function __construct($mda_type = null, $role = null)
     {
-        $this->id = $id;
+        $this->mda_type = $mda_type;
         $this->role = $role;
     }
 
@@ -34,13 +34,12 @@ class CheckMdaHeadRule implements Rule
     public function passes($attribute, $value)
     {
 
-        $mda = Mda::where('id', $this->id)->first();
+        $mda = Mda::where('id', $this->mda_type)->first();
 
-        $existsMDAHead = User::join('user_roles', 'user_roles.user_id', 'users.id')
+        $existsMDAHead = User::where('users.mda', $this->mda_type)
+        ->join('user_roles', 'user_roles.user_id', 'users.id')
         ->join('roles', 'roles.id', 'user_roles.role_id')
-        ->join('mdas', 'mdas.id', 'users.mda')
-        ->where('mdas.id', $this->id)
-        ->where('roles.code', 'mda_head');
+        ->where('roles.id', $this->role);
 
         if($existsMDAHead->exists()){
             $this->message = 'You can not add more HEAD for '.$mda->title.' MDA.';
